@@ -1,0 +1,14 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:zcml="http://namespaces.zope.org/zcml">
+
+  <plone:service
+    method="POST"
+    for="Products.CMFCore.interfaces.IFolderish"
+    factory=".add.FolderPost"
+    layer="imio.restapi.interfaces.IImioRestapiLayer"
+    permission="cmf.AddPortalContent"
+    />
+
+</configure>

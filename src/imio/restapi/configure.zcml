@@ -7,6 +7,9 @@
 
   <i18n:registerTranslations directory="locales" />
 
+  <include package="plone.restapi" />
+  <include package=".services" />
+
   <include file="upgrades.zcml" />
 
   <genericsetup:registerProfile

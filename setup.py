@@ -41,6 +41,7 @@ setup(
         # -*- Extra requirements: -*-
         'setuptools',
         'z3c.jbot',
+        'plone.restapi',
     ],
     extras_require={
         'test': [
