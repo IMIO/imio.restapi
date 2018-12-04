@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+
 from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
-from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
+from plone.app.testing import applyProfile
+from plone.restapi.testing import PLONE_RESTAPI_AT_FUNCTIONAL_TESTING
 from plone.testing import z2
 
 import imio.restapi
@@ -36,7 +38,7 @@ IMIO_RESTAPI_INTEGRATION_TESTING = IntegrationTesting(
 
 
 IMIO_RESTAPI_FUNCTIONAL_TESTING = FunctionalTesting(
-    bases=(IMIO_RESTAPI_FIXTURE,),
+    bases=(IMIO_RESTAPI_FIXTURE, PLONE_RESTAPI_AT_FUNCTIONAL_TESTING),
     name='ImioRestapiLayer:FunctionalTesting',
 )
 
