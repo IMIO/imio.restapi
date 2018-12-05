@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from ZPublisher.HTTPRequest import HTTPRequest
 from plone.restapi.deserializer import json_body
 from plone.restapi.services.content import add
+from ZPublisher.HTTPRequest import HTTPRequest
 
 import json
 
