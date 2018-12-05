@@ -1,22 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from imio.restapi.testing import IMIO_RESTAPI_FUNCTIONAL_TESTING
-from OFS.interfaces import IObjectWillBeAddedEvent
-from plone.app.testing import login
-from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import TEST_USER_NAME
-from plone.app.testing import TEST_USER_PASSWORD
-from plone.restapi import HAS_AT
-from plone.restapi.testing import PLONE_RESTAPI_AT_FUNCTIONAL_TESTING
-from plone.restapi.testing import PLONE_RESTAPI_DX_FUNCTIONAL_TESTING
-from Products.CMFCore.utils import getToolByName
-from zope.component import getGlobalSiteManager
-from zope.lifecycleevent.interfaces import IObjectAddedEvent
-from zope.lifecycleevent.interfaces import IObjectCreatedEvent
-from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
 import requests
 import transaction
