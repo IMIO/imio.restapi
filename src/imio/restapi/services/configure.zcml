@@ -11,4 +11,14 @@
     permission="cmf.AddPortalContent"
     />
 
+  <plone:service
+    method="GET"
+    for="Products.CMFCore.interfaces.ISiteRoot"
+    accept="application/json,application/schema+json"
+    name="@request_schema"
+    factory=".request_schema.RequestSchemaGet"
+    layer="imio.restapi.interfaces.IImioRestapiLayer"
+    permission="zope2.View"
+    />
+
 </configure>
