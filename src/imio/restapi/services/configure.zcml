@@ -21,4 +21,15 @@
     permission="zope2.View"
     />
 
+  <configure zcml:condition="installed Products.Archetypes">
+    <plone:service
+      method="GET"
+      for="Products.Archetypes.interfaces.base.IBaseObject"
+      name="@at_vocabularies"
+      factory=".at.ATVocabulariesGet"
+      layer="imio.restapi.interfaces.IImioRestapiLayer"
+      permission="zope2.View"
+      />
+  </configure>
+
 </configure>

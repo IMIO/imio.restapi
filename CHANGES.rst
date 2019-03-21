@@ -5,6 +5,9 @@ Changelog
 1.0a2 (unreleased)
 ------------------
 
+- Add a endpoint to get Archetypes vocabulary values
+  [mpeeters]
+
 - Add package tests
   [mpeeters]
 
