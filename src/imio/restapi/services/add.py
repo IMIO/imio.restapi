@@ -38,5 +38,15 @@ class FolderPost(add.FolderPost):
                 child_request.request = request
                 results.append(child_request.reply())
             result['__children__'] = results
-
         return result
+
+
+class BulkFolderPost(FolderPost):
+
+    def reply(self):
+        data = json_body(self.request)
+        result = []
+        for element in data['data']:
+            self.request.set('BODY', json.dumps(element))
+            result.extend(super(BulkFolderPost, self).create_content())
+        return {'data': result}

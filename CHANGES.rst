@@ -5,6 +5,9 @@ Changelog
 1.0a2 (unreleased)
 ------------------
 
+- Add `bulk` endpoint
+  [mpeeters]
+
 - Add a endpoint to get Archetypes vocabulary values
   [mpeeters]
 

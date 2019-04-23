@@ -12,6 +12,15 @@
     />
 
   <plone:service
+    method="POST"
+    for="Products.CMFCore.interfaces.IFolderish"
+    name="@bulk"
+    factory=".add.BulkFolderPost"
+    layer="imio.restapi.interfaces.IImioRestapiLayer"
+    permission="cmf.AddPortalContent"
+    />
+
+  <plone:service
     method="GET"
     for="Products.CMFCore.interfaces.ISiteRoot"
     accept="application/json,application/schema+json"
