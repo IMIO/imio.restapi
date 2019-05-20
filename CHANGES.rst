@@ -5,6 +5,9 @@ Changelog
 1.0a2 (unreleased)
 ------------------
 
+- Implement control panel
+  [mpeeters]
+
 - Add `bulk` endpoint
   [mpeeters]
 

@@ -11,6 +11,8 @@
   <include package="collective.z3cform.select2" file="minimal.zcml" />
   <include package=".services" />
   <include package=".form" />
+  <include package=".settings" />
+  <include package=".vocabularies" />
 
   <include file="upgrades.zcml" />
 

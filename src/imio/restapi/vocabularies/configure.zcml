@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="imio.restapi">
+
+  <utility
+    component=".applications.ApplicationsVocabulary"
+    name="imio.restapi.applications"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+</configure>
