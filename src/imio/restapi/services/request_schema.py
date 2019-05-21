@@ -88,7 +88,7 @@ class RequestSchemaGet(Service):
                         "title": "Tags",
                         "type": "string",
                         "widget": "select2",
-                        "vocabulary": "plone.app.vocabularies.Keywords"
+                        "vocabulary": "@vocabularies/plone.app.vocabularies.Keywords"
                     },
                     "allow_discussion": {
                         "choices": [
