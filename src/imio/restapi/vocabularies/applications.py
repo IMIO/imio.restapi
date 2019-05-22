@@ -15,7 +15,9 @@ class ApplicationsVocabularyFactory(base.RestVocabularyFactory):
 
     def transform(self, json):
         values = {
-            r["application_id"]: r["application_id"] for r in json.get("routes", [])
+            r["application_id"]: r["application_id"]
+            for r in json.get("routes", [])
+            if r["application_id"] not in utils.get_application_id()
         }
         return base.dict_2_vocabulary(values)
 

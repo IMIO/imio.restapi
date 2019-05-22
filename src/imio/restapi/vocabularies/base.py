@@ -49,8 +49,10 @@ class RemoteRestVocabularyFactory(SimpleVocabulary, RestVocabularyFactory):
     client_id = None
     application_id = None
 
-    def __init__(self):
+    def __init__(self, *interfaces, **kwargs):
         """ Override of SimpleVocabulary __init__ """
+        terms = self.get_terms()
+        super(RemoteRestVocabularyFactory, self).__init__(terms, *interfaces, **kwargs)
 
     @property
     def url(self):
@@ -78,8 +80,7 @@ class RemoteRestVocabularyFactory(SimpleVocabulary, RestVocabularyFactory):
         terms_values = json_body["response"].get("terms", [])
         return [self.createTerm(e['token'], e['token'], e['title']) for e in terms_values]
 
-    @property
-    def _terms(self):
+    def get_terms(self):
         r = self.synchronous_request()
         if r.status_code == 200:
             return self.transform(r.json())
