@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 
 from imio.restapi.vocabularies import base
-
-import os
+from imio.restapi import utils
 
 
 class ApplicationsVocabularyFactory(base.RestVocabularyFactory):
     """ Vocabulary that return all the applications for the same client """
 
     @property
-    def base_url(self):
-        return u"{0}{1}".format(u"{ws_url}/route/", os.getenv("CLIENT_ID"))
+    def url(self):
+        return u"{ws_url}/route/{client_id}".format(
+            ws_url=utils.get_ws_url(), client_id=utils.get_client_id()
+        )
 
     def transform(self, json):
         values = {

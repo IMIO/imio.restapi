@@ -26,7 +26,7 @@ class RestVocabularyFactory(object):
 
     @property
     def url(self):
-        return "{ws_url}/request".format(ws_url=utils.get_ws_url())
+        raise NotImplementedError
 
     def synchronous_request(self):
         args = (self.method, self.url)
@@ -51,6 +51,10 @@ class RemoteRestVocabularyFactory(SimpleVocabulary, RestVocabularyFactory):
 
     def __init__(self):
         """ Override of SimpleVocabulary __init__ """
+
+    @property
+    def url(self):
+        return "{ws_url}/request".format(ws_url=utils.get_ws_url())
 
     @property
     def body(self):

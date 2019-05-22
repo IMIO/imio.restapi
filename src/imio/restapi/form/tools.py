@@ -30,6 +30,8 @@ class JsonSchema2Z3c(object):
         ("string", "select2"): schema.Choice,
         ("string", "radio"): schema.Choice,
         ("string", "checkbox"): schema.Choice,
+        ("string", "datetime"): schema.Datetime,
+        ("string", "date"): schema.Date,
         ("string", "multiselect2"): schema.List,
     }
 
