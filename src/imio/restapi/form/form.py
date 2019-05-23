@@ -2,11 +2,21 @@
 
 from imio.restapi import utils
 from imio.restapi.form import tools
+from plone.dexterity.interfaces import IDexterityContent
+from plone.restapi.interfaces import IFieldSerializer
 from plone.z3cform.fieldsets.extensible import ExtensibleForm
 from plone.z3cform.layout import FormWrapper
 from z3c.form import button
 from z3c.form.form import Form
 from z3c.form.interfaces import ActionExecutionError
+from zope.component import queryMultiAdapter
+from zope.interface import Interface
+from zope.interface import implementer
+
+
+@implementer(IDexterityContent, Interface)
+class DummyObject(object):
+    """ Dummy dexterity object """
 
 
 class GeneratedButton(button.Button):
@@ -46,22 +56,32 @@ class ButtonHandler(button.Handler):
         if errors:
             form.status = form.formErrorsMessage
             return
-        url = "{0}/request".format(utils.get_ws_url())
-        json_body = {
-            "client_id": form.client_id,
-            "application_id": form._application_id,
-            "request_type": self.action.get("request_type", "POST"),
-            "path": self.action["path"],
-            "parameters": self.action.get("parameters", {}),
-        }
-        json_body["parameters"].update({k: v for k, v in data.items() if v})
-        result = utils.ws_synchronous_request(
-            "POST",
-            url,
-            headers={"Accept": "application/json", "Content-Type": "application/json"},
-            auth=("admin", "admin"),
-            json=json_body,
-        )
+        data = self._serialize_data(form, data)
+        args, kwargs = form.base_request_parameters
+        kwargs["json"]["request_type"] = self.action.get("request_type", "POST")
+        kwargs["json"]["path"] = self.action["path"]
+        kwargs["json"]["parameters"] = self.action.get("parameters", {})
+        kwargs["json"]["parameters"].update({k: v for k, v in data.items() if v})
+        result = utils.ws_synchronous_request(*args, **kwargs)
+
+    def _get_field(self, form, key):
+        if key in form.fields:
+            return form.fields[key].field
+        for group in form.groups:
+            if key in group.fields:
+                return group.fields[key].field
+        raise ValueError
+
+    def _serialize_data(self, form, data):
+        dummy_object = type('dummy dexterity object', (DummyObject, ), data)()
+        for key, value in data.items():
+            serializer = queryMultiAdapter(
+                (self._get_field(form, key), dummy_object, form.request),
+                IFieldSerializer,
+            )
+            if serializer:
+                data[key] = serializer()
+        return data
 
 
 class BaseForm(ExtensibleForm, Form):
@@ -73,21 +93,28 @@ class BaseForm(ExtensibleForm, Form):
     def client_id(self):
         return utils.get_client_id()
 
-    def request_schema(self):
-        url = "{0}/request".format(utils.get_ws_url())
-        return utils.ws_synchronous_request(
-            "POST",
-            url,
-            headers={"Accept": "application/json", "Content-Type": "application/json"},
-            auth=("admin", "admin"),
-            json={
+    @property
+    def base_request_parameters(self):
+        args = ("POST", "{0}/request".format(utils.get_ws_url()))
+        kwargs = {
+            "headers": {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
+            "auth": ("admin", "admin"),
+            "json": {
                 "client_id": self.client_id,
                 "application_id": self._application_id,
-                "request_type": "GET",
-                "path": "/@request_schema/{0}".format(self._request_schema),
                 "parameters": {},
             },
-        )
+        }
+        return args, kwargs
+
+    def request_schema(self):
+        args, kwargs = self.base_request_parameters
+        kwargs["json"]["request_type"] = "GET"
+        kwargs["json"]["path"] = "/@request_schema/{0}".format(self._request_schema)
+        return utils.ws_synchronous_request(*args, **kwargs)
 
     def update(self):
         r = self.request_schema()
