@@ -17,6 +17,11 @@ from zope.interface.interface import InterfaceClass
 from zope.schema.vocabulary import SimpleVocabulary
 
 
+class IJsonSchema2Z3cInterface(InterfaceClass):
+    def __call__(self, context):
+        return context
+
+
 class JsonSchema2Z3c(object):
     """
     Convert a json schema to a z3c.form valid schema
@@ -63,7 +68,9 @@ class JsonSchema2Z3c(object):
 
     @property
     def generated_schema(self):
-        return InterfaceClass("IJson2Z3cSchema", attrs={k: v for k, v in self.items()})
+        return IJsonSchema2Z3cInterface(
+            "IJson2Z3cSchema", attrs={k: v for k, v in self.items()}
+        )
 
     @property
     def generated_groups(self):
