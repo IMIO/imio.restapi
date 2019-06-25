@@ -5,6 +5,15 @@ Changelog
 1.0a2 (unreleased)
 ------------------
 
+- Add a base form class for REST interaction
+  [mpeeters]
+
+- Implement a converter from json schema to a z3c.form interface
+  [mpeeters]
+
+- Implement an endpoint to return a json schema schema
+  [mpeeters]
+
 - Implement control panel
   [mpeeters]
 
