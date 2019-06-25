@@ -5,11 +5,4 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="imio.restapi">
 
-  <browser:page
-    for="*"
-    name="rest-form"
-    permission="zope2.View"
-    class=".form.FormView"
-    />
-
 </configure>

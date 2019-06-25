@@ -5,7 +5,6 @@ from imio.restapi.form import tools
 from plone.dexterity.interfaces import IDexterityContent
 from plone.restapi.interfaces import IFieldSerializer
 from plone.z3cform.fieldsets.extensible import ExtensibleForm
-from plone.z3cform.layout import FormWrapper
 from z3c.form import button
 from z3c.form.form import Form
 from z3c.form.interfaces import ActionExecutionError
@@ -86,8 +85,8 @@ class ButtonHandler(button.Handler):
 
 class BaseForm(ExtensibleForm, Form):
     ignoreContext = True
-    _request_schema = "Document"
-    _application_id = "IADELIB"
+    _request_schema = None
+    _application_id = None
 
     @property
     def client_id(self):
@@ -150,7 +149,3 @@ class BaseForm(ExtensibleForm, Form):
 
     def updateActions(self):
         self.actions.update()
-
-
-class FormView(FormWrapper):
-    form = BaseForm
