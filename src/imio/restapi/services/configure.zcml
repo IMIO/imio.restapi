@@ -41,18 +41,4 @@
       />
   </configure>
 
-  <adapter
-    factory=".request_schema.RequestSchemaTestAdapter"
-    for="zope.interface.Interface
-         zope.publisher.interfaces.browser.IBrowserRequest"
-    name="foo"
-    />
-
-  <adapter
-    factory=".request_schema.RequestSchemaDocumentAdapter"
-    for="zope.interface.Interface
-         zope.publisher.interfaces.browser.IBrowserRequest"
-    name="Document"
-    />
-
 </configure>
