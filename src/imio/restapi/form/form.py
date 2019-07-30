@@ -93,6 +93,14 @@ class BaseForm(ExtensibleForm, Form):
         return utils.get_client_id()
 
     @property
+    def request_schema(self):
+        return self._request_schema
+
+    @property
+    def application_id(self):
+        return self._application_id
+
+    @property
     def base_request_parameters(self):
         args = ("POST", "{0}/request".format(utils.get_ws_url()))
         kwargs = {
@@ -103,24 +111,24 @@ class BaseForm(ExtensibleForm, Form):
             "auth": ("admin", "admin"),
             "json": {
                 "client_id": self.client_id,
-                "application_id": self._application_id,
+                "application_id": self.application_id,
                 "parameters": {},
             },
         }
         return args, kwargs
 
-    def request_schema(self):
+    def get_request_schema(self):
         args, kwargs = self.base_request_parameters
         kwargs["json"]["request_type"] = "GET"
-        kwargs["json"]["path"] = "/@request_schema/{0}".format(self._request_schema)
+        kwargs["json"]["path"] = "/@request_schema/{0}".format(self.request_schema)
         return utils.ws_synchronous_request(*args, **kwargs)
 
     def update(self):
-        r = self.request_schema()
+        r = self.get_request_schema()
         if r.status_code == 200:
             schema = r.json()["response"]
             converter = tools.JsonSchema2Z3c(
-                schema, self.client_id, self._application_id
+                schema, self.client_id, self.application_id
             )
             self.title = converter.form_title
             self.fields = converter.generated_fields
