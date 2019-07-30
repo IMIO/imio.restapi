@@ -5,4 +5,16 @@
   xmlns:plone="http://namespaces.plone.org/plone"
   i18n_domain="imio.restapi">
 
+  <adapter
+    factory=".link.RESTLink"
+    provides="imio.restapi.interfaces.IRESTLink"
+    />
+
+  <browser:view
+    for="imio.restapi.interfaces.IRESTLink"
+    class=".link.RestLinkView"
+    name="view"
+    permission="zope2.View"
+    />
+
 </configure>

@@ -1,0 +1,4 @@
+<div class="rest-link">
+  <a href="" tal:attributes="href here/path"
+             tal:content="here/title"></a>
+</div>

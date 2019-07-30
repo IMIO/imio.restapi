@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from imio.restapi.form.link import get_links
 from imio.restapi.interfaces import IRESTAction
 from plone import api
 from plone.app.layout.viewlets import common as base
@@ -30,3 +31,19 @@ class ActionViewlet(base.ViewletBase):
             if adapter.application_id in self._apps:
                 actions.append(adapter)
         return actions
+
+
+class LinkViewlet(base.ViewletBase):
+    """Viewlet that display informations about elements that were created or requested
+    with the REST api on the current context"""
+
+    @property
+    def available(self):
+        return True
+
+    def update(self):
+        if self.available:
+            self.links = self._get_links()
+
+    def _get_links(self):
+        return get_links(self.context)

@@ -15,4 +15,13 @@
     permission="zope2.View"
     />
 
+  <browser:viewlet
+    name="imio-restapi-links"
+    manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
+    for="*"
+    class=".viewlets.LinkViewlet"
+    template="templates/link-viewlet.pt"
+    permission="zope2.View"
+    />
+
 </configure>

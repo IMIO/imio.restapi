@@ -5,6 +5,9 @@ Changelog
 1.0a2 (unreleased)
 ------------------
 
+- Add REST links
+  [mpeeters]
+
 - Add REST actions
   [mpeeters]
 

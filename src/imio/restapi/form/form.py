@@ -2,6 +2,8 @@
 
 from imio.restapi import utils
 from imio.restapi.form import tools
+from imio.restapi.form.link import add_link
+from imio.restapi.interfaces import IRESTLink
 from plone.dexterity.interfaces import IDexterityContent
 from plone.restapi.interfaces import IFieldSerializer
 from plone.z3cform.fieldsets.extensible import ExtensibleForm
@@ -9,6 +11,7 @@ from z3c.form import button
 from z3c.form.form import Form
 from z3c.form.interfaces import ActionExecutionError
 from zope.component import queryMultiAdapter
+from zope.component import getMultiAdapter
 from zope.interface import Interface
 from zope.interface import implementer
 
@@ -62,6 +65,8 @@ class ButtonHandler(button.Handler):
         kwargs["json"]["parameters"] = self.action.get("parameters", {})
         kwargs["json"]["parameters"].update({k: v for k, v in data.items() if v})
         result = utils.ws_synchronous_request(*args, **kwargs)
+        link = getMultiAdapter((result.json(), form), IRESTLink)
+        add_link(form.context, link)
 
     def _get_field(self, form, key):
         if key in form.fields:

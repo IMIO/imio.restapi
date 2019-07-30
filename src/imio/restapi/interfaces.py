@@ -41,3 +41,34 @@ class IRESTAction(Interface):
         required=True,
         default=u"default-action-form",
     )
+
+
+class IRESTLink(Interface):
+    """A REST link"""
+
+    path = schema.TextLine(
+        title=u"Path to the object",
+        required=True,
+    )
+
+    uid = schema.TextLine(
+        title=u"The object UID",
+        required=True,
+    )
+
+    title = schema.TextLine(
+        title=u"The object title",
+        required=True,
+    )
+
+    application_id = schema.TextLine(
+        title=u"Application Identifier",
+        description=u"The unique application identifier",
+        required=True,
+    )
+
+    schema_name = schema.TextLine(
+        title=u"Query schema",
+        description=u"The query schema used for the request",
+        required=True,
+    )
