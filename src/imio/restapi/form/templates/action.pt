@@ -1,0 +1,11 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	    xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+	    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="imio.restapi" lang="en">
+  <a class=""
+     href=""
+     tal:attributes="class view/klass;
+                     href view/url;"
+     tal:content="view/title"></a>
+</html>

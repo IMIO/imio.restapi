@@ -1,8 +1,43 @@
 # -*- coding: utf-8 -*-
 """Module where all interfaces, events and exceptions live."""
 
+from zope import schema
+from zope.interface import Interface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 
 class IImioRestapiLayer(IDefaultBrowserLayer):
     """Marker interface that defines a browser layer."""
+
+
+class IRESTAction(Interface):
+    """A REST action"""
+
+    id = schema.TextLine(
+        title=u"Action Identifier",
+        required=True,
+        default=u"default",
+    )
+
+    title = schema.TextLine(
+        title=u"Action title",
+        required=True,
+    )
+
+    application_id = schema.TextLine(
+        title=u"Application Identifier",
+        description=u"The unique application identifier",
+        required=True,
+    )
+
+    schema_name = schema.TextLine(
+        title=u"Query schema",
+        description=u"The query schema for the request",
+        required=True,
+    )
+
+    view_name = schema.TextLine(
+        title=u"Form view",
+        required=True,
+        default=u"default-action-form",
+    )

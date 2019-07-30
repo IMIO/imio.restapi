@@ -5,6 +5,9 @@ Changelog
 1.0a2 (unreleased)
 ------------------
 
+- Add REST actions
+  [mpeeters]
+
 - Add a base form class for REST interaction
   [mpeeters]
 
