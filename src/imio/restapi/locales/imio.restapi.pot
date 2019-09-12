@@ -1,0 +1,75 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2019-09-12 11:37+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: imio.restapi\n"
+
+#: ../settings/interfaces.py:50
+msgid "Application links"
+msgstr ""
+
+#: ../profiles/default/controlpanel.xml
+#: ../settings/view.py:15
+msgid "Imio REST API"
+msgstr ""
+
+#: ../configure.zcml:28
+msgid "Installs the imio.restapi add-on."
+msgstr ""
+
+#: ../browser/templates/link-viewlet.pt:8
+msgid "Linked element(s)"
+msgstr ""
+
+#: ../settings/interfaces.py:51
+msgid "List of application with who this application will communicate"
+msgstr ""
+
+#: ../settings/interfaces.py:23
+msgid "The application identifier"
+msgstr ""
+
+#: ../settings/interfaces.py:14
+msgid "The client unique identifier"
+msgstr ""
+
+#: ../form/form.py:114
+msgid "The content {title} was created"
+msgstr ""
+
+#: ../settings/interfaces.py:32
+msgid "The public url of this application"
+msgstr ""
+
+#: ../settings/interfaces.py:41
+msgid "The url of the Webservice instance"
+msgstr ""
+
+#: ../settings/interfaces.py:15
+msgid "This information is configured in the instance configuration file"
+msgstr ""
+
+#: ../configure.zcml:37
+msgid "Uninstalls the imio.restapi add-on."
+msgstr ""
+
+#: ../configure.zcml:28
+msgid "imio.restapi"
+msgstr ""
+
+#: ../configure.zcml:37
+msgid "imio.restapi (uninstall)"
+msgstr ""

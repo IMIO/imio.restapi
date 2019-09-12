@@ -16,7 +16,7 @@ msgstr ""
 
 #: ../settings/interfaces.py:50
 msgid "Application links"
-msgstr ""
+msgstr "Liens avec les autres applications"
 
 #: ../profiles/default/controlpanel.xml
 #: ../settings/view.py:15
@@ -29,35 +29,35 @@ msgstr ""
 
 #: ../browser/templates/link-viewlet.pt:8
 msgid "Linked element(s)"
-msgstr ""
+msgstr "Elément(s) lié(s)"
 
 #: ../settings/interfaces.py:51
 msgid "List of application with who this application will communicate"
-msgstr ""
+msgstr "Liste des applications avec lesquelles cette application communiquera"
 
 #: ../settings/interfaces.py:23
 msgid "The application identifier"
-msgstr ""
+msgstr "L'identifiant de l'application"
 
 #: ../settings/interfaces.py:14
 msgid "The client unique identifier"
-msgstr ""
+msgstr "L'identifiant unique du client"
 
 #: ../form/form.py:114
 msgid "The content {title} was created"
-msgstr ""
+msgstr "Le contenu {title} a été créé"
 
 #: ../settings/interfaces.py:32
 msgid "The public url of this application"
-msgstr ""
+msgstr "L'URL publique de l'application"
 
 #: ../settings/interfaces.py:41
 msgid "The url of the Webservice instance"
-msgstr ""
+msgstr "L'URL de l'instance des webservices"
 
 #: ../settings/interfaces.py:15
 msgid "This information is configured in the instance configuration file"
-msgstr ""
+msgstr "Cette information est configurée dans le fichier de configuration de l'instance"
 
 #: ../configure.zcml:37
 msgid "Uninstalls the imio.restapi add-on."
