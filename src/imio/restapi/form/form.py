@@ -1,17 +1,22 @@
 # -*- coding: utf-8 -*-
 
+from Products.statusmessages.interfaces import IStatusMessage
+from imio.restapi import _
 from imio.restapi import utils
 from imio.restapi.form import tools
 from imio.restapi.form.link import add_link
+from imio.restapi.form.link import add_remote_link
 from imio.restapi.interfaces import IRESTLink
 from plone.dexterity.interfaces import IDexterityContent
+from plone.memoize.view import memoize
 from plone.restapi.interfaces import IFieldSerializer
 from plone.z3cform.fieldsets.extensible import ExtensibleForm
 from z3c.form import button
 from z3c.form.form import Form
 from z3c.form.interfaces import ActionExecutionError
-from zope.component import queryMultiAdapter
 from zope.component import getMultiAdapter
+from zope.component import queryMultiAdapter
+from zope.i18n import translate
 from zope.interface import Interface
 from zope.interface import implementer
 
@@ -59,14 +64,28 @@ class ButtonHandler(button.Handler):
             form.status = form.formErrorsMessage
             return
         data = self._serialize_data(form, data)
-        args, kwargs = form.base_request_parameters
-        kwargs["json"]["request_type"] = self.action.get("request_type", "POST")
-        kwargs["json"]["path"] = self.action["path"]
-        kwargs["json"]["parameters"] = self.action.get("parameters", {})
-        kwargs["json"]["parameters"].update({k: v for k, v in data.items() if v})
-        result = utils.ws_synchronous_request(*args, **kwargs)
-        link = getMultiAdapter((result.json(), form), IRESTLink)
-        add_link(form.context, link)
+        r_args, r_kwargs = form.base_request_parameters
+        r_kwargs["json"]["request_type"] = self.action.get("request_type", "POST")
+        r_kwargs["json"]["path"] = self.action["path"]
+        r_kwargs["json"]["parameters"] = self.action.get("parameters", {})
+        r_kwargs["json"]["parameters"].update({k: v for k, v in data.items() if v})
+        r_kwargs["json"]["parameters"]["_rest_link_uid"] = form.context.UID()
+        result = utils.ws_synchronous_request(*r_args, **r_kwargs)
+        if form._add_link is True:
+            json_result = result.json()
+            link = getMultiAdapter((json_result, form), IRESTLink)
+            add_link(form.context, link)
+            add_remote_link(
+                form.context,
+                json_result["response"]["@id"],
+                form.application_id,
+                form._request_schema,
+            )
+        status_message = IStatusMessage(form.request)
+        status_message.addStatusMessage(
+            form.message.format(title=json_result["response"]["title"]), type="info"
+        )
+        form.request.response.redirect(form.context.absolute_url())
 
     def _get_field(self, form, key):
         if key in form.fields:
@@ -77,7 +96,7 @@ class ButtonHandler(button.Handler):
         raise ValueError
 
     def _serialize_data(self, form, data):
-        dummy_object = type('dummy dexterity object', (DummyObject, ), data)()
+        dummy_object = type("dummy dexterity object", (DummyObject,), data)()
         for key, value in data.items():
             serializer = queryMultiAdapter(
                 (self._get_field(form, key), dummy_object, form.request),
@@ -92,6 +111,8 @@ class BaseForm(ExtensibleForm, Form):
     ignoreContext = True
     _request_schema = None
     _application_id = None
+    _add_link = True
+    _message = _("The content {title} was created")
 
     @property
     def client_id(self):
@@ -106,6 +127,10 @@ class BaseForm(ExtensibleForm, Form):
         return self._application_id
 
     @property
+    def message(self):
+        return translate(self._message, context=self.request)
+
+    @property
     def base_request_parameters(self):
         args = ("POST", "{0}/request".format(utils.get_ws_url()))
         kwargs = {
@@ -113,7 +138,7 @@ class BaseForm(ExtensibleForm, Form):
                 "Accept": "application/json",
                 "Content-Type": "application/json",
             },
-            "auth": ("admin", "admin"),
+            "auth": ("admin", "admin"),  # XXX Implement authentication
             "json": {
                 "client_id": self.client_id,
                 "application_id": self.application_id,
@@ -122,6 +147,7 @@ class BaseForm(ExtensibleForm, Form):
         }
         return args, kwargs
 
+    @memoize
     def get_request_schema(self):
         args, kwargs = self.base_request_parameters
         kwargs["json"]["request_type"] = "GET"
