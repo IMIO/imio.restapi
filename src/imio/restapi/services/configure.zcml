@@ -30,6 +30,46 @@
     permission="zope2.View"
     />
 
+  <plone:service
+    method="GET"
+    for="*"
+    accept="application/json,application/schema+json"
+    name="@rest_link"
+    factory=".rest_link.LinkGet"
+    layer="imio.restapi.interfaces.IImioRestapiLayer"
+    permission="zope2.View"
+    />
+
+  <plone:service
+    method="POST"
+    for="*"
+    accept="application/json,application/schema+json"
+    name="@rest_link"
+    factory=".rest_link.LinkPost"
+    layer="imio.restapi.interfaces.IImioRestapiLayer"
+    permission="cmf.ModifyPortalContent"
+    />
+
+  <plone:service
+    method="PATCH"
+    for="*"
+    accept="application/json,application/schema+json"
+    name="@rest_link"
+    factory=".rest_link.LinkPatch"
+    layer="imio.restapi.interfaces.IImioRestapiLayer"
+    permission="cmf.ModifyPortalContent"
+    />
+
+  <plone:service
+    method="DELETE"
+    for="*"
+    accept="application/json,application/schema+json"
+    name="@rest_link"
+    factory=".rest_link.LinkDelete"
+    layer="imio.restapi.interfaces.IImioRestapiLayer"
+    permission="cmf.ModifyPortalContent"
+    />
+
   <configure zcml:condition="installed Products.Archetypes">
     <plone:service
       method="GET"
