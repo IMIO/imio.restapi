@@ -30,6 +30,18 @@
     permission="zope2.View"
     />
 
+  <configure zcml:condition="installed collective.documentgenerator">
+    <plone:service
+      method="GET"
+      for="*"
+      accept="application/json,application/schema+json"
+      name="@pod"
+      factory=".pod.PodTemplatesGet"
+      layer="imio.restapi.interfaces.IImioRestapiLayer"
+      permission="zope2.View"
+      />
+  </configure>
+
   <configure zcml:condition="installed Products.Archetypes">
     <plone:service
       method="GET"

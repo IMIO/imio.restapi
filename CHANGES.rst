@@ -32,6 +32,12 @@ Changelog
 - Add package tests
   [mpeeters]
 
+- Add `@pod` endpoint that will return every `collective.documentgenerator`
+  generable POD template for a context.
+  This include information on the POD template and links to generate the final
+  document in available output formats.
+  [gbastien]
+
 
 1.0a1 (2018-12-04)
 ------------------
