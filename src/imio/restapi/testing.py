@@ -9,6 +9,7 @@ from plone.app.testing import PloneSandboxLayer
 from plone.restapi.testing import PLONE_RESTAPI_AT_FUNCTIONAL_TESTING
 from plone.testing import z2
 
+import collective.documentgenerator
 import imio.restapi
 
 
@@ -28,26 +29,35 @@ class ImioRestapiLayer(PloneSandboxLayer):
         applyProfile(portal, 'imio.restapi:default')
 
 
+class ImioRestapiDocGenLayer(ImioRestapiLayer):
+
+    def setUpZope(self, app, configurationContext):
+        self.loadZCML(package=collective.documentgenerator)
+
+    def setUpPloneSite(self, portal):
+        applyProfile(portal, 'collective.documentgenerator:demo')
+
+
 IMIO_RESTAPI_FIXTURE = ImioRestapiLayer()
 
+IMIO_RESTAPI_DOCGEN_FIXTURE = ImioRestapiDocGenLayer()
 
 IMIO_RESTAPI_INTEGRATION_TESTING = IntegrationTesting(
     bases=(IMIO_RESTAPI_FIXTURE,),
-    name='ImioRestapiLayer:IntegrationTesting',
-)
+    name='ImioRestapiLayer:IntegrationTesting', )
 
 
 IMIO_RESTAPI_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(IMIO_RESTAPI_FIXTURE, PLONE_RESTAPI_AT_FUNCTIONAL_TESTING),
-    name='ImioRestapiLayer:FunctionalTesting',
-)
+    name='ImioRestapiLayer:FunctionalTesting', )
 
+IMIO_RESTAPI_DOCGEN_FUNCTIONAL_TESTING = FunctionalTesting(
+    bases=(IMIO_RESTAPI_DOCGEN_FIXTURE, IMIO_RESTAPI_FUNCTIONAL_TESTING, ),
+    name='ImioRestapiWithDocGenLayer:FunctionalTesting', )
 
 IMIO_RESTAPI_ACCEPTANCE_TESTING = FunctionalTesting(
     bases=(
         IMIO_RESTAPI_FIXTURE,
         REMOTE_LIBRARY_BUNDLE_FIXTURE,
-        z2.ZSERVER_FIXTURE,
-    ),
-    name='ImioRestapiLayer:AcceptanceTesting',
-)
+        z2.ZSERVER_FIXTURE, ),
+    name='ImioRestapiLayer:AcceptanceTesting', )

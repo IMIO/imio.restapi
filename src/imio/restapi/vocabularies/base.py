@@ -2,6 +2,7 @@
 
 from imio.restapi import utils
 from zope.schema.vocabulary import SimpleVocabulary
+from requests.exceptions import MissingSchema
 
 
 def dict_2_vocabulary(dictionary):
@@ -36,9 +37,12 @@ class RestVocabularyFactory(object):
         return utils.ws_synchronous_request(*args, **kwargs)
 
     def __call__(self, context):
-        r = self.synchronous_request()
-        if r.status_code == 200:
-            return self.transform(r.json())
+        try:
+            r = self.synchronous_request()
+            if r.status_code == 200:
+                return self.transform(r.json())
+        except MissingSchema:
+            pass
         return self.transform({})
 
 

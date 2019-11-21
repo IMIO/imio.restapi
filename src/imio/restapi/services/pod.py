@@ -35,9 +35,8 @@ class PodTemplatesGet(Service):
             serializer = getMultiAdapter(
                 (pod_template, self.request), ISerializeToJson)
             serialized = serializer()
-            # append the generate_url
-            for format in serialized['pod_formats']:
-                output_format = format['token']
+            output_formats = pod_template.get_available_formats()
+            for output_format in output_formats:
                 serialized['generate_url_{0}'.format(output_format)] = \
                     context_url + '/document-generation?template_uid={0}&output_format={1}'.format(
                     serialized['UID'], output_format)
