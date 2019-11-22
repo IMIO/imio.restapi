@@ -10,7 +10,7 @@ from zope.publisher.interfaces import IPublishTraverse
 
 
 class IRequestSchema(Interface):
-    """ """
+    ''' '''
 
 
 @implementer(IRequestSchema)
@@ -20,7 +20,7 @@ class RequestSchemaAdapter(object):
         self.request = request
 
     def get_schema(self):
-        """ Return the json associated schema """
+        ''' Return the json associated schema '''
         raise NotImplementedError
 
 
@@ -39,30 +39,30 @@ class RequestSchemaGet(Service):
     def _request_name(self):
         if len(self.params) != 1:
             raise Exception(
-                "Must supply exactly one parameter (dotted name of"
-                "the record to be retrieved)"
+                'Must supply exactly one parameter (dotted name of'
+                'the record to be retrieved)'
             )
 
         return self.params[0]
 
     def check_security(self):
         # Only expose type information to authenticated users
-        portal_membership = getToolByName(self.context, "portal_membership")
+        portal_membership = getToolByName(self.context, 'portal_membership')
         if portal_membership.isAnonymousUser():
             raise Unauthorized
 
     def reply(self):
         self.check_security()
 
-        self.content_type = "application/json+schema"
+        self.content_type = 'application/json+schema'
         adapter = queryMultiAdapter(
             (self.context, self.request), IRequestSchema, name=self._request_name
         )
         if not adapter:
-            self.content_type = "application/json"
+            self.content_type = 'application/json'
             self.request.response.setStatus(404)
             return {
-                "type": "NotFound",
-                "message": 'Type "{}" could not be found.'.format(self._request_name),
+                'type': 'NotFound',
+                'message': 'Type \'{}\' could not be found.'.format(self._request_name),
             }
         return adapter.get_schema()

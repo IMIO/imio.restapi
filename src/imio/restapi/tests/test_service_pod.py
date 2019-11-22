@@ -35,7 +35,6 @@ class TestServicePodTemplatesGet(unittest.TestCase):
         transaction.commit()
 
     def test_pod_endpoint_generate_url(self):
-        """ """
         self._create_doc()
         response = requests.get(
             self.endpoint_url,
@@ -68,7 +67,6 @@ class TestServicePodTemplatesGet(unittest.TestCase):
         self.assertTrue(u'generate_url_docx' in pod_templates[3])
 
     def test_pod_endpoint_get_generated_pod(self):
-        """ """
         self._create_doc()
         # get pod templates
         response = requests.get(
@@ -90,6 +88,6 @@ class TestServicePodTemplatesGet(unittest.TestCase):
             response.headers['content-disposition'],
             'inline;filename="General template Doc.odt"')
         filename = re.findall(
-            "filename=(.+)",
+            'filename=(.+)',
             response.headers['content-disposition'])[0].replace('"', '')
         self.assertEqual(filename, 'General template Doc.odt')

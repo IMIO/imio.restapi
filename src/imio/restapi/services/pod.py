@@ -39,8 +39,9 @@ class PodTemplatesGet(Service):
             output_formats = pod_template.get_available_formats()
             for output_format in output_formats:
                 serialized['generate_url_{0}'.format(output_format)] = \
-                    context_url + '/document-generation?template_uid={0}&output_format={1}'.format(
-                    serialized['UID'], output_format)
+                    context_url + '/document-generation?' + \
+                    'template_uid={0}&output_format={1}'.format(
+                        serialized['UID'], output_format)
             result.append(serialized)
 
         return result
