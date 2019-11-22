@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from imio.restapi.interfaces import IRESTAction
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.interface import implementer
 from zope.schema.fieldproperty import FieldProperty
 

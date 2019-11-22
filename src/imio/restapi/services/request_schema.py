@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from Products.CMFCore.utils import getToolByName
 from plone.restapi.services import Service
+from Products.CMFCore.utils import getToolByName
 from zExceptions import Unauthorized
-from zope.interface import implementer
-from zope.publisher.interfaces import IPublishTraverse
-from zope.interface import Interface
 from zope.component import queryMultiAdapter
+from zope.interface import implementer
+from zope.interface import Interface
+from zope.publisher.interfaces import IPublishTraverse
 
 
 class IRequestSchema(Interface):

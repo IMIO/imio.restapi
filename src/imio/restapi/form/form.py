@@ -10,10 +10,10 @@ from plone.z3cform.fieldsets.extensible import ExtensibleForm
 from z3c.form import button
 from z3c.form.form import Form
 from z3c.form.interfaces import ActionExecutionError
-from zope.component import queryMultiAdapter
 from zope.component import getMultiAdapter
-from zope.interface import Interface
+from zope.component import queryMultiAdapter
 from zope.interface import implementer
+from zope.interface import Interface
 
 
 @implementer(IDexterityContent, Interface)

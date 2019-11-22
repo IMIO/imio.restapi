@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from imio.restapi import utils
-from zope.schema.vocabulary import SimpleVocabulary
 from requests.exceptions import MissingSchema
+from zope.schema.vocabulary import SimpleVocabulary
 
 
 def dict_2_vocabulary(dictionary):

@@ -7,6 +7,7 @@ from zope.component import getMultiAdapter
 
 import pkg_resources
 
+
 try:
     pkg_resources.get_distribution('collective.documentgenerator')
 except pkg_resources.DistributionNotFound:

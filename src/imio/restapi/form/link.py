@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.Five import BrowserView
 from imio.restapi.interfaces import IRESTLink
 from persistent import Persistent
 from persistent.list import PersistentList
+from Products.Five import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.annotation import IAnnotations
-from zope.interface import implementer
 from zope.component import adapter
-from zope.schema.fieldproperty import FieldProperty
+from zope.interface import implementer
 from zope.interface import Interface
+from zope.schema.fieldproperty import FieldProperty
+
 
 ANNOTATION_KEY = "imio.restapi.link"
 

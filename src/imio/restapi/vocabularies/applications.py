@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from imio.restapi.vocabularies import base
 from imio.restapi import utils
+from imio.restapi.vocabularies import base
 
 
 class ApplicationsVocabularyFactory(base.RestVocabularyFactory):

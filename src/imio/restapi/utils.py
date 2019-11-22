@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import os
 import requests
 import time
-import os
 
 
 def get_ws_url():

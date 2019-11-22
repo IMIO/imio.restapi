@@ -8,8 +8,8 @@ from z3c.form.interfaces import IValue
 from z3c.form.interfaces import IWidget
 from z3c.form.interfaces import NO_VALUE
 from zope.component import adapts
-from zope.interface import Interface
 from zope.interface import implementer
+from zope.interface import Interface
 from zope.schema.interfaces import IField
 
 import os
