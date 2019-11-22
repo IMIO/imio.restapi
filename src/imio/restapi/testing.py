@@ -11,6 +11,7 @@ from plone.testing import z2
 
 import collective.documentgenerator
 import imio.restapi
+import plone.app.dexterity
 
 
 class ImioRestapiLayer(PloneSandboxLayer):
@@ -21,7 +22,6 @@ class ImioRestapiLayer(PloneSandboxLayer):
         # Load any other ZCML that is required for your tests.
         # The z3c.autoinclude feature is disabled in the Plone fixture base
         # layer.
-        import plone.app.dexterity
         self.loadZCML(package=plone.app.dexterity)
         self.loadZCML(package=imio.restapi)
 
@@ -29,12 +29,15 @@ class ImioRestapiLayer(PloneSandboxLayer):
         applyProfile(portal, 'imio.restapi:default')
 
 
-class ImioRestapiDocGenLayer(ImioRestapiLayer):
+class ImioRestapiDocGenLayer(PloneSandboxLayer):
 
     def setUpZope(self, app, configurationContext):
+        self.loadZCML(package=plone.app.dexterity)
+        self.loadZCML(package=imio.restapi)
         self.loadZCML(package=collective.documentgenerator)
 
     def setUpPloneSite(self, portal):
+        applyProfile(portal, 'imio.restapi:default')
         applyProfile(portal, 'collective.documentgenerator:demo')
 
 
@@ -52,7 +55,7 @@ IMIO_RESTAPI_FUNCTIONAL_TESTING = FunctionalTesting(
     name='ImioRestapiLayer:FunctionalTesting', )
 
 IMIO_RESTAPI_DOCGEN_FUNCTIONAL_TESTING = FunctionalTesting(
-    bases=(IMIO_RESTAPI_DOCGEN_FIXTURE, IMIO_RESTAPI_FUNCTIONAL_TESTING, ),
+    bases=(IMIO_RESTAPI_DOCGEN_FIXTURE, PLONE_RESTAPI_AT_FUNCTIONAL_TESTING),
     name='ImioRestapiWithDocGenLayer:FunctionalTesting', )
 
 IMIO_RESTAPI_ACCEPTANCE_TESTING = FunctionalTesting(
