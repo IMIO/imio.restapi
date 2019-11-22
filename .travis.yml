@@ -26,7 +26,6 @@ install:
   - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True
 before_script:
   - docker run -p 127.0.0.1:2002:8997 -d --rm --name="oo_server" xcgd/libreoffice:5.1
-  - bin/translation-manage -c
   - firefox -v
 script:
   - docker ps
