@@ -14,7 +14,7 @@ long_description = '\n\n'.join([
 
 setup(
     name='imio.restapi',
-    version='1.0a2',
+    version='1.0a3.dev0',
     description="Extended rest api service for IMIO usecases",
     long_description=long_description,
     # Get more from https://pypi.python.org/pypi?%3Aaction=list_classifiers
