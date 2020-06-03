@@ -35,9 +35,9 @@ class FolderPost(add.FolderPost):
            transition not triggerable warning.'''
         return ''
 
-    def wf_transitions(self, serialized_obj):
+    def wf_transitions(self, serialized_obj, data):
         '''If a key 'wf_transitions' is there, try to trigger it.'''
-        wf_tr = self.data.get('wf_transitions', [])
+        wf_tr = data.get('wf_transitions', [])
         if not wf_tr:
             return
         with api.env.adopt_roles(roles=['Manager']):
@@ -64,7 +64,7 @@ class FolderPost(add.FolderPost):
             self.request.set('BODY', json.dumps(data))
         result = super(FolderPost, self).reply()
         self._after_reply_hook(result)
-        self.wf_transitions(result)
+        self.wf_transitions(result, data)
         if children:
             results = []
             for child in children:
