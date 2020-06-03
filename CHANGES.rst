@@ -5,8 +5,12 @@ Changelog
 1.0a3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- In `add.FolderPost.reply`, call `self.__class__` instead `FolderPost`
+  to manage `children` in case we inherit from `FolderPost`.
+  [gbastien]
+- Added `add.FolderPost.prepare_child_data` to be able to prepare child data
+  before calling `reply` that will create the element.
+  [gbastien]
 
 1.0a2 (2020-01-10)
 ------------------

@@ -21,6 +21,10 @@ def create_request(base_request, body):
 
 class FolderPost(add.FolderPost):
 
+    def prepare_child_data(self, child_data):
+        ''' '''
+        return child_data
+
     def reply(self):
         data = json_body(self.request)
         children = []
@@ -32,8 +36,9 @@ class FolderPost(add.FolderPost):
             results = []
             for child in children:
                 context = self.context.get(result['id'])
-                request = create_request(self.request, json.dumps(child))
-                child_request = FolderPost()
+                child_data = self.prepare_child_data(child)
+                request = create_request(self.request, json.dumps(child_data))
+                child_request = self.__class__(context, request)
                 child_request.context = context
                 child_request.request = request
                 results.append(child_request.reply())
