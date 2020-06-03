@@ -11,6 +11,12 @@ Changelog
 - Added `add.FolderPost.prepare_child_data` to be able to prepare child data
   before calling `reply` that will create the element.
   [gbastien]
+- Added some hooks before (`_prepare_data`) and
+  after `reply` (`_after_reply_hook`).
+  [gbastien]
+- If key `wf_transitions` is found during creation,
+  given WF transitions are triggered.
+  [gbastien]
 
 1.0a2 (2020-01-10)
 ------------------

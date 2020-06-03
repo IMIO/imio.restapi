@@ -6,7 +6,9 @@
 # locales/[language]/LC_MESSAGES/imio.restapi.po
 # (e.g. locales/de/LC_MESSAGES/imio.restapi.po)
 
-domain=imio.restapi
+domains="imio.restapi imio.history"
+i18ndude rebuild-pot --pot imio.restapi.pot --create imio.restapi ../
 
-i18ndude rebuild-pot --pot $domain.pot --create $domain ../
-i18ndude sync --pot $domain.pot */LC_MESSAGES/$domain.po
+for domain in $domains; do
+    i18ndude sync --pot $domain.pot */LC_MESSAGES/$domain.po
+done
