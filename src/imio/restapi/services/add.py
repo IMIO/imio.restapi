@@ -30,7 +30,7 @@ class FolderPost(add.FolderPost):
         super(FolderPost, self).__init__(context, request)
         self.warnings = []
 
-    def _prepare_data(self, data):
+    def prepare_data(self, data):
         '''Hook to manipulate the data structure if necessary.'''
         # when adding an element having a 'file', check that given data is correct
         if u'file' in data:
@@ -41,6 +41,11 @@ class FolderPost(add.FolderPost):
                 file_data[u'encoding'] = u'base64'
                 self.warnings.append(FILE_DATA_ENCODING_WARNING)
         return data
+
+    def clean_data(self, data):
+        '''Clean data before creating element.'''
+        cleaned_data = data.copy()
+        return cleaned_data
 
     def _after_reply_hook(self, serialized_obj):
         '''Hook to be overrided if necessary.'''
@@ -75,7 +80,7 @@ class FolderPost(add.FolderPost):
         if not getattr(self, 'parent_data', None):
             self.parent_data = {}
         data = json_body(self.request)
-        self.data = self._prepare_data(data)
+        self.data = self.prepare_data(data)
         self.cleaned_data = self.clean_data(data)
         # set new BODY with cleaned data
         self.request.set('BODY', json.dumps(self.cleaned_data))

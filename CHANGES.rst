@@ -8,7 +8,7 @@ Changelog
 - In `add.FolderPost.reply`, call `self.__class__` instead `FolderPost`
   to manage `children` in case we inherit from `FolderPost`.
   [gbastien]
-- Added `add.FolderPost._prepare_data` to be able to prepare data
+- Added `add.FolderPost.prepare_data` to be able to prepare data
   before calling `reply` that will create the element.
   By default, this checks that data for file is correct.
   [gbastien]
