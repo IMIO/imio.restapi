@@ -4,8 +4,12 @@ from plone import api
 from plone.restapi.deserializer import json_body
 from plone.restapi.services.content import add
 from ZPublisher.HTTPRequest import HTTPRequest
+from zExceptions import BadRequest
 
 import json
+
+FILE_DATA_INCOMPLETE_ERROR = "One of 'filename' or 'content-type' is required while adding a 'file'!"
+FILE_DATA_ENCODING_WARNING = "While adding 'file', key 'encoding' was not given, assuming it is 'base64'!"
 
 
 def create_request(base_request, body):
@@ -22,8 +26,20 @@ def create_request(base_request, body):
 
 class FolderPost(add.FolderPost):
 
+    def __init__(self, context, request):
+        super(FolderPost, self).__init__(context, request)
+        self.warnings = []
+
     def _prepare_data(self, data):
         '''Hook to manipulate the data structure if necessary.'''
+        # when adding an element having a 'file', check that given data is correct
+        if u'file' in data:
+            file_data = data[u'file']
+            if 'filename' not in file_data and u'content-type' not in file_data:
+                raise BadRequest(FILE_DATA_INCOMPLETE_ERROR)
+            elif 'encoding' not in file_data:
+                file_data[u'encoding'] = u'base64'
+                self.warnings.append(FILE_DATA_ENCODING_WARNING)
         return data
 
     def _after_reply_hook(self, serialized_obj):
@@ -56,25 +72,36 @@ class FolderPost(add.FolderPost):
                 wfTool.doActionFor(obj, tr, comment=wf_comment)
 
     def reply(self):
+        if not getattr(self, 'parent_data', None):
+            self.parent_data = {}
         data = json_body(self.request)
+        self.data = self._prepare_data(data)
+        self.cleaned_data = self.clean_data(data)
+        # set new BODY with cleaned data
+        self.request.set('BODY', json.dumps(self.cleaned_data))
+        return self._reply()
+
+    def _reply(self):
         children = []
-        data = self._prepare_data(data)
-        if '__children__' in data:
-            children = data.pop('__children__')
-            self.request.set('BODY', json.dumps(data))
+        if '__children__' in self.data:
+            children = self.data.pop('__children__')
+            self.request.set('BODY', json.dumps(self.data))
         result = super(FolderPost, self).reply()
         self._after_reply_hook(result)
-        self.wf_transitions(result, data)
+        self.wf_transitions(result, self.data)
+        result['@warnings'] = self.warnings
         if children:
             results = []
             for child in children:
                 context = self.context.get(result['id'])
-                child_data = self._prepare_data(child)
-                request = create_request(self.request, json.dumps(child_data))
+                request = create_request(self.request, json.dumps(child))
                 child_request = self.__class__(context, request)
+                child_request.warnings = []
                 child_request.context = context
                 child_request.request = request
-                results.append(child_request.reply())
+                child_request.parent_data = self.data
+                child_result = child_request.reply()
+                results.append(child_result)
             result['__children__'] = results
         return result
 

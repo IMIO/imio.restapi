@@ -8,15 +8,18 @@ Changelog
 - In `add.FolderPost.reply`, call `self.__class__` instead `FolderPost`
   to manage `children` in case we inherit from `FolderPost`.
   [gbastien]
-- Added `add.FolderPost.prepare_child_data` to be able to prepare child data
+- Added `add.FolderPost._prepare_data` to be able to prepare data
   before calling `reply` that will create the element.
+  By default, this checks that data for file is correct.
   [gbastien]
-- Added some hooks before (`_prepare_data`) and
-  after `reply` (`_after_reply_hook`).
+- Added hook after `reply` (`_after_reply_hook`).
   [gbastien]
 - If key `wf_transitions` is found during creation,
   given WF transitions are triggered.
   [gbastien]
+- Added `@warnings` management in `FolderPost`.
+  [gbastien]
+
 
 1.0a2 (2020-01-10)
 ------------------
