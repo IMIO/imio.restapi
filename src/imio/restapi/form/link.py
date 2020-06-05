@@ -12,7 +12,7 @@ from zope.interface import Interface
 from zope.schema.fieldproperty import FieldProperty
 
 
-ANNOTATION_KEY = 'imio.restapi.link'
+ANNOTATION_KEY = "imio.restapi.link"
 
 
 def get_links(context):
@@ -39,45 +39,46 @@ def add_link(context, link):
 @implementer(IRESTLink)
 @adapter(dict, Interface)
 class RESTLink(Persistent):
-    '''
+    """
     A persistent link to an object created or retrieved by REST API
-    '''
-    _path = FieldProperty(IRESTLink['path'])
-    _uid = FieldProperty(IRESTLink['uid'])
-    _title = FieldProperty(IRESTLink['title'])
-    _application_id = FieldProperty(IRESTLink['application_id'])
-    _schema_name = FieldProperty(IRESTLink['schema_name'])
+    """
+
+    _path = FieldProperty(IRESTLink["path"])
+    _uid = FieldProperty(IRESTLink["uid"])
+    _title = FieldProperty(IRESTLink["title"])
+    _application_id = FieldProperty(IRESTLink["application_id"])
+    _schema_name = FieldProperty(IRESTLink["schema_name"])
 
     def __init__(self, result, form):
-        self._path = result['response']['@id']
-        self._uid = result['response']['UID']
-        self._title = result['response']['title']
-        self._application_id = result['application_id']
+        self._path = result["response"]["@id"]
+        self._uid = result["response"]["UID"]
+        self._title = result["response"]["title"]
+        self._application_id = result["application_id"]
         self._schema_name = unicode(form._request_schema)
 
     @property
     def path(self):
-        return getattr(self, '_path', '')
+        return getattr(self, "_path", "")
 
     @property
     def uid(self):
-        return getattr(self, '_uid', None)
+        return getattr(self, "_uid", None)
 
     @property
     def title(self):
-        return getattr(self, '_title', 'missing')
+        return getattr(self, "_title", "missing")
 
     @property
     def application_id(self):
-        return getattr(self, '_application_id', None)
+        return getattr(self, "_application_id", None)
 
     @property
     def schema_name(self):
-        return getattr(self, '_schema_name', None)
+        return getattr(self, "_schema_name", None)
 
 
 class RestLinkView(BrowserView):
-    index = ViewPageTemplateFile('templates/link.pt')
+    index = ViewPageTemplateFile("templates/link.pt")
 
     def render(self):
         return self.index()

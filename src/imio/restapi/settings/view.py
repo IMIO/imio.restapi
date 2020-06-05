@@ -12,11 +12,8 @@ from zope.interface import implementer
 @implementer(ISettingsForm)
 class SettingsEditForm(RegistryEditForm):
     schema = ISettings
-    label = _(u'Imio REST API')
+    label = _(u"Imio REST API")
     ignoreContext = True
 
 
-SettingsView = layout.wrap_form(
-    SettingsEditForm,
-    ControlPanelFormWrapper,
-)
+SettingsView = layout.wrap_form(SettingsEditForm, ControlPanelFormWrapper)

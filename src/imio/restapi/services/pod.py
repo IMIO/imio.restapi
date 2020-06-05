@@ -9,7 +9,7 @@ import pkg_resources
 
 
 try:
-    pkg_resources.get_distribution('collective.documentgenerator')
+    pkg_resources.get_distribution("collective.documentgenerator")
 except pkg_resources.DistributionNotFound:
     HAS_DOCGEN = False
 else:
@@ -23,7 +23,7 @@ class PodTemplatesGet(Service):
     def reply(self):
         """ """
         result = {}
-        result['pod_templates'] = self.serialize_templates()
+        result["pod_templates"] = self.serialize_templates()
         return result
 
     def serialize_templates(self):
@@ -33,15 +33,17 @@ class PodTemplatesGet(Service):
         generable_templates = adapter.get_generable_templates()
         context_url = self.context.absolute_url()
         for pod_template in generable_templates:
-            serializer = getMultiAdapter(
-                (pod_template, self.request), ISerializeToJson)
+            serializer = getMultiAdapter((pod_template, self.request), ISerializeToJson)
             serialized = serializer()
             output_formats = pod_template.get_available_formats()
             for output_format in output_formats:
-                serialized['generate_url_{0}'.format(output_format)] = \
-                    context_url + '/document-generation?' + \
-                    'template_uid={0}&output_format={1}'.format(
-                        serialized['UID'], output_format)
+                serialized["generate_url_{0}".format(output_format)] = (
+                    context_url
+                    + "/document-generation?"
+                    + "template_uid={0}&output_format={1}".format(
+                        serialized["UID"], output_format
+                    )
+                )
             result.append(serialized)
 
         return result

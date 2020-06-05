@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-'''Module where all interfaces, events and exceptions live.'''
+"""Module where all interfaces, events and exceptions live."""
 
 from zope import schema
 from zope.interface import Interface
@@ -7,68 +7,50 @@ from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 
 class IImioRestapiLayer(IDefaultBrowserLayer):
-    '''Marker interface that defines a browser layer.'''
+    """Marker interface that defines a browser layer."""
 
 
 class IRESTAction(Interface):
-    '''A REST action'''
+    """A REST action"""
 
-    id = schema.TextLine(
-        title=u'Action Identifier',
-        required=True,
-        default=u'default',
-    )
+    id = schema.TextLine(title=u"Action Identifier", required=True, default=u"default")
 
-    title = schema.TextLine(
-        title=u'Action title',
-        required=True,
-    )
+    title = schema.TextLine(title=u"Action title", required=True)
 
     application_id = schema.TextLine(
-        title=u'Application Identifier',
-        description=u'The unique application identifier',
+        title=u"Application Identifier",
+        description=u"The unique application identifier",
         required=True,
     )
 
     schema_name = schema.TextLine(
-        title=u'Query schema',
-        description=u'The query schema for the request',
+        title=u"Query schema",
+        description=u"The query schema for the request",
         required=True,
     )
 
     view_name = schema.TextLine(
-        title=u'Form view',
-        required=True,
-        default=u'default-action-form',
+        title=u"Form view", required=True, default=u"default-action-form"
     )
 
 
 class IRESTLink(Interface):
-    '''A REST link'''
+    """A REST link"""
 
-    path = schema.TextLine(
-        title=u'Path to the object',
-        required=True,
-    )
+    path = schema.TextLine(title=u"Path to the object", required=True)
 
-    uid = schema.TextLine(
-        title=u'The object UID',
-        required=True,
-    )
+    uid = schema.TextLine(title=u"The object UID", required=True)
 
-    title = schema.TextLine(
-        title=u'The object title',
-        required=True,
-    )
+    title = schema.TextLine(title=u"The object title", required=True)
 
     application_id = schema.TextLine(
-        title=u'Application Identifier',
-        description=u'The unique application identifier',
+        title=u"Application Identifier",
+        description=u"The unique application identifier",
         required=True,
     )
 
     schema_name = schema.TextLine(
-        title=u'Query schema',
-        description=u'The query schema used for the request',
+        title=u"Query schema",
+        description=u"The query schema used for the request",
         required=True,
     )

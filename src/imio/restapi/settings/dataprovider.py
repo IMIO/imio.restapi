@@ -19,7 +19,7 @@ import os
 class SettingsDataProvider(object):
     adapts(Interface, IFormLayer, IForm, IField, IWidget)
 
-    _env_keys = ('WS_URL', 'CLIENT_ID', 'APPLICATION_ID', 'APPLICATION_URL')
+    _env_keys = ("WS_URL", "CLIENT_ID", "APPLICATION_ID", "APPLICATION_URL")
 
     def __init__(self, context, request, form, field, widget):
         self.context = context

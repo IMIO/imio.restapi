@@ -26,19 +26,18 @@ class ImioRestapiLayer(PloneSandboxLayer):
         self.loadZCML(package=imio.restapi)
 
     def setUpPloneSite(self, portal):
-        applyProfile(portal, 'imio.restapi:default')
+        applyProfile(portal, "imio.restapi:default")
 
 
 class ImioRestapiDocGenLayer(PloneSandboxLayer):
-
     def setUpZope(self, app, configurationContext):
         self.loadZCML(package=plone.app.dexterity)
         self.loadZCML(package=imio.restapi)
         self.loadZCML(package=collective.documentgenerator)
 
     def setUpPloneSite(self, portal):
-        applyProfile(portal, 'imio.restapi:default')
-        applyProfile(portal, 'collective.documentgenerator:demo')
+        applyProfile(portal, "imio.restapi:default")
+        applyProfile(portal, "collective.documentgenerator:demo")
 
 
 IMIO_RESTAPI_FIXTURE = ImioRestapiLayer()
@@ -46,21 +45,21 @@ IMIO_RESTAPI_FIXTURE = ImioRestapiLayer()
 IMIO_RESTAPI_DOCGEN_FIXTURE = ImioRestapiDocGenLayer()
 
 IMIO_RESTAPI_INTEGRATION_TESTING = IntegrationTesting(
-    bases=(IMIO_RESTAPI_FIXTURE,),
-    name='ImioRestapiLayer:IntegrationTesting', )
+    bases=(IMIO_RESTAPI_FIXTURE,), name="ImioRestapiLayer:IntegrationTesting"
+)
 
 
 IMIO_RESTAPI_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(IMIO_RESTAPI_FIXTURE, PLONE_RESTAPI_AT_FUNCTIONAL_TESTING),
-    name='ImioRestapiLayer:FunctionalTesting', )
+    name="ImioRestapiLayer:FunctionalTesting",
+)
 
 IMIO_RESTAPI_DOCGEN_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(IMIO_RESTAPI_DOCGEN_FIXTURE, PLONE_RESTAPI_AT_FUNCTIONAL_TESTING),
-    name='ImioRestapiWithDocGenLayer:FunctionalTesting', )
+    name="ImioRestapiWithDocGenLayer:FunctionalTesting",
+)
 
 IMIO_RESTAPI_ACCEPTANCE_TESTING = FunctionalTesting(
-    bases=(
-        IMIO_RESTAPI_FIXTURE,
-        REMOTE_LIBRARY_BUNDLE_FIXTURE,
-        z2.ZSERVER_FIXTURE, ),
-    name='ImioRestapiLayer:AcceptanceTesting', )
+    bases=(IMIO_RESTAPI_FIXTURE, REMOTE_LIBRARY_BUNDLE_FIXTURE, z2.ZSERVER_FIXTURE),
+    name="ImioRestapiLayer:AcceptanceTesting",
+)

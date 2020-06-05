@@ -8,8 +8,8 @@ from zope.component import getAdapters
 
 
 class ActionViewlet(base.ViewletBase):
-    '''Viewlet that display the actions that can be made with the REST api
-    on the current context'''
+    """Viewlet that display the actions that can be made with the REST api
+    on the current context"""
 
     actions = []
 
@@ -20,7 +20,7 @@ class ActionViewlet(base.ViewletBase):
     def update(self):
         if self.available:
             self._apps = api.portal.get_registry_record(
-                name='imio.restapi.settings.interfaces.ISettings.application_links',
+                name="imio.restapi.settings.interfaces.ISettings.application_links",
                 default=[],
             )
             self.actions = self._get_actions()
@@ -34,8 +34,8 @@ class ActionViewlet(base.ViewletBase):
 
 
 class LinkViewlet(base.ViewletBase):
-    '''Viewlet that display informations about elements that were created or requested
-    with the REST api on the current context'''
+    """Viewlet that display informations about elements that were created or requested
+    with the REST api on the current context"""
 
     @property
     def available(self):

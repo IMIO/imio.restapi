@@ -18,7 +18,7 @@ from zope.interface import Interface
 
 @implementer(IDexterityContent, Interface)
 class DummyObject(object):
-    ''' Dummy dexterity object '''
+    """ Dummy dexterity object """
 
 
 class GeneratedButton(button.Button):
@@ -60,10 +60,10 @@ class ButtonHandler(button.Handler):
             return
         data = self._serialize_data(form, data)
         args, kwargs = form.base_request_parameters
-        kwargs['json']['request_type'] = self.action.get('request_type', 'POST')
-        kwargs['json']['path'] = self.action['path']
-        kwargs['json']['parameters'] = self.action.get('parameters', {})
-        kwargs['json']['parameters'].update({k: v for k, v in data.items() if v})
+        kwargs["json"]["request_type"] = self.action.get("request_type", "POST")
+        kwargs["json"]["path"] = self.action["path"]
+        kwargs["json"]["parameters"] = self.action.get("parameters", {})
+        kwargs["json"]["parameters"].update({k: v for k, v in data.items() if v})
         result = utils.ws_synchronous_request(*args, **kwargs)
         link = getMultiAdapter((result.json(), form), IRESTLink)
         add_link(form.context, link)
@@ -77,7 +77,7 @@ class ButtonHandler(button.Handler):
         raise ValueError
 
     def _serialize_data(self, form, data):
-        dummy_object = type('dummy dexterity object', (DummyObject, ), data)()
+        dummy_object = type("dummy dexterity object", (DummyObject,), data)()
         for key, value in data.items():
             serializer = queryMultiAdapter(
                 (self._get_field(form, key), dummy_object, form.request),
@@ -107,31 +107,31 @@ class BaseForm(ExtensibleForm, Form):
 
     @property
     def base_request_parameters(self):
-        args = ('POST', '{0}/request'.format(utils.get_ws_url()))
+        args = ("POST", "{0}/request".format(utils.get_ws_url()))
         kwargs = {
-            'headers': {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
+            "headers": {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
             },
-            'auth': ('admin', 'admin'),
-            'json': {
-                'client_id': self.client_id,
-                'application_id': self.application_id,
-                'parameters': {},
+            "auth": ("admin", "admin"),
+            "json": {
+                "client_id": self.client_id,
+                "application_id": self.application_id,
+                "parameters": {},
             },
         }
         return args, kwargs
 
     def get_request_schema(self):
         args, kwargs = self.base_request_parameters
-        kwargs['json']['request_type'] = 'GET'
-        kwargs['json']['path'] = '/@request_schema/{0}'.format(self.request_schema)
+        kwargs["json"]["request_type"] = "GET"
+        kwargs["json"]["path"] = "/@request_schema/{0}".format(self.request_schema)
         return utils.ws_synchronous_request(*args, **kwargs)
 
     def update(self):
         r = self.get_request_schema()
         if r.status_code == 200:
-            schema = r.json()['response']
+            schema = r.json()["response"]
             converter = tools.JsonSchema2Z3c(
                 schema, self.client_id, self.application_id
             )
@@ -145,18 +145,18 @@ class BaseForm(ExtensibleForm, Form):
     def create_buttons(self, schema):
         return button.Buttons(
             *[
-                GeneratedButton(str(e['id']), title=e['title'])
-                for e in schema.get('actions', [])
+                GeneratedButton(str(e["id"]), title=e["title"])
+                for e in schema.get("actions", [])
             ]
         )
 
     def create_actions(self, schema):
         actions = GeneratedButtonActions(self, self.request, self.getContent())
-        for action_data in schema.get('actions', []):
-            button_field = self.buttons[action_data['id']]
+        for action_data in schema.get("actions", []):
+            button_field = self.buttons[action_data["id"]]
             actions.add_handler(
                 button_field.__name__,
-                ButtonHandler(button_field, action_data['action']),
+                ButtonHandler(button_field, action_data["action"]),
             )
         return actions
 
