@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
+from imio.restapi.services.add import FILE_DATA_INCOMPLETE_ERROR
 from imio.restapi.testing import IMIO_RESTAPI_FUNCTIONAL_TESTING
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 
+import base64
 import requests
 import transaction
 import unittest
@@ -110,3 +112,68 @@ class TestFolderCreate(unittest.TestCase):
         self.assertEqual("My Document", children_json.get("title"))
         expected_url = self.portal_url + u"/myfolder/myfolder/mydocument"
         self.assertEqual(expected_url, children_json.get("@id"))
+
+    def test_folder_post_file(self):
+        # must define "filename" or "content-type" while adding file
+        # to find correct contentType on created file
+        response = requests.post(
+            self.portal_url,
+            headers={"Accept": "application/json"},
+            auth=(SITE_OWNER_NAME, SITE_OWNER_PASSWORD),
+            json={
+                "@type": "File",
+                "id": "myfile",
+                "title": "My File",
+                "file": {"data": "123456",
+                         "encoding": "ascii", }, },
+        )
+        self.assertEqual(400, response.status_code)
+        self.assertEqual(response.json()[u'message'], FILE_DATA_INCOMPLETE_ERROR)
+
+        # add file correctly
+        response = requests.post(
+            self.portal_url,
+            headers={"Accept": "application/json"},
+            auth=(SITE_OWNER_NAME, SITE_OWNER_PASSWORD),
+            json={
+                "@type": "File",
+                "id": "myfile",
+                "title": "My File",
+                "file": {"data": "123456",
+                         "encoding": "ascii",
+                         "filename": "file.txt"}, },
+        )
+        self.assertEqual(201, response.status_code)
+        transaction.begin()
+        myfile = self.portal.myfile
+        self.assertEqual(myfile.Title(), "My File")
+        file = myfile.getFile()
+        self.assertEqual(file.filename, "file.txt")
+        self.assertEqual(file.content_type, 'text/plain')
+        # due to a bug in plone.restapi while creating file with another
+        # encoding than base64, we coment this under, so for AT,
+        # do not define an encoding or use base64, DX is correct in both cases...
+        # self.assertEqual(file.size(), 6)
+        # self.assertEqual(file.data, '123456')
+
+        # if "encoding" not given, considered as "base64"
+        response = requests.post(
+            self.portal_url,
+            headers={"Accept": "application/json"},
+            auth=(SITE_OWNER_NAME, SITE_OWNER_PASSWORD),
+            json={
+                "@type": "File",
+                "id": "myfile2",
+                "title": "My File 2",
+                "file": {"data": base64.b64encode("654321"),
+                         "filename": "file.txt"}, },
+        )
+        self.assertEqual(201, response.status_code)
+        transaction.begin()
+        myfile2 = self.portal.myfile2
+        self.assertEqual(myfile2.Title(), "My File 2")
+        file2 = myfile2.getFile()
+        self.assertEqual(file2.filename, "file.txt")
+        self.assertEqual(file2.content_type, 'text/plain')
+        self.assertEqual(file2.size(), 6)
+        self.assertEqual(file2.data, '654321')
