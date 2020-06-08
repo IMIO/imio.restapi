@@ -29,7 +29,7 @@ class TestServicePodTemplatesGet(unittest.TestCase):
             container=self.portal, type="Document", id="doc", title="Doc"
         )
         self.doc_url = self.doc.absolute_url()
-        self.endpoint_url = "{0}/@pod".format(self.doc_url)
+        self.endpoint_url = "{0}/@pod-templates".format(self.doc_url)
         transaction.commit()
 
     def test_pod_endpoint_generate_url(self):
@@ -41,7 +41,7 @@ class TestServicePodTemplatesGet(unittest.TestCase):
             json={},
         )
         # 4 POD templates available
-        pod_templates = response.json()["pod_templates"]
+        pod_templates = response.json()
         self.assertEqual(
             [pt["id"] for pt in pod_templates],
             [
@@ -76,7 +76,7 @@ class TestServicePodTemplatesGet(unittest.TestCase):
             auth=(TEST_USER_NAME, TEST_USER_PASSWORD),
             json={},
         )
-        pod_templates = response.json()["pod_templates"]
+        pod_templates = response.json()
         # generate an ODT pod template
         generate_url_odt = pod_templates[0]["generate_url_odt"]
         response = requests.get(
@@ -93,3 +93,16 @@ class TestServicePodTemplatesGet(unittest.TestCase):
             0
         ].replace('"', "")
         self.assertEqual(filename, "General template Doc.odt")
+
+    def test_pod_expandable(self):
+        self._create_doc()
+        # get informations for doc
+        response = requests.get(
+            self.doc.absolute_url(),
+            headers={"Accept": "application/json"},
+            auth=(TEST_USER_NAME, TEST_USER_PASSWORD),
+            json={},
+        )
+        json = response.json()
+        self.assertTrue('pod-templates' in json['@components'])
+        self.assertEqual(json['@components']['pod-templates']['@id'], self.endpoint_url)

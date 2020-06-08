@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 
+from plone.restapi.interfaces import IExpandableElement
 from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.services import Service
+from zope.component import adapter
 from zope.component import getAdapter
 from zope.component import getMultiAdapter
+from zope.interface import implementer
+from zope.interface import Interface
 
 import pkg_resources
 
@@ -17,16 +21,21 @@ else:
     from collective.documentgenerator.interfaces import IGenerablePODTemplates
 
 
-class PodTemplatesGet(Service):
-    """ """
+@implementer(IExpandableElement)
+@adapter(Interface, Interface)
+class PodTemplates(object):
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
 
-    def reply(self):
-        """ """
-        result = {}
-        result["pod_templates"] = self.serialize_templates()
-        return result
+    def __call__(self, expand=False):
+        result = {"pod-templates": {"@id": "{}/@pod-templates".format(self.context.absolute_url())}}
+        if not expand:
+            return result
 
-    def serialize_templates(self):
+        # extend batch? DEFAULT_BATCH_SIZE = 25
+        # self.request.form['b_size'] = 50
+
         result = []
         # get generatable POD template for self.context
         adapter = getAdapter(self.context, IGenerablePODTemplates)
@@ -47,3 +56,11 @@ class PodTemplatesGet(Service):
             result.append(serialized)
 
         return result
+
+
+class PodTemplatesGet(Service):
+    """ """
+
+    def reply(self):
+        pod_templates = PodTemplates(self.context, self.request)
+        return pod_templates(expand=True)

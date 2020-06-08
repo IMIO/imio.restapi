@@ -5,8 +5,10 @@ Changelog
 1.0a4 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Renamed `@pod endpoint` to `@pod-templates` to be more explicit.
+  Endpoint `@pod-templates` is now a default exapandable element
+  available in `@components`.
+  [gbastien]
 
 1.0a3 (2020-06-08)
 ------------------

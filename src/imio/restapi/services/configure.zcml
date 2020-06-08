@@ -31,11 +31,12 @@
     />
 
   <configure zcml:condition="installed collective.documentgenerator">
-    <plone:service
+   <adapter factory=".pod.PodTemplates" name="pod-templates" />
+   <plone:service
       method="GET"
       for="*"
       accept="application/json,application/schema+json"
-      name="@pod"
+      name="@pod-templates"
       factory=".pod.PodTemplatesGet"
       layer="imio.restapi.interfaces.IImioRestapiLayer"
       permission="zope2.View"
