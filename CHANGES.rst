@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a3 (unreleased)
+1.0a3 (2020-06-08)
 ------------------
 
 - Add `requests` to package dependencies
