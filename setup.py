@@ -45,6 +45,7 @@ setup(
         "z3c.jbot",
         "plone.restapi",
         "collective.z3cform.select2",
+        "requests",
     ],
     extras_require={
         "test": [
