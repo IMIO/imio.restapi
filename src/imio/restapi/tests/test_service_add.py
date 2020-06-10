@@ -177,3 +177,27 @@ class TestFolderCreate(unittest.TestCase):
         self.assertEqual(file2.content_type, 'text/plain')
         self.assertEqual(file2.size(), 6)
         self.assertEqual(file2.data, '654321')
+
+    def test_folder_post_wf_transitions(self):
+        response = requests.post(
+            self.portal_url,
+            headers={"Accept": "application/json"},
+            auth=(SITE_OWNER_NAME, SITE_OWNER_PASSWORD),
+            json={
+                "@type": "Folder",
+                "id": "myfolder",
+                "title": "My Folder",
+                "wf_transitions": ["unknown1"],
+                "__children__": [
+                    {"@type": "Document",
+                     "id": "mydocument",
+                     "title": "My Document",
+                     "wf_transitions": ["unknown2", "publish"], }
+                ],
+            },
+        )
+        self.assertEqual(201, response.status_code)
+        # unknown transitions are ignored
+        json = response.json()
+        self.assertEqual(json["review_state"], "private")
+        self.assertEqual(json["__children__"][0]["review_state"], "published")

@@ -9,6 +9,10 @@ Changelog
   Endpoint `@pod-templates` is now a default exapandable element
   available in `@components`.
   [gbastien]
+- Moved `FolderPost.wf_transitions` call into `FolderPost._after_reply_hook`.
+  Update `serialized_obj` `review_state` key if transitions were triggered in
+  `FolderPost.wf_transitions`.
+  [gbastien]
 
 1.0a3 (2020-06-08)
 ------------------

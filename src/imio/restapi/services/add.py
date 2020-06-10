@@ -49,23 +49,25 @@ class FolderPost(add.FolderPost):
         return cleaned_data
 
     def _after_reply_hook(self, serialized_obj):
-        """Hook to be overrided if necessary."""
-        return
+        """Hook to be overrided if necessary, by default manage
+           the 'wf_transitions' if given."""
+        self.wf_transitions(serialized_obj)
 
     def _wf_transition_additional_warning(self, tr):
         """Hook to add some specific context for
            transition not triggerable warning."""
         return ""
 
-    def wf_transitions(self, serialized_obj, data):
+    def wf_transitions(self, serialized_obj):
         """If a key 'wf_transitions' is there, try to trigger it."""
-        wf_tr = data.get("wf_transitions", [])
+        wf_tr = self.data.get("wf_transitions", [])
         if not wf_tr:
             return
         with api.env.adopt_roles(roles=["Manager"]):
             wfTool = api.portal.get_tool("portal_workflow")
             wf_comment = u"wf_transition_triggered_by_application"
             obj = self.context.get(serialized_obj["id"])
+            must_update_serialized_obj = False
             for tr in wf_tr:
                 available_transitions = [t["id"] for t in wfTool.getTransitionsFor(obj)]
                 if tr not in available_transitions:
@@ -78,6 +80,9 @@ class FolderPost(add.FolderPost):
                     continue
                 # we are sure transition is available, trigger it
                 wfTool.doActionFor(obj, tr, comment=wf_comment)
+                must_update_serialized_obj = True
+            if must_update_serialized_obj:
+                serialized_obj[u"review_state"] = api.content.get_state(obj)
 
     def reply(self):
         if not getattr(self, "parent_data", None):
@@ -96,7 +101,6 @@ class FolderPost(add.FolderPost):
             self.request.set("BODY", json.dumps(self.data))
         result = super(FolderPost, self).reply()
         self._after_reply_hook(result)
-        self.wf_transitions(result, self.data)
         result["@warnings"] = self.warnings
         if children:
             results = []
