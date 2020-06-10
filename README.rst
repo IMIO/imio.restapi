@@ -5,6 +5,10 @@
 .. image:: https://travis-ci.com/IMIO/imio.restapi.svg?branch=master
     :target: https://travis-ci.com/IMIO/imio.restapi
 
+.. image:: https://coveralls.io/repos/github/IMIO/imio.restapi/badge.svg?branch=master
+:target: https://coveralls.io/github/IMIO/imio.restapi?branch=master
+
+
 ============
 imio.restapi
 ============
