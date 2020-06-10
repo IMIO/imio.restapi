@@ -197,7 +197,12 @@ class TestFolderCreate(unittest.TestCase):
             },
         )
         self.assertEqual(201, response.status_code)
+        transaction.begin()
         # unknown transitions are ignored
         json = response.json()
         self.assertEqual(json["review_state"], "private")
         self.assertEqual(json["__children__"][0]["review_state"], "published")
+        # review_state correctly reindexed
+        brains = self.portal.portal_catalog(review_state="published")
+        doc = brains[0].getObject()
+        self.assertEqual(doc.UID(), json["__children__"][0]["UID"])

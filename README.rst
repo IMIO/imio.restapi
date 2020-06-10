@@ -28,6 +28,7 @@ Todo
 ----
 
 - manage wf_transitions triggered when creating an element in the deserializer when we will be using only DX
+- include cleanHTML functionnality at the deserializer level, also when we will be using only DX
 
 
 Installation
