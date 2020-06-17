@@ -3,6 +3,7 @@
 from imio.restapi import utils
 from plone.memoize import ram
 from time import time
+from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
 
@@ -98,3 +99,58 @@ class RemoteRestVocabularyFactory(SimpleVocabulary, RestVocabularyFactory):
         if r.status_code == 200:
             return self.transform(r.json())
         return self.transform({})
+
+
+class RestSearchVocabularyFactory(RestVocabularyFactory):
+    method = "POST"
+    request_type = "GET"
+    application_id = None
+
+    @property
+    def url(self):
+        return "{ws_url}/request".format(ws_url=utils.get_ws_url())
+
+    @property
+    def client_id(self):
+        return utils.get_client_id()
+
+    @property
+    def body(self):
+        return {
+            "client_id": self.client_id,
+            "application_id": self.application_id,
+            "request_type": self.request_type,
+            "path": self.request_path,
+            "parameters": {},
+        }
+
+    @property
+    def request_path(self):
+        return "/@search?{0}".format(self.parameters)
+
+    @property
+    def parameters(self):
+        """ Must return a query_string. e.g. portal_type=Document """
+        return ""
+
+    def _filter(self, value):
+        """
+        Method that can be overrided to filter the terms of the vocabulary
+        Return a boolean to specify if the value must be present
+        """
+        return True
+
+    def transform(self, json_body):
+        terms_values = json_body["response"].get("items", [])
+        base_url = json_body["response"]["@id"].replace(self.request_path, "")
+        return SimpleVocabulary(
+            [
+                SimpleTerm(
+                    e["@id"].replace(base_url, ""),
+                    e["@id"].replace(base_url, ""),
+                    e["title"],
+                )
+                for e in terms_values
+                if self._filter(e) is True
+            ]
+        )
