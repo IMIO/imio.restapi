@@ -20,13 +20,20 @@ def get_application_id():
     return os.getenv("APPLICATION_ID")
 
 
-def generate_request_parameters(path, client_id, application_id, method="POST"):
+def get_application_url():
+    """ Return the application_url defined in instance config """
+    return os.getenv("APPLICATION_URL")
+
+
+def generate_request_parameters(
+    path, client_id, application_id, method="POST", r_method="POST"
+):
     args = (method, "{0}/request".format(get_ws_url()))
     kwargs = {
         "headers": {"Accept": "application/json", "Content-Type": "application/json"},
         "auth": ("admin", "admin"),  # XXX Implement authentication
         "json": {
-            "request_type": method,
+            "request_type": r_method,
             "client_id": client_id,
             "application_id": application_id,
             "path": path,
