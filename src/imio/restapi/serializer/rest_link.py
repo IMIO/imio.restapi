@@ -24,7 +24,7 @@ class SerializeRestLinkToJson(object):
             "uid": self.context.uid,
             "title": self.context.title,
             "application_id": self.context.application_id,
-            "schema_name": self.context.schema_name,
+            "back_link": self.context.back_link,
         }
 
         return result

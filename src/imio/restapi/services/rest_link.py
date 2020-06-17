@@ -37,7 +37,7 @@ class BaseLinkService(Service):
 class LinkPost(Service):
     def reply(self):
         data = json_body(self.request)
-        required_values = ("path", "uid", "title", "application_id", "schema_name")
+        required_values = ("path", "uid", "title", "application_id")
 
         values = {k: data.get(k, None) for k in required_values}
         missing_values = [k for k in values.keys() if values[k] is None]
@@ -51,7 +51,6 @@ class LinkPost(Service):
             values["uid"],
             values["title"],
             values["application_id"],
-            values["schema_name"],
         )
         add_link(self.context, link)
         serializer = queryMultiAdapter((link, self.request), ISerializeToJson)

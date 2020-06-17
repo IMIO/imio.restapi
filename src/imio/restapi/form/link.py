@@ -36,7 +36,7 @@ def add_link(context, link):
     links.append(link)
 
 
-def add_remote_link(context, path, remote_application_id, schema_name):
+def add_remote_link(context, path, remote_application_id, back_link=False):
     client_id = utils.get_client_id()
     r_args, r_kwargs = utils.generate_request_parameters(
         "{0}/@rest_link".format(path), client_id, remote_application_id
@@ -46,7 +46,6 @@ def add_remote_link(context, path, remote_application_id, schema_name):
         "uid": context.UID(),
         "title": context.Title(),
         "application_id": utils.get_application_id(),
-        "schema_name": schema_name,
     }
     r_kwargs["json"]["parameters"] = parameters
     utils.ws_asynchronous_request(*r_args, **r_kwargs)
@@ -80,46 +79,69 @@ class RESTLinkObject(Persistent):
     _uid = FieldProperty(IRESTLink["uid"])
     _title = FieldProperty(IRESTLink["title"])
     _application_id = FieldProperty(IRESTLink["application_id"])
-    _schema_name = FieldProperty(IRESTLink["schema_name"])
+    _back_link = FieldProperty(IRESTLink["back_link"])
 
-    def __init__(self, path, uid, title, application_id, schema_name):
-        self._path = path
-        self._uid = uid
-        self._title = title
-        self._application_id = application_id
-        self._schema_name = schema_name
+    def __init__(self, path, uid, title, application_id, back_link=False):
+        self.path = path
+        self.uid = uid
+        self.title = title
+        self.application_id = application_id
+        self.back_link = back_link
 
     @property
     def path(self):
         return getattr(self, "_path", "")
 
+    @path.setter
+    def path(self, value):
+        self._path = value
+
     @property
     def uid(self):
         return getattr(self, "_uid", None)
+
+    @uid.setter
+    def uid(self, value):
+        self._uid = value
 
     @property
     def title(self):
         return getattr(self, "_title", "missing")
 
+    @title.setter
+    def title(self, value):
+        self._title = value
+
     @property
     def application_id(self):
         return getattr(self, "_application_id", None)
 
+    @application_id.setter
+    def application_id(self, value):
+        self._application_id = value
+
     @property
-    def schema_name(self):
-        return getattr(self, "_schema_name", None)
+    def back_link(self):
+        return self._back_link
+
+    @back_link.setter
+    def back_link(self, value):
+        self._back_link = value
 
 
 @adapter(dict, Interface)
 class RESTLink(RESTLinkObject):
-    def __init__(self, result, form):
+    def __init__(self, result, context):
         super(RESTLink, self).__init__(
             result["response"]["@id"],
             result["response"]["UID"],
             result["response"]["title"],
             result["application_id"],
-            unicode(form._request_schema),
         )
+
+    def add_on(self, context):
+        """ Add the link on the given context """
+        add_link(context, self)
 
 
 class RestLinkView(BrowserView):
