@@ -70,6 +70,16 @@
     permission="cmf.ModifyPortalContent"
     />
 
+  <plone:service
+    method="GET"
+    for="Products.CMFCore.interfaces.ISiteRoot"
+    accept="application/json,application/schema+json"
+    name="@uid"
+    factory=".uid.UIDGet"
+    layer="imio.restapi.interfaces.IImioRestapiLayer"
+    permission="zope2.View"
+    />
+
   <configure zcml:condition="installed Products.Archetypes">
     <plone:service
       method="GET"
