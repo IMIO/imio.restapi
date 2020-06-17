@@ -42,6 +42,7 @@ class RestVocabularyFactory(object):
         return utils.ws_synchronous_request(*args, **kwargs)
 
     def __call__(self, context):
+        self.context = context
         r = self.synchronous_request()
         if r.status_code == 200:
             return self.transform(r.json())
@@ -52,7 +53,6 @@ class RemoteRestVocabularyFactory(SimpleVocabulary, RestVocabularyFactory):
     method = "POST"
     request_type = "GET"
     vocabulary_name = None
-    client_id = None
     application_id = None
 
     def __init__(self, *interfaces, **kwargs):
@@ -63,6 +63,10 @@ class RemoteRestVocabularyFactory(SimpleVocabulary, RestVocabularyFactory):
     @property
     def url(self):
         return "{ws_url}/request".format(ws_url=utils.get_ws_url())
+
+    @property
+    def client_id(self):
+        return utils.get_client_id()
 
     @property
     def body(self):
