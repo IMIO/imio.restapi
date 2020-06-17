@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 
+from imio.restapi.interfaces import IRESTLink
+from plone.restapi.services.content import add
+from zope.component import getMultiAdapter
+
 import requests
 import time
 import os
+import json
 
 
 def get_ws_url():
@@ -69,3 +74,23 @@ def ws_synchronous_request(method, *args, **kwargs):
                 counter += 1
                 time.sleep(0.01)
         return r
+
+
+def import_content(
+    context, request, client_id, application_id, path, link=True, back_link=False
+):
+    """ Import the content from the given application on the current context """
+    r_args, r_kwargs = generate_request_parameters(
+        path, client_id, application_id, method="POST", r_method="GET"
+    )
+    result = ws_synchronous_request(*r_args, **r_kwargs)
+    json_result = result.json()
+    request.set("BODY", json.dumps(json_result["response"]))
+    folder_post = add.FolderPost()
+    folder_post.context = context
+    folder_post.request = request
+    reply = folder_post.reply()
+    created_element = context.get(reply["id"])
+    link = getMultiAdapter((json_result, context), IRESTLink)
+    link.back_link = True
+    link.add_on(created_element)
