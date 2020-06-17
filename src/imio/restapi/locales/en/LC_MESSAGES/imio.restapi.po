@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-06-03 14:08+0000\n"
+"POT-Creation-Date: 2020-06-17 15:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,8 +23,16 @@ msgstr ""
 msgid "Imio REST API"
 msgstr ""
 
-#: ../configure.zcml:27
+#: ../form/form.py:204
+msgid "Import"
+msgstr ""
+
+#: ../configure.zcml:28
 msgid "Installs the imio.restapi add-on."
+msgstr ""
+
+#: ../browser/templates/link-viewlet.pt:8
+msgid "Linked element(s)"
 msgstr ""
 
 #: ../settings/interfaces.py:51
@@ -39,6 +47,14 @@ msgstr ""
 msgid "The client unique identifier"
 msgstr ""
 
+#: ../form/form.py:115
+msgid "The content {title} was created"
+msgstr ""
+
+#: ../form/form.py:198
+msgid "The content(s) was imported"
+msgstr ""
+
 #: ../settings/interfaces.py:32
 msgid "The public url of this application"
 msgstr ""
@@ -51,14 +67,14 @@ msgstr ""
 msgid "This information is configured in the instance configuration file"
 msgstr ""
 
-#: ../configure.zcml:36
+#: ../configure.zcml:37
 msgid "Uninstalls the imio.restapi add-on."
 msgstr ""
 
-#: ../configure.zcml:27
+#: ../configure.zcml:28
 msgid "imio.restapi"
 msgstr ""
 
-#: ../configure.zcml:36
+#: ../configure.zcml:37
 msgid "imio.restapi (uninstall)"
 msgstr ""
