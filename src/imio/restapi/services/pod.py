@@ -29,7 +29,11 @@ class PodTemplates(object):
         self.request = request
 
     def __call__(self, expand=False):
-        result = {"pod-templates": {"@id": "{}/@pod-templates".format(self.context.absolute_url())}}
+        result = {
+            "pod-templates": {
+                "@id": "{}/@pod-templates".format(self.context.absolute_url())
+            }
+        }
         if not expand:
             return result
 

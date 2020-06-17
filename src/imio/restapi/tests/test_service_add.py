@@ -124,11 +124,11 @@ class TestFolderCreate(unittest.TestCase):
                 "@type": "File",
                 "id": "myfile",
                 "title": "My File",
-                "file": {"data": "123456",
-                         "encoding": "ascii", }, },
+                "file": {"data": "123456", "encoding": "ascii",},
+            },
         )
         self.assertEqual(400, response.status_code)
-        self.assertEqual(response.json()[u'message'], FILE_DATA_INCOMPLETE_ERROR)
+        self.assertEqual(response.json()[u"message"], FILE_DATA_INCOMPLETE_ERROR)
 
         # add file correctly
         response = requests.post(
@@ -139,9 +139,8 @@ class TestFolderCreate(unittest.TestCase):
                 "@type": "File",
                 "id": "myfile",
                 "title": "My File",
-                "file": {"data": "123456",
-                         "encoding": "ascii",
-                         "filename": "file.txt"}, },
+                "file": {"data": "123456", "encoding": "ascii", "filename": "file.txt"},
+            },
         )
         self.assertEqual(201, response.status_code)
         transaction.begin()
@@ -149,7 +148,7 @@ class TestFolderCreate(unittest.TestCase):
         self.assertEqual(myfile.Title(), "My File")
         file = myfile.getFile()
         self.assertEqual(file.filename, "file.txt")
-        self.assertEqual(file.content_type, 'text/plain')
+        self.assertEqual(file.content_type, "text/plain")
         # due to a bug in plone.restapi while creating file with another
         # encoding than base64, we coment this under, so for AT,
         # do not define an encoding or use base64, DX is correct in both cases...
@@ -165,8 +164,8 @@ class TestFolderCreate(unittest.TestCase):
                 "@type": "File",
                 "id": "myfile2",
                 "title": "My File 2",
-                "file": {"data": base64.b64encode("654321"),
-                         "filename": "file.txt"}, },
+                "file": {"data": base64.b64encode("654321"), "filename": "file.txt"},
+            },
         )
         self.assertEqual(201, response.status_code)
         transaction.begin()
@@ -174,9 +173,9 @@ class TestFolderCreate(unittest.TestCase):
         self.assertEqual(myfile2.Title(), "My File 2")
         file2 = myfile2.getFile()
         self.assertEqual(file2.filename, "file.txt")
-        self.assertEqual(file2.content_type, 'text/plain')
+        self.assertEqual(file2.content_type, "text/plain")
         self.assertEqual(file2.size(), 6)
-        self.assertEqual(file2.data, '654321')
+        self.assertEqual(file2.data, "654321")
 
     def test_folder_post_wf_transitions(self):
         response = requests.post(
@@ -189,10 +188,12 @@ class TestFolderCreate(unittest.TestCase):
                 "title": "My Folder",
                 "wf_transitions": ["unknown1"],
                 "__children__": [
-                    {"@type": "Document",
-                     "id": "mydocument",
-                     "title": "My Document",
-                     "wf_transitions": ["unknown2", "publish"], }
+                    {
+                        "@type": "Document",
+                        "id": "mydocument",
+                        "title": "My Document",
+                        "wf_transitions": ["unknown2", "publish"],
+                    }
                 ],
             },
         )

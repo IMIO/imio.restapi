@@ -46,6 +46,8 @@ setup(
         "plone.restapi",
         "collective.z3cform.select2",
         "requests",
+        "Products.CPUtils",
+        "imio.pyutils",
     ],
     extras_require={
         "test": [

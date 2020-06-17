@@ -104,5 +104,5 @@ class TestServicePodTemplatesGet(unittest.TestCase):
             json={},
         )
         json = response.json()
-        self.assertTrue('pod-templates' in json['@components'])
-        self.assertEqual(json['@components']['pod-templates']['@id'], self.endpoint_url)
+        self.assertTrue("pod-templates" in json["@components"])
+        self.assertEqual(json["@components"]["pod-templates"]["@id"], self.endpoint_url)

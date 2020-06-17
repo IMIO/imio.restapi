@@ -38,3 +38,18 @@ def ws_synchronous_request(method, *args, **kwargs):
                 counter += 1
                 time.sleep(0.01)
         return r
+
+
+def sizeof_fmt(num, suffix="o"):
+    """Readable file size
+    :param num: Bytes value
+    :type num: int
+    :param suffix: Unit suffix (optionnal) default = o
+    :type suffix: str
+    :rtype: str
+    """
+    for unit in ["", "k", "M", "G", "T", "P", "E", "Z"]:
+        if abs(num) < 1024.0:
+            return "%3.1f %s%s" % (num, unit, suffix)
+        num /= 1024.0
+    return "%.1f%s%s" % (num, "Yi", suffix)
