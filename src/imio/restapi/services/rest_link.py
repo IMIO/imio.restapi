@@ -47,10 +47,7 @@ class LinkPost(Service):
                 "Properties ({0}) are required".format(", ".join(missing_values))
             )
         link = RESTLinkObject(
-            values["path"],
-            values["uid"],
-            values["title"],
-            values["application_id"],
+            values["path"], values["uid"], values["title"], values["application_id"]
         )
         add_link(self.context, link)
         serializer = queryMultiAdapter((link, self.request), ISerializeToJson)

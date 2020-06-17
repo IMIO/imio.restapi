@@ -13,16 +13,9 @@ class IImioRestapiLayer(IDefaultBrowserLayer):
 class IRESTAction(Interface):
     """A REST action"""
 
-    id = schema.TextLine(
-        title=u"Action Identifier",
-        required=True,
-        default=u"default",
-    )
+    id = schema.TextLine(title=u"Action Identifier", required=True, default=u"default")
 
-    title = schema.TextLine(
-        title=u"Action title",
-        required=True,
-    )
+    title = schema.TextLine(title=u"Action title", required=True)
 
     application_id = schema.TextLine(
         title=u"Application Identifier",
@@ -37,29 +30,18 @@ class IRESTAction(Interface):
     )
 
     view_name = schema.TextLine(
-        title=u"Form view",
-        required=True,
-        default=u"default-action-form",
+        title=u"Form view", required=True, default=u"default-action-form"
     )
 
 
 class IRESTLink(Interface):
     """A REST link"""
 
-    path = schema.TextLine(
-        title=u"Path to the object",
-        required=True,
-    )
+    path = schema.TextLine(title=u"Path to the object", required=True)
 
-    uid = schema.TextLine(
-        title=u"The object UID",
-        required=True,
-    )
+    uid = schema.TextLine(title=u"The object UID", required=True)
 
-    title = schema.TextLine(
-        title=u"The object title",
-        required=True,
-    )
+    title = schema.TextLine(title=u"The object title", required=True)
 
     application_id = schema.TextLine(
         title=u"Application Identifier",

@@ -3,4 +3,4 @@
 from zope.i18nmessageid import MessageFactory
 
 
-_ = MessageFactory('imio.restapi')
+_ = MessageFactory("imio.restapi")
