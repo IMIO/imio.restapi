@@ -192,3 +192,23 @@ class BaseForm(ExtensibleForm, Form):
             self.actions.update()
         else:
             super(BaseForm, self).updateActions()
+
+
+class ImportForm(BaseForm):
+    _message = _("The content(s) was imported")
+
+    def _get_data(self, data):
+        """ Return an iterable with the relative path of Plone objects to create """
+        raise NotImplementedError
+
+    @button.buttonAndHandler(_(u"Import"))
+    def handleApply(self, action):
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        for path in self._get_data(data):
+            utils.import_content(
+                self.context, self.request, self.client_id, self.application_id, path
+            )
+        self.request.response.redirect(self.context.absolute_url())
