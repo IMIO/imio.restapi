@@ -4,9 +4,11 @@
 	    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       i18n:domain="imio.restapi" lang="en">
 <tal:block condition="view/available">
-Links
-<div class="rest-links" tal:repeat="link view/links">
+<div class="rest-links" tal:condition="view/links">
+  <h3 i18n:translate="">Linked element(s)</h3>
+  <tal:while repeat="link view/links">
   <tal:block replace="structure link/@@view"></tal:block>
+  </tal:while>
 </div>
 </tal:block>
 </html>

@@ -22,6 +22,8 @@ class ImioRestapiLayer(PloneSandboxLayer):
         # Load any other ZCML that is required for your tests.
         # The z3c.autoinclude feature is disabled in the Plone fixture base
         # layer.
+        import plone.app.dexterity
+
         self.loadZCML(package=plone.app.dexterity)
         self.loadZCML(package=imio.restapi)
 
