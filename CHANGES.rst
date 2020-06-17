@@ -5,10 +5,50 @@ Changelog
 1.0a4 (unreleased)
 ------------------
 
+- Add `@uid` rest service
+  [mpeeters]
+
+- Add `ImportForm` base class for content import from remote app
+  [mpeeters]
+
+- Make `_request_schema` optional to handle more usecases
+  [mpeeters]
+
+- Add `import_content` utils to create content from rest call result
+  [mpeeters]
+
+- Add `get_application_url` and improve `generate_request_parameters` utils
+  [mpeeters]
+
+- Implement a base class vocabulary for search of objects on remote app
+  [mpeeters]
+
+- Remove `client_id` parameter from base vocabulary class since the value is set directly on zope config
+  [mpeeters]
+
+- Add caching for vocabularies
+  [mpeeters]
+
+- Update translations
+  [mpeeters]
+
+- Update form implementation for links
+  [mpeeters]
+
+- Improve link viewlet
+  [mpeeters]
+
+- Implement services for REST links
+  [mpeeters]
+
+- Add a serializer for links
+  [mpeeters]
+
 - Renamed `@pod endpoint` to `@pod-templates` to be more explicit.
   Endpoint `@pod-templates` is now a default exapandable element
   available in `@components`.
   [gbastien]
+
 - Moved `FolderPost.wf_transitions` call into `FolderPost._after_reply_hook`.
   Update `serialized_obj` `review_state` key if transitions were triggered in
   `FolderPost.wf_transitions`.
