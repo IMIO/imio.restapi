@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from imio.restapi import utils
+from plone.memoize import ram
+from time import time
 from zope.schema.vocabulary import SimpleVocabulary
 
 
@@ -8,6 +10,10 @@ def dict_2_vocabulary(dictionary):
     """Transform a dictionary into a vocabulary"""
     terms = [SimpleVocabulary.createTerm(k, k, v) for k, v in dictionary.items()]
     return SimpleVocabulary(terms)
+
+
+def _rest_vocabulary_cache_key(func, obj):
+    return (func, getattr(obj, "body", {}), time() // (5 * 60))
 
 
 class RestVocabularyFactory(object):
@@ -78,8 +84,11 @@ class RemoteRestVocabularyFactory(SimpleVocabulary, RestVocabularyFactory):
 
     def transform(self, json_body):
         terms_values = json_body["response"].get("terms", [])
-        return [self.createTerm(e['token'], e['token'], e['title']) for e in terms_values]
+        return [
+            self.createTerm(e["token"], e["token"], e["title"]) for e in terms_values
+        ]
 
+    @ram.cache(_rest_vocabulary_cache_key)
     def get_terms(self):
         r = self.synchronous_request()
         if r.status_code == 200:
