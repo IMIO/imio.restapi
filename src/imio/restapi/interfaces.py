@@ -49,8 +49,9 @@ class IRESTLink(Interface):
         required=True,
     )
 
-    schema_name = schema.TextLine(
-        title=u"Query schema",
-        description=u"The query schema used for the request",
+    back_link = schema.Bool(
+        title=u"Back reference",
+        description=u"Define if this is a back reference",
         required=True,
+        default=False,
     )

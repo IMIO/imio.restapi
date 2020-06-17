@@ -31,7 +31,7 @@ class RequestSchemaGet(Service):
         self.params = []
 
     def publishTraverse(self, request, name):
-        # Treat any path segments after /@types as parameters
+        # Treat any path segments after /@request_schema as parameters
         self.params.append(name)
         return self
 
