@@ -155,17 +155,18 @@ class BaseForm(ExtensibleForm, Form):
         return utils.ws_synchronous_request(*args, **kwargs)
 
     def update(self):
-        r = self.get_request_schema()
-        if r.status_code == 200:
-            schema = r.json()["response"]
-            converter = tools.JsonSchema2Z3c(
-                schema, self.client_id, self.application_id
-            )
-            self.title = converter.form_title
-            self.fields = converter.generated_fields
-            self.groups = converter.generated_groups
-            self.buttons = self.create_buttons(schema)
-            self.actions = self.create_actions(schema)
+        if self._request_schema is not None:
+            r = self.get_request_schema()
+            if r.status_code == 200:
+                schema = r.json()["response"]
+                converter = tools.JsonSchema2Z3c(
+                    schema, self.client_id, self.application_id
+                )
+                self.title = converter.form_title
+                self.fields = converter.generated_fields
+                self.groups = converter.generated_groups
+                self.buttons = self.create_buttons(schema)
+                self.actions = self.create_actions(schema)
         super(BaseForm, self).update()
 
     def create_buttons(self, schema):
@@ -187,4 +188,7 @@ class BaseForm(ExtensibleForm, Form):
         return actions
 
     def updateActions(self):
-        self.actions.update()
+        if self._request_schema is not None:
+            self.actions.update()
+        else:
+            super(BaseForm, self).updateActions()
