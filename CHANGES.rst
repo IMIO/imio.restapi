@@ -5,6 +5,9 @@ Changelog
 1.0a4 (unreleased)
 ------------------
 
+- Add an adapter to allow data transform during import of content
+  [mpeeters]
+
 - Ensure that REST vocabulary base class have context available
   [mpeeters]
 

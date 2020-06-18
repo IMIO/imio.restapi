@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from imio.restapi.interfaces import IContentImporter
 from imio.restapi.interfaces import IRESTLink
 from plone.restapi.services.content import add
 from zope.component import getMultiAdapter
@@ -85,7 +86,8 @@ def import_content(
     )
     result = ws_synchronous_request(*r_args, **r_kwargs)
     json_result = result.json()
-    request.set("BODY", json.dumps(json_result["response"]))
+    importer = getMultiAdapter((json_result["response"], context), IContentImporter)
+    request.set("BODY", json.dumps(importer.parse_data()))
     folder_post = add.FolderPost()
     folder_post.context = context
     folder_post.request = request
@@ -109,4 +111,3 @@ def sizeof_fmt(num, suffix="o"):
             return "%3.1f %s%s" % (num, unit, suffix)
         num /= 1024.0
     return "%.1f%s%s" % (num, "Yi", suffix)
-

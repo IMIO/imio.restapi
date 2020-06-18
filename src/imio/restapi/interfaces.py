@@ -55,3 +55,7 @@ class IRESTLink(Interface):
         required=True,
         default=False,
     )
+
+
+class IContentImporter(Interface):
+    """ Adapter interface to prepare data to import """

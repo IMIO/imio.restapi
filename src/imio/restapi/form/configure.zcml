@@ -10,6 +10,11 @@
     provides="imio.restapi.interfaces.IRESTLink"
     />
 
+  <adapter
+    factory=".importer.BaseContentImporter"
+    provides="imio.restapi.interfaces.IContentImporter"
+    />
+
   <browser:view
     for="imio.restapi.interfaces.IRESTLink"
     class=".link.RestLinkView"
