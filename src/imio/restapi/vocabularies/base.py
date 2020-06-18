@@ -44,6 +44,7 @@ class RestVocabularyFactory(object):
         return utils.ws_synchronous_request(*args, **kwargs)
 
     def __call__(self, context):
+        self.context = context
         try:
             r = self.synchronous_request()
             if r.status_code == 200:

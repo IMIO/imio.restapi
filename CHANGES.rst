@@ -5,6 +5,9 @@ Changelog
 1.0a4 (unreleased)
 ------------------
 
+- Ensure that REST vocabulary base class have context available
+  [mpeeters]
+
 - Add `@uid` rest service
   [mpeeters]
 
