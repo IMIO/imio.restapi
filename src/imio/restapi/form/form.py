@@ -138,7 +138,6 @@ class BaseForm(ExtensibleForm, Form):
                 "Accept": "application/json",
                 "Content-Type": "application/json",
             },
-            "auth": ("admin", "admin"),  # XXX Implement authentication
             "json": {
                 "client_id": self.client_id,
                 "application_id": self.application_id,
@@ -152,6 +151,9 @@ class BaseForm(ExtensibleForm, Form):
         args, kwargs = self.base_request_parameters
         kwargs["json"]["request_type"] = "GET"
         kwargs["json"]["path"] = "/@request_schema/{0}".format(self.request_schema)
+        auth = utils.get_authentication(self.request)
+        if auth:
+            kwargs["json"]["auth"] = auth
         return utils.ws_synchronous_request(*args, **kwargs)
 
     def update(self):

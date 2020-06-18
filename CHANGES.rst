@@ -5,6 +5,9 @@ Changelog
 1.0a4 (unreleased)
 ------------------
 
+- Implement basic auth adapter for requests
+  [mpeeters]
+
 - Add an adapter to allow data transform during import of content
   [mpeeters]
 

@@ -2,8 +2,10 @@
 
 from imio.restapi.interfaces import IContentImporter
 from imio.restapi.interfaces import IRESTLink
+from imio.restapi.interfaces import IRestAuthentication
 from plone.restapi.services.content import add
 from zope.component import getMultiAdapter
+from zope.component import queryAdapter
 
 import requests
 import time
@@ -31,13 +33,18 @@ def get_application_url():
     return os.getenv("APPLICATION_URL")
 
 
+def get_authentication(request):
+    auth = queryAdapter(request, IRestAuthentication)
+    if auth:
+        return auth.basic
+
+
 def generate_request_parameters(
     path, client_id, application_id, method="POST", r_method="POST"
 ):
     args = (method, "{0}/request".format(get_ws_url()))
     kwargs = {
         "headers": {"Accept": "application/json", "Content-Type": "application/json"},
-        "auth": ("admin", "admin"),  # XXX Implement authentication
         "json": {
             "request_type": r_method,
             "client_id": client_id,
@@ -82,6 +89,9 @@ def import_content(
     r_args, r_kwargs = generate_request_parameters(
         path, client_id, application_id, method="POST", r_method="GET"
     )
+    auth = get_authentication(request)
+    if auth:
+        r_kwargs["json"]["auth"] = auth
     result = ws_synchronous_request(*r_args, **r_kwargs)
     json_result = result.json()
     importer = getMultiAdapter((json_result["response"], context), IContentImporter)
