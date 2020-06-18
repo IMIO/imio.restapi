@@ -58,6 +58,9 @@ Changelog
   This is soft depending on `Products.CPUtils` and `imio.pyutils`.
   [gbastien]
 
+- Require `plone.restapi>=6.13.3`.
+  [gbastien]
+
 1.0a3 (2020-06-08)
 ------------------
 

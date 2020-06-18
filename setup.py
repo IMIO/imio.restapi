@@ -43,7 +43,8 @@ setup(
         # -*- Extra requirements: -*-
         "setuptools",
         "z3c.jbot",
-        "plone.restapi",
+        # fix plone.app.controlpanel permissions.zcml include
+        "plone.restapi>=6.13.3",
         "collective.z3cform.select2",
         "requests",
     ],
