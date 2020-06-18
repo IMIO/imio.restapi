@@ -65,12 +65,10 @@ def ws_synchronous_request(method, *args, **kwargs):
         counter = 0
         while result is False:
             r = requests.get(*args, **kwargs)
-            print("request {0}".format(counter))
             if r.status_code == 200:
                 result = True
             else:
                 if counter >= 500:
-                    __import__("pdb").set_trace()
                     return r
                 counter += 1
                 time.sleep(0.01)
