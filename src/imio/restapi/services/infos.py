@@ -2,12 +2,9 @@
 
 from AccessControl import Unauthorized
 from imio.restapi.utils import sizeof_fmt
-from imio.pyutils.system import read_dir
-from imio.pyutils.system import read_file
 from plone import api
 from plone.restapi.deserializer import boolean_value
 from plone.restapi.services import Service
-from Products.CPUtils.Extensions.utils import tobytes
 
 import os
 
@@ -62,6 +59,10 @@ class InfosGet(Service):
         return types
 
     def _stats_database(self):
+        # soft dependency
+        from imio.pyutils.system import read_dir
+        from imio.pyutils.system import read_file
+        from Products.CPUtils.Extensions.utils import tobytes
         # zope
         database = {"fs_sz": 0, "bl_sz": 0}
         app = self.context.restrictedTraverse("/")

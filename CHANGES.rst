@@ -53,7 +53,9 @@ Changelog
   Update `serialized_obj` `review_state` key if transitions were triggered in
   `FolderPost.wf_transitions`.
   [gbastien]
+
 - Added endpoint `@infos` to get various informations about application.
+  This is soft depending on `Products.CPUtils` and `imio.pyutils`.
   [gbastien]
 
 1.0a3 (2020-06-08)

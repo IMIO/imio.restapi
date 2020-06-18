@@ -46,8 +46,6 @@ setup(
         "plone.restapi",
         "collective.z3cform.select2",
         "requests",
-        "Products.CPUtils",
-        "imio.pyutils",
     ],
     extras_require={
         "test": [
@@ -60,6 +58,10 @@ setup(
             "plone.app.robotframework[debug]",
             "plone.restapi[test]",
             "Products.ATContentTypes",
+        ],
+        "stats": [
+            "Products.CPUtils",
+            "imio.pyutils",
         ]
     },
     entry_points="""
