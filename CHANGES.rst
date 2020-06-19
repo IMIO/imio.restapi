@@ -67,6 +67,12 @@ Changelog
 - Require `plone.restapi>=6.13.3`.
   [gbastien]
 
+- Override `@search` default endpoint so it is easier to complete and
+  is a base for sub-packages.
+  Added management of `base_search_uid`, being able to give a `Collection UID`
+  as base query.
+  [gbastien]
+
 1.0a3 (2020-06-08)
 ------------------
 

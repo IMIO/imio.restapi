@@ -117,4 +117,14 @@
       />
   </configure>
 
+  <!-- search -->
+  <plone:service
+    method="GET"
+    for="Products.CMFCore.interfaces.ISiteRoot"
+    accept="application/json,application/schema+json"
+    name="@search"
+    factory=".search.SearchGet"
+    layer="imio.restapi.interfaces.IImioRestapiLayer"
+    permission="zope2.View" />
+
 </configure>

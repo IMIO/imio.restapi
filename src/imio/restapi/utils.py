@@ -109,3 +109,10 @@ def sizeof_fmt(num, suffix="o"):
             return "%3.1f %s%s" % (num, unit, suffix)
         num /= 1024.0
     return "%.1f%s%s" % (num, "Yi", suffix)
+
+
+def listify(value):
+    """Make sure value is a list."""
+    if not hasattr(value, "__iter__"):
+        value = [value]
+    return value
