@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from imio.restapi import utils
-from requests.exceptions import MissingSchema
 from plone.memoize import ram
+from requests.exceptions import MissingSchema
 from time import time
+from zope.globalrequest import getRequest
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -33,14 +34,23 @@ class RestVocabularyFactory(object):
         return {"Accept": "application/json", "Content-Type": "application/json"}
 
     @property
+    def request(self):
+        if hasattr(self.context, "REQUEST"):
+            return self.context.REQUEST
+        return getRequest()
+
+    @property
     def url(self):
         raise NotImplementedError
 
     def synchronous_request(self):
         args = (self.method, self.url)
-        kwargs = {"headers": self.headers, "auth": ("admin", "admin")}
+        kwargs = {"headers": self.headers}
         if self.method == "POST":
             kwargs["json"] = self.body
+        auth = utils.get_authentication(self.request)
+        if auth:
+            kwargs["json"]["auth"] = auth
         return utils.ws_synchronous_request(*args, **kwargs)
 
     def __call__(self, context):

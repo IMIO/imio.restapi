@@ -59,3 +59,7 @@ class IRESTLink(Interface):
 
 class IContentImporter(Interface):
     """ Adapter interface to prepare data to import """
+
+
+class IRestAuthentication(Interface):
+    """ Adapter interface to handle authentification """
