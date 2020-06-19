@@ -10,6 +10,7 @@ import unittest
 
 class TestServiceSearchGet(unittest.TestCase):
     """@search"""
+
     layer = IMIO_RESTAPI_DOCGEN_FUNCTIONAL_TESTING
 
     def setUp(self):
@@ -27,4 +28,4 @@ class TestServiceSearchGet(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 200)
         json = response.json()
-        self.assertEqual(json[u'items_total'], 12)
+        self.assertEqual(json[u"items_total"], 12)

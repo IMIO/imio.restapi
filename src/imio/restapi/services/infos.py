@@ -63,6 +63,7 @@ class InfosGet(Service):
         from imio.pyutils.system import read_dir
         from imio.pyutils.system import read_file
         from Products.CPUtils.Extensions.utils import tobytes
+
         # zope
         database = {"fs_sz": 0, "bl_sz": 0}
         app = self.context.restrictedTraverse("/")

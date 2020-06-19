@@ -60,10 +60,7 @@ setup(
             "plone.restapi[test]",
             "Products.ATContentTypes",
         ],
-        "stats": [
-            "Products.CPUtils",
-            "imio.pyutils",
-        ]
+        "stats": ["Products.CPUtils", "imio.pyutils",],
     },
     entry_points="""
     [z3c.autoinclude.plugin]
