@@ -47,6 +47,7 @@ setup(
         "plone.restapi>=6.13.3",
         "collective.z3cform.select2",
         "requests",
+        "imio.helpers",
     ],
     extras_require={
         "test": [
