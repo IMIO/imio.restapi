@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a4 (unreleased)
+1.0a4 (2020-06-22)
 ------------------
 
 - Add missing french translations
