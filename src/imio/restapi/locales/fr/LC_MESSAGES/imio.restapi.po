@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-06-17 15:46+0000\n"
+"POT-Creation-Date: 2020-06-22 11:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgstr "Liens avec les autres applications"
 msgid "Imio REST API"
 msgstr ""
 
-#: ../form/form.py:204
+#: ../form/form.py:206
 msgid "Import"
 msgstr ""
 
@@ -51,7 +51,7 @@ msgstr "L'identifiant unique du client"
 msgid "The content {title} was created"
 msgstr "Le contenu {title} a été créé"
 
-#: ../form/form.py:198
+#: ../form/form.py:200
 msgid "The content(s) was imported"
 msgstr ""
 
