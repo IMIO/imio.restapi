@@ -5,6 +5,9 @@ Changelog
 1.0a4 (unreleased)
 ------------------
 
+- Add missing french translations
+  [mpeeters]
+
 - Implement basic auth adapter for requests
   [mpeeters]
 

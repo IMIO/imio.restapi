@@ -25,7 +25,7 @@ msgstr ""
 
 #: ../form/form.py:206
 msgid "Import"
-msgstr ""
+msgstr "Importer"
 
 #: ../configure.zcml:28
 msgid "Installs the imio.restapi add-on."
@@ -53,7 +53,7 @@ msgstr "Le contenu {title} a été créé"
 
 #: ../form/form.py:200
 msgid "The content(s) was imported"
-msgstr ""
+msgstr "Le(s) contenu(s) ont été importé(s)"
 
 #: ../settings/interfaces.py:32
 msgid "The public url of this application"
