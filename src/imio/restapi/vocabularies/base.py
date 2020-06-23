@@ -49,7 +49,7 @@ class RestVocabularyFactory(object):
         if self.method == "POST":
             kwargs["json"] = self.body
         auth = utils.get_authentication(self.request)
-        if auth:
+        if auth and "json" in kwargs:
             kwargs["json"]["auth"] = auth
         return utils.ws_synchronous_request(*args, **kwargs)
 

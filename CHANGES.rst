@@ -5,7 +5,8 @@ Changelog
 1.0a5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix an error with vocabulary request when there is no body
+  [mpeeters]
 
 
 1.0a4 (2020-06-22)
