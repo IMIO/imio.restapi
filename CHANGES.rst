@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a8 (unreleased)
+1.0a8 (2020-06-23)
 ------------------
 
 - Improve filtering for remote rest vocabulary by using the id without the domain
