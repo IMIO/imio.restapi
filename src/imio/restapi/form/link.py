@@ -135,7 +135,7 @@ class RESTLinkObject(Persistent):
 class RESTLink(RESTLinkObject):
     def __init__(self, result, context):
         super(RESTLink, self).__init__(
-            result["response"]["@id"],
+            result["response"]["@relative_path"],
             result["response"]["UID"],
             result["response"]["title"],
             result["application_id"],

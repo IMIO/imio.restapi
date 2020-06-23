@@ -5,6 +5,9 @@ Changelog
 1.0a8 (unreleased)
 ------------------
 
+- Use `@relative_path` attribute for links
+  [mpeeters]
+
 - Implement base serializer to add `@relative_path` attribute
   [mpeeters]
 
