@@ -5,7 +5,8 @@ Changelog
 1.0a7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix an issue with search vocabulary term ids when `b_size` parameter is used
+  [mpeeters]
 
 
 1.0a6 (2020-06-23)

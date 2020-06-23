@@ -154,9 +154,16 @@ class RestSearchVocabularyFactory(RestVocabularyFactory):
         """
         return True
 
+    def _get_base_url(self, value):
+        """
+        Return the base_url without search parameters removed
+        """
+        parts = value.split("/@search")
+        return parts[0]
+
     def transform(self, json_body):
         terms_values = json_body["response"].get("items", [])
-        base_url = json_body["response"]["@id"].replace(self.request_path, "")
+        base_url = self._get_base_url(json_body["response"]["@id"])
         return SimpleVocabulary(
             [
                 SimpleTerm(
