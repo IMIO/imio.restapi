@@ -4,6 +4,8 @@
   xmlns:i18n="http://namespaces.zope.org/i18n"
   i18n_domain="imio.restapi">
 
+  <adapter factory=".base.SerializeToJson" />
+  <adapter factory=".base.SerializeFolderToJson" />
   <adapter factory=".rest_link.SerializeRestLinkToJson" />
 
 </configure>

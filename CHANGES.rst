@@ -5,7 +5,8 @@ Changelog
 1.0a8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Implement base serializer to add `@relative_path` attribute
+  [mpeeters]
 
 
 1.0a7 (2020-06-23)
