@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a7 (unreleased)
+1.0a7 (2020-06-23)
 ------------------
 
 - Fix an issue with search vocabulary term ids when `b_size` parameter is used
