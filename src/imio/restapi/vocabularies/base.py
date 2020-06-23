@@ -172,6 +172,6 @@ class RestSearchVocabularyFactory(RestVocabularyFactory):
                     e["title"],
                 )
                 for e in terms_values
-                if self._filter(e) is True
+                if self._filter(e["@id"].replace(base_url, "")) is True
             ]
         )

@@ -5,6 +5,9 @@ Changelog
 1.0a8 (unreleased)
 ------------------
 
+- Improve filtering for remote rest vocabulary by using the id without the domain
+  [mpeeters]
+
 - Use `@relative_path` attribute for links
   [mpeeters]
 
