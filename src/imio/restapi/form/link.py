@@ -38,6 +38,7 @@ def add_link(context, link):
 
 
 def add_remote_link(context, path, remote_application_id, back_link=False):
+    # XXX To be implemented
     client_id = utils.get_client_id()
     r_args, r_kwargs = utils.generate_request_parameters(
         "{0}/@rest_link".format(path), client_id, remote_application_id
