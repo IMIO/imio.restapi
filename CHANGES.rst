@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a6 (unreleased)
+1.0a6 (2020-06-23)
 ------------------
 
 - Fix permissions for viewlet
