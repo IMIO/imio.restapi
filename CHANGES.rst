@@ -5,7 +5,8 @@ Changelog
 1.0a6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix permissions for viewlet
+  [mpeeters]
 
 
 1.0a5 (2020-06-23)

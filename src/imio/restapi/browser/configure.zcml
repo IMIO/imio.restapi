@@ -12,7 +12,7 @@
     for="*"
     class=".viewlets.ActionViewlet"
     template="templates/action-viewlet.pt"
-    permission="zope2.View"
+    permission="cmf.ModifyPortalContent"
     />
 
   <browser:viewlet
@@ -21,7 +21,7 @@
     for="*"
     class=".viewlets.LinkViewlet"
     template="templates/link-viewlet.pt"
-    permission="zope2.View"
+    permission="cmf.ModifyPortalContent"
     />
 
 </configure>
