@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a5 (unreleased)
+1.0a5 (2020-06-23)
 ------------------
 
 - Fix an error with vocabulary request when there is no body
