@@ -5,8 +5,9 @@ Changelog
 1.0a9 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Display `imio-restapi-actions` and `imio-restapi-links` viewlets
+  only when package is installed (`IImioRestapiLayer`)
+  [gbastien]
 
 1.0a8 (2020-06-23)
 ------------------

@@ -12,6 +12,7 @@
     for="*"
     class=".viewlets.ActionViewlet"
     template="templates/action-viewlet.pt"
+    layer="imio.restapi.interfaces.IImioRestapiLayer"
     permission="cmf.ModifyPortalContent"
     />
 
@@ -21,6 +22,7 @@
     for="*"
     class=".viewlets.LinkViewlet"
     template="templates/link-viewlet.pt"
+    layer="imio.restapi.interfaces.IImioRestapiLayer"
     permission="cmf.ModifyPortalContent"
     />
 
