@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a9 (unreleased)
+1.0a9 (2020-06-24)
 ------------------
 
 - Improve caching of REST vocabularies
