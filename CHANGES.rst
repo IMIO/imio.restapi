@@ -5,6 +5,9 @@ Changelog
 1.0a9 (unreleased)
 ------------------
 
+- Improve caching of REST vocabularies
+  [mpeeters]
+
 - Display `imio-restapi-actions` and `imio-restapi-links` viewlets
   only when package is installed (`IImioRestapiLayer`)
   [gbastien]

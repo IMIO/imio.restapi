@@ -53,12 +53,17 @@ class RestVocabularyFactory(object):
             kwargs["json"]["auth"] = auth
         return utils.ws_synchronous_request(*args, **kwargs)
 
+    @ram.cache(_rest_vocabulary_cache_key)
+    def _request(self):
+        r = self.synchronous_request()
+        if r.status_code == 200:
+            return r.json()
+        return {}
+
     def __call__(self, context):
         self.context = context
         try:
-            r = self.synchronous_request()
-            if r.status_code == 200:
-                return self.transform(r.json())
+            return self.transform(self._request())
         except MissingSchema:
             pass
         return self.transform({})
@@ -107,12 +112,8 @@ class RemoteRestVocabularyFactory(SimpleVocabulary, RestVocabularyFactory):
             self.createTerm(e["token"], e["token"], e["title"]) for e in terms_values
         ]
 
-    @ram.cache(_rest_vocabulary_cache_key)
     def get_terms(self):
-        r = self.synchronous_request()
-        if r.status_code == 200:
-            return self.transform(r.json())
-        return self.transform({})
+        return self.transform(self._request())
 
 
 class RestSearchVocabularyFactory(RestVocabularyFactory):

@@ -7,6 +7,9 @@ from imio.restapi.vocabularies import base
 class ApplicationsVocabularyFactory(base.RestVocabularyFactory):
     """ Vocabulary that return all the applications for the same client """
 
+    def body(self):
+        return {}
+
     @property
     def url(self):
         return u"{ws_url}/route/{client_id}".format(
