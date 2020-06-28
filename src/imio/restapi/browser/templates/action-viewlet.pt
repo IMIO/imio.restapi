@@ -4,7 +4,7 @@
 	    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       i18n:domain="imio.restapi" lang="en">
 <tal:block condition="view/available">
-<ul tal:condition="view/actions">
+<ul tal:condition="view/actions" class="rest-actions">
   <li tal:repeat="action view/actions"><tal:block replace="structure action/render"></tal:block></li>
 </ul>
 </tal:block>

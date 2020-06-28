@@ -5,7 +5,8 @@ Changelog
 1.0a10 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Add class on list of actions
+  [mpeeters]
 
 
 1.0a9 (2020-06-24)
