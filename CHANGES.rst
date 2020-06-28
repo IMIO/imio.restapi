@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a10 (unreleased)
+1.0a10 (2020-06-28)
 -------------------
 
 - Add class on list of actions
