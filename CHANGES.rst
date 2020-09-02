@@ -5,8 +5,8 @@ Changelog
 1.0a11 (unreleased)
 -------------------
 
-- Leave `FolderPost._after_reply_hook` empty, was managing `wf_transitions`
-  before, or `wf_transitions` could be broken if a package overrides
+- Leave `FolderPost._after_reply_hook` empty (was managing `wf_transitions`)
+  or `wf_transitions` could be broken if a package overrides
   `_after_reply_hook` and forget to call super's original method
   [gbastien]
 
