@@ -5,7 +5,10 @@ Changelog
 1.0a11 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Leave `FolderPost._after_reply_hook` empty, was managing `wf_transitions`
+  before, or `wf_transitions` could be broken if a package overrides
+  `_after_reply_hook` and forget to call super's original method
+  [gbastien]
 
 
 1.0a10 (2020-06-28)
@@ -24,6 +27,7 @@ Changelog
 - Display `imio-restapi-actions` and `imio-restapi-links` viewlets
   only when package is installed (`IImioRestapiLayer`)
   [gbastien]
+
 
 1.0a8 (2020-06-23)
 ------------------

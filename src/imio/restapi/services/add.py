@@ -49,9 +49,9 @@ class FolderPost(add.FolderPost):
         return cleaned_data
 
     def _after_reply_hook(self, serialized_obj):
-        """Hook to be overrided if necessary, by default manage
-           the 'wf_transitions' if given."""
-        self.wf_transitions(serialized_obj)
+        """Hook to be overrided if necessary,
+           called after reply returned result."""
+        pass
 
     def _wf_transition_additional_warning(self, tr):
         """Hook to add some specific context for
@@ -100,6 +100,7 @@ class FolderPost(add.FolderPost):
             children = self.data.pop("__children__")
             self.request.set("BODY", json.dumps(self.data))
         result = super(FolderPost, self).reply()
+        self.wf_transitions(result)
         self._after_reply_hook(result)
         result["@warnings"] = self.warnings
         if children:
