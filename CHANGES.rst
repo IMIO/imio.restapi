@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a11 (unreleased)
+1.0a11 (2020-09-10)
 -------------------
 
 - Leave `FolderPost._after_reply_hook` empty (was managing `wf_transitions`)
