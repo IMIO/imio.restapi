@@ -10,6 +10,9 @@ Changelog
   the default `plone.restapi` `DefaultJSONSummarySerializer` and add
   `id` and `UID` by default to the results.
   [gbastien]
+- Improve `@search` by allowing element UID other than Collection for `base_search_uid` parameter that can be used as a base path
+  [mpeeters]
+
 
 1.0a11 (2020-09-10)
 -------------------

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from imio.helpers.content import uuidsToObjects
+from plone.app.contenttypes.interfaces import ICollection
 from plone.app.querystring.queryparser import parseFormquery
 from plone.restapi.search.handler import SearchHandler
 from plone.restapi.search.utils import unflatten_dotted_dict
@@ -28,10 +29,14 @@ class SearchGet(BaseSearchGet):
         form = self.request.form
         base_search_uid = form.get("base_search_uid", "").strip()
         if base_search_uid:
-            collection = uuidsToObjects(uuids=base_search_uid)
-            if collection:
-                collection = collection[0]
+            element = uuidsToObjects(uuids=base_search_uid)
+            if element and ICollection.providedBy(element[0]):
+                collection = element[0]
                 query = parseFormquery(collection, collection.query)
+            elif element:
+                query["path"] = {
+                    "query": "/".join(element[0].getPhysicalPath())
+                }
         return query
 
     def _set_query_additional_params(self):
