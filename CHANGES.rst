@@ -5,13 +5,14 @@ Changelog
 1.0a12 (unreleased)
 -------------------
 
+- Improve `@search` by allowing element UID other than Collection for `base_search_uid` parameter that can be used as a base path
+  [mpeeters]
+
 - Moved management of additional `metadata_fields` from the `SearchGet` service
   to the `DefaultJSONSummarySerializer` created for that, it will override
   the default `plone.restapi` `DefaultJSONSummarySerializer` and add
   `id` and `UID` by default to the results.
   [gbastien]
-- Improve `@search` by allowing element UID other than Collection for `base_search_uid` parameter that can be used as a base path
-  [mpeeters]
 
 
 1.0a11 (2020-09-10)
