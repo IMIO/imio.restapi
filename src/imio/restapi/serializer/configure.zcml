@@ -6,6 +6,7 @@
 
   <adapter factory=".base.SerializeToJson" />
   <adapter factory=".base.SerializeFolderToJson" />
+  <adapter factory=".base.DefaultJSONSummarySerializer" />
   <adapter factory=".rest_link.SerializeRestLinkToJson" />
 
 </configure>

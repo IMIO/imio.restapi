@@ -29,3 +29,6 @@ class TestServiceSearchGet(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         json = response.json()
         self.assertEqual(json[u"items_total"], 12)
+        # "id" and "UID" are added to the default search result
+        self.assertTrue("UID" in json["items"][0])
+        self.assertTrue("id" in json["items"][0])

@@ -5,8 +5,11 @@ Changelog
 1.0a12 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Moved management of additional `metadata_fields` from the `SearchGet` service
+  to the `DefaultJSONSummarySerializer` created for that, it will override
+  the default `plone.restapi` `DefaultJSONSummarySerializer` and add
+  `id` and `UID` by default to the results.
+  [gbastien]
 
 1.0a11 (2020-09-10)
 -------------------
