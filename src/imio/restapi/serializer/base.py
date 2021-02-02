@@ -49,7 +49,7 @@ class DefaultJSONSummarySerializer(summary.DefaultJSONSummarySerializer):
 
     @property
     def _additional_fields(self):
-        """By default add 'UID' to returned data."""
+        """By default add 'id' and 'UID' to returned data."""
         return ["id", "UID"]
 
     def _set_metadata_fields(self):
