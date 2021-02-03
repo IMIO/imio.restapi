@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a12 (unreleased)
+1.0a12 (2021-02-03)
 -------------------
 
 - Improve `@search` by allowing element UID other than Collection for `base_search_uid` parameter that can be used as a base path
