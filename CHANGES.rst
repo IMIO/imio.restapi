@@ -5,7 +5,8 @@ Changelog
 1.0a13 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Adapt `@search` service to use the context instead of using `path` index that can be buggy on some circumstances
+  [mpeeters]
 
 
 1.0a12 (2021-02-03)

@@ -34,9 +34,7 @@ class SearchGet(BaseSearchGet):
                 collection = element[0]
                 query = parseFormquery(collection, collection.query)
             elif element:
-                query["path"] = {
-                    "query": "/".join(element[0].getPhysicalPath())
-                }
+                self.context = element[0]
         return query
 
     def _set_query_additional_params(self):
