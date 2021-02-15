@@ -45,7 +45,7 @@ class SearchGet(BaseSearchGet):
     def _clean_query(self, query):
         """Remove parameters that are not indexes names to avoid warnings like :
            WARNING plone.restapi.search.query No such index: 'my_custom_parameter'"""
-        query.pop("my_custom_parameter", None)
+        query.pop("base_search_uid", None)
 
     def _process_reply(self):
         """Easier to override if necessary to call various ways from reply method."""

@@ -5,6 +5,9 @@ Changelog
 1.0a13 (unreleased)
 -------------------
 
+- Cleanup `base_search_uid` parameter to avoid warnings in instance logs
+  [mpeeters]
+
 - Adapt `@search` service to use the context instead of using `path` index that can be buggy on some circumstances
   [mpeeters]
 
