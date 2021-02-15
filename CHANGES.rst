@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a13 (unreleased)
+1.0a13 (2021-02-15)
 -------------------
 
 - Cleanup `base_search_uid` parameter to avoid warnings in instance logs
