@@ -5,7 +5,8 @@ Changelog
 1.0a14 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Avoid duplicates in `metadata_fields`.
+  [gbastien]
 
 
 1.0a13 (2021-02-15)

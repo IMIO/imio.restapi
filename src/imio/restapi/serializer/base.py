@@ -58,7 +58,8 @@ class DefaultJSONSummarySerializer(summary.DefaultJSONSummarySerializer):
         # manage metadata_fields
         additional_metadata_fields = listify(form.get("metadata_fields", []))
         additional_metadata_fields += self._additional_fields
-        form["metadata_fields"] = additional_metadata_fields
+        # manage duplicates
+        form["metadata_fields"] = list(set(additional_metadata_fields))
 
     def __call__(self):
         """ """
