@@ -7,6 +7,9 @@ Changelog
 
 - Avoid duplicates in `metadata_fields`.
   [gbastien]
+- In `@infos` if `PWD` env variable is not available, try to determinate instance
+  path using the `INSTANCE_HOME` env variable.
+  [gbastien]
 
 
 1.0a13 (2021-02-15)

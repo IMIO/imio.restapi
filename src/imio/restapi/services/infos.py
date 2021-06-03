@@ -77,6 +77,10 @@ class InfosGet(Service):
                 database["fs_sz_readable"] = sizeof_fmt(size)
         # blobstorage
         instdir = os.getenv("PWD")
+        if instdir is None:
+            # try with INSTANCE_HOME, it is like
+            # /srv/instances/instance_name/parts/instance1
+            instdir = os.getenv("INSTANCE_HOME").split("/parts/")[0]
         vardir = os.path.join(instdir, "var")
         for blobdirname in read_dir(vardir, only_folders=True):
             if not blobdirname.startswith("blobstorage"):

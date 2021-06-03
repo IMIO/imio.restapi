@@ -9,6 +9,7 @@ from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import TEST_USER_PASSWORD
 
+import os
 import requests
 import transaction
 import unittest
@@ -67,6 +68,20 @@ class testServiceInfosGet(unittest.TestCase):
         login(self.portal, TEST_USER_NAME)
         transaction.commit()
         # stats contains various data
+        response = requests.get(
+            endpoint_url,
+            headers={"Accept": "application/json"},
+            auth=(TEST_USER_NAME, TEST_USER_PASSWORD),
+        )
+        self.assertEqual(response.status_code, 200)
+        json = response.json()
+        self.assertTrue(u"database" in json["stats"])
+        self.assertTrue(u"groups" in json["stats"])
+        self.assertTrue(u"users" in json["stats"])
+        self.assertTrue(u"types" in json["stats"])
+        # when PWD does not exist, INSTANCE_HOME is used
+        os.environ["INSTANCE_HOME"] = os.environ["PWD"]
+        del os.environ["PWD"]
         response = requests.get(
             endpoint_url,
             headers={"Accept": "application/json"},
