@@ -3,7 +3,6 @@
 from Acquisition import aq_inner
 from imio.restapi.interfaces import IImioRestapiLayer
 from imio.restapi.utils import listify
-from Products.ZCatalog.interfaces import ICatalogBrain
 from plone import api
 from plone.dexterity.interfaces import IDexterityContainer
 from plone.dexterity.interfaces import IDexterityContent
@@ -11,6 +10,10 @@ from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.serializer import dxcontent
 from plone.restapi.serializer import summary
+from plone.restapi.serializer.summary import DEFAULT_METADATA_FIELDS
+from plone.restapi.serializer.summary import NON_METADATA_ATTRIBUTES
+from Products.CMFCore.utils import getToolByName
+from Products.ZCatalog.interfaces import ICatalogBrain
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import Interface
@@ -52,14 +55,38 @@ class DefaultJSONSummarySerializer(summary.DefaultJSONSummarySerializer):
         """By default add 'id' and 'UID' to returned data."""
         return ["id", "UID"]
 
+    def _get_metadata_fields_name(self):
+        """May be overrided when necessary."""
+        return "metadata_fields"
+
+    def metadata_fields(self):
+        """Override from plone.restapi to be able to change the metadata_fields name..."""
+        # XXX following line is replaced
+        # additional_metadata_fields = self.request.form.get("metadata_fields", [])
+        additional_metadata_fields = self.request.form.get(self._get_metadata_fields_name(), [])
+        if not isinstance(additional_metadata_fields, list):
+            additional_metadata_fields = [additional_metadata_fields]
+        additional_metadata_fields = set(additional_metadata_fields)
+
+        if "_all" in additional_metadata_fields:
+            fields_cache = self.request.get("_summary_fields_cache", None)
+            if fields_cache is None:
+                catalog = getToolByName(self.context, "portal_catalog")
+                fields_cache = set(catalog.schema()) | NON_METADATA_ATTRIBUTES
+                self.request.set("_summary_fields_cache", fields_cache)
+            additional_metadata_fields = fields_cache
+
+        return DEFAULT_METADATA_FIELDS | additional_metadata_fields
+
     def _set_metadata_fields(self):
         """Must be set in request.form."""
+        metadata_fields_name = self._get_metadata_fields_name()
         form = self.request.form
         # manage metadata_fields
-        additional_metadata_fields = listify(form.get("metadata_fields", []))
+        additional_metadata_fields = listify(form.get(metadata_fields_name, []))
         additional_metadata_fields += self._additional_fields
         # manage duplicates
-        form["metadata_fields"] = list(set(additional_metadata_fields))
+        form[metadata_fields_name] = list(set(additional_metadata_fields))
 
     def __call__(self):
         """ """

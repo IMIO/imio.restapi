@@ -7,10 +7,16 @@ Changelog
 
 - Avoid duplicates in `metadata_fields`.
   [gbastien]
+
 - In `@infos` if `PWD` env variable is not available, try to determinate instance
   path using the `INSTANCE_HOME` env variable.
   [gbastien]
+
 - Require `plone.restapi<8` in `setup.py` as versions 8+ are only for Python3.
+  [gbastien]
+
+- Added possibility to redefine the name of the `metadata_fields` form parameter
+  so it may be overrided by a subclass for example.
   [gbastien]
 
 
