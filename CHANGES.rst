@@ -15,11 +15,13 @@ Changelog
 - Require `plone.restapi<8` in `setup.py` as versions 8+ are only for Python3.
   [gbastien]
 
-- Added possibility to redefine the name of the `metadata_fields` form parameter
-  so it may be overrided by a subclass for example.
 - Fixed tests due to changes in `collective.documentgenerator` where
   the `ConfigurablePODTemplate` named `test_ods_template` is no more generable
   on type `Document`.
+  [gbastien]
+
+- Added possibility to redefine the name of the `metadata_fields` form parameter
+  so it may be overrided by a subclass for example.
   [gbastien]
 
 
