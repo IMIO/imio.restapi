@@ -17,6 +17,9 @@ Changelog
 
 - Added possibility to redefine the name of the `metadata_fields` form parameter
   so it may be overrided by a subclass for example.
+- Fixed tests due to changes in `collective.documentgenerator` where
+  the `ConfigurablePODTemplate` named `test_ods_template` is no more generable
+  on type `Document`.
   [gbastien]
 
 
