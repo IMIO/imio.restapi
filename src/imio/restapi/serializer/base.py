@@ -66,6 +66,10 @@ class DefaultJSONSummarySerializer(summary.DefaultJSONSummarySerializer):
         additional_metadata_fields = self.request.form.get(self._get_metadata_fields_name(), [])
         if not isinstance(additional_metadata_fields, list):
             additional_metadata_fields = [additional_metadata_fields]
+        # XXX begin custom additional metadata_fields
+        additional_metadata_fields += self._additional_fields
+        # XXX end custom additional metadata_fields
+
         additional_metadata_fields = set(additional_metadata_fields)
 
         if "_all" in additional_metadata_fields:
@@ -77,19 +81,3 @@ class DefaultJSONSummarySerializer(summary.DefaultJSONSummarySerializer):
             additional_metadata_fields = fields_cache
 
         return DEFAULT_METADATA_FIELDS | additional_metadata_fields
-
-    def _set_metadata_fields(self):
-        """Must be set in request.form."""
-        metadata_fields_name = self._get_metadata_fields_name()
-        form = self.request.form
-        # manage metadata_fields
-        additional_metadata_fields = listify(form.get(metadata_fields_name, []))
-        additional_metadata_fields += self._additional_fields
-        # manage duplicates
-        form[metadata_fields_name] = list(set(additional_metadata_fields))
-
-    def __call__(self):
-        """ """
-        self._set_metadata_fields()
-        result = super(DefaultJSONSummarySerializer, self).__call__()
-        return result
