@@ -40,14 +40,13 @@ class TestServicePodTemplatesGet(unittest.TestCase):
             auth=(TEST_USER_NAME, TEST_USER_PASSWORD),
             json={},
         )
-        # 4 POD templates available
+        # 3 POD templates available for doc
         pod_templates = response.json()
         self.assertEqual(
             [pt["id"] for pt in pod_templates],
             [
                 u"test_template",
                 u"test_template_multiple",
-                u"test_ods_template",
                 u"test_template_reuse",
             ],
         )
@@ -58,14 +57,11 @@ class TestServicePodTemplatesGet(unittest.TestCase):
         self.assertTrue(u"generate_url_pdf" in pod_templates[1])
         self.assertTrue(u"generate_url_doc" in pod_templates[1])
         self.assertTrue(u"generate_url_docx" in pod_templates[1])
-        # test_ods_template
-        self.assertTrue(u"generate_url_ods" in pod_templates[2])
-        self.assertTrue(u"generate_url_xls" in pod_templates[2])
         # test_template_reuse
-        self.assertTrue(u"generate_url_odt" in pod_templates[3])
-        self.assertTrue(u"generate_url_pdf" in pod_templates[3])
-        self.assertTrue(u"generate_url_doc" in pod_templates[3])
-        self.assertTrue(u"generate_url_docx" in pod_templates[3])
+        self.assertTrue(u"generate_url_odt" in pod_templates[2])
+        self.assertTrue(u"generate_url_pdf" in pod_templates[2])
+        self.assertTrue(u"generate_url_doc" in pod_templates[2])
+        self.assertTrue(u"generate_url_docx" in pod_templates[2])
 
     def test_pod_endpoint_get_generated_pod(self):
         self._create_doc()
