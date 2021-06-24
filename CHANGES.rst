@@ -20,6 +20,10 @@ Changelog
   on type `Document`.
   [gbastien]
 
+- Added possibility to redefine the name of the `metadata_fields` form parameter
+  so it may be overrided by a subclass for example.
+  [gbastien]
+
 
 1.0a13 (2021-02-15)
 -------------------
