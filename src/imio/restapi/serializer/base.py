@@ -2,7 +2,6 @@
 
 from Acquisition import aq_inner
 from imio.restapi.interfaces import IImioRestapiLayer
-from imio.restapi.utils import listify
 from plone import api
 from plone.dexterity.interfaces import IDexterityContainer
 from plone.dexterity.interfaces import IDexterityContent
@@ -61,14 +60,13 @@ class DefaultJSONSummarySerializer(summary.DefaultJSONSummarySerializer):
 
     def metadata_fields(self):
         """Override from plone.restapi to be able to change the metadata_fields name..."""
-        # XXX following line is replaced
+        # following line is replaced
         # additional_metadata_fields = self.request.form.get("metadata_fields", [])
         additional_metadata_fields = self.request.form.get(self._get_metadata_fields_name(), [])
         if not isinstance(additional_metadata_fields, list):
             additional_metadata_fields = [additional_metadata_fields]
-        # XXX begin custom additional metadata_fields
+        # following line is added, additional metadata_fields
         additional_metadata_fields += self._additional_fields
-        # XXX end custom additional metadata_fields
 
         additional_metadata_fields = set(additional_metadata_fields)
 
