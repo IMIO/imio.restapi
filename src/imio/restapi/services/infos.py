@@ -81,9 +81,8 @@ class InfosGet(Service):
             # try with INSTANCE_HOME, it is like
             # /srv/instances/instance_name/parts/instance1
             instdir = os.getenv("INSTANCE_HOME").split("/parts/")[0]
-        # if really no instdir, abort
-        if instdir:
-            vardir = os.path.join(instdir, "var")
+        vardir = os.path.join(instdir, "var")
+        if os.path.exists(vardir):
             for blobdirname in read_dir(vardir, only_folders=True):
                 if not blobdirname.startswith("blobstorage"):
                     continue
