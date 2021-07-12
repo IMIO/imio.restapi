@@ -81,19 +81,21 @@ class InfosGet(Service):
             # try with INSTANCE_HOME, it is like
             # /srv/instances/instance_name/parts/instance1
             instdir = os.getenv("INSTANCE_HOME").split("/parts/")[0]
-        vardir = os.path.join(instdir, "var")
-        for blobdirname in read_dir(vardir, only_folders=True):
-            if not blobdirname.startswith("blobstorage"):
-                continue
-            sizefile = os.path.join(vardir, blobdirname, "size.txt")
-            if os.path.exists(sizefile):
-                lines = read_file(sizefile)
-                size = int(lines and lines[0] or 0)
-                # keep only largest
-                if size > database["bl_sz"]:
-                    database["bl_sz"] = size
-                    database["bl_sz_readable"] = sizeof_fmt(size)
-                    database["bl_nm"] = blobdirname
+        # if really no instdir, abort
+        if instdir:
+            vardir = os.path.join(instdir, "var")
+            for blobdirname in read_dir(vardir, only_folders=True):
+                if not blobdirname.startswith("blobstorage"):
+                    continue
+                sizefile = os.path.join(vardir, blobdirname, "size.txt")
+                if os.path.exists(sizefile):
+                    lines = read_file(sizefile)
+                    size = int(lines and lines[0] or 0)
+                    # keep only largest
+                    if size > database["bl_sz"]:
+                        database["bl_sz"] = size
+                        database["bl_sz_readable"] = sizeof_fmt(size)
+                        database["bl_nm"] = blobdirname
         return database
 
     def _stats(self):
