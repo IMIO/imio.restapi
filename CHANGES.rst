@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a14 (unreleased)
+1.0a14 (2021-07-16)
 -------------------
 
 - Avoid duplicates in `metadata_fields`.
