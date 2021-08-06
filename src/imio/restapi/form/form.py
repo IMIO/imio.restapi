@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from Products.statusmessages.interfaces import IStatusMessage
 from imio.restapi import _
 from imio.restapi import utils
 from imio.restapi.form import tools
@@ -11,6 +10,7 @@ from plone.dexterity.interfaces import IDexterityContent
 from plone.memoize.view import memoize
 from plone.restapi.interfaces import IFieldSerializer
 from plone.z3cform.fieldsets.extensible import ExtensibleForm
+from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
 from z3c.form.form import Form
 from z3c.form.interfaces import ActionExecutionError

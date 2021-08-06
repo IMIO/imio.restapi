@@ -32,14 +32,13 @@ jobs:
         env:
           cache-name: cache-eggs
         with:
-          path: ./buildout-cache/eggs ./eggs
+          path: ~/buildout-cache/eggs
           key: ${{ runner.os }}-build-${{ env.cache-name }}
-          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}
       - name: buildout
         run: |
           pip install -r requirements.txt coverage==5.3.1
-          buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True annotate
-          buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True
+          buildout -c ci.cfg annotate
+          buildout -c ci.cfg
       - name: test
         run: |
           docker ps -a
@@ -72,14 +71,16 @@ jobs:
         env:
           cache-name: cache-eggs
         with:
-          path: ./buildout-cache/eggs ./eggs 
-          key: ${{ runner.os }}-build-${{ env.cache-name }}
-          restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}
+          path: ~/buildout-cache/eggs
+          key: ${{ runner.os }}-build-coverage-${{ env.cache-name }}
       - name: buildout
         run: |
           pip install -r requirements.txt coverage==5.3.1
-          buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True annotate
-          buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True
+          buildout -c ci.cfg annotate
+          buildout -c ci.cfg
+      - name: code-analysis
+        run: |
+          bin/code-analysis
       - name: test coverage
         run: |
           docker ps -a

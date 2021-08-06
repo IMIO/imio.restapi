@@ -8,6 +8,7 @@ from plone.restapi.services import Service
 
 import os
 
+
 STATS_UNAUTHORIZED = 'User must be Manager to use the "stats" option!'
 
 

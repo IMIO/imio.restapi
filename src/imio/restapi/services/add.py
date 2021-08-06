@@ -3,10 +3,11 @@
 from plone import api
 from plone.restapi.deserializer import json_body
 from plone.restapi.services.content import add
-from ZPublisher.HTTPRequest import HTTPRequest
 from zExceptions import BadRequest
+from ZPublisher.HTTPRequest import HTTPRequest
 
 import json
+
 
 FILE_DATA_INCOMPLETE_ERROR = (
     "One of 'filename' or 'content-type' is required while adding a 'file'!"

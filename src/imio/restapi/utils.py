@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 
 from imio.restapi.interfaces import IContentImporter
-from imio.restapi.interfaces import IRESTLink
 from imio.restapi.interfaces import IRestAuthentication
+from imio.restapi.interfaces import IRESTLink
 from plone.restapi.services.content import add
 from zope.component import getMultiAdapter
 from zope.component import queryAdapter
 
+import json
+import os
 import requests
 import time
-import os
-import json
 
 
 def get_ws_url():

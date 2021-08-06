@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from Products.CMFCore.utils import getToolByName
 from plone import api
 from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.services import Service
+from Products.CMFCore.utils import getToolByName
 from zExceptions import Unauthorized
 from zope.component import queryMultiAdapter
 from zope.interface import implementer

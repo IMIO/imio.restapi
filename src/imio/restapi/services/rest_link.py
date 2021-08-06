@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from imio.restapi.form.link import get_links
 from imio.restapi.form.link import add_link
-from imio.restapi.form.link import RESTLinkObject
+from imio.restapi.form.link import get_links
 from imio.restapi.form.link import remove_link
-from zExceptions import BadRequest
+from imio.restapi.form.link import RESTLinkObject
+from plone.restapi.deserializer import json_body
 from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.services import Service
-from plone.restapi.deserializer import json_body
+from zExceptions import BadRequest
 from zope.component import queryMultiAdapter
 from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse

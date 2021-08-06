@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from imio.restapi.interfaces import IRESTLink
 from imio.restapi import utils
+from imio.restapi.interfaces import IRESTLink
 from persistent import Persistent
 from persistent.list import PersistentList
 from Products.Five import BrowserView

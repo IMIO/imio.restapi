@@ -2,8 +2,8 @@
 
 from imio.restapi.interfaces import IContentImporter
 from zope.component import adapter
-from zope.interface import Interface
 from zope.interface import implementer
+from zope.interface import Interface
 
 
 @implementer(IContentImporter)

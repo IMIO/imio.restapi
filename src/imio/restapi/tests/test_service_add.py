@@ -124,7 +124,7 @@ class TestFolderCreate(unittest.TestCase):
                 "@type": "File",
                 "id": "myfile",
                 "title": "My File",
-                "file": {"data": "123456", "encoding": "ascii",},
+                "file": {"data": "123456", "encoding": "ascii", },
             },
         )
         self.assertEqual(400, response.status_code)
