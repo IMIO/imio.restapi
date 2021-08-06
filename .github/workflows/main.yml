@@ -32,7 +32,7 @@ jobs:
         env:
           cache-name: cache-eggs
         with:
-          path: ./eggs ./eggs
+          path: ./buildout-cache/eggs ./eggs
           key: ${{ runner.os }}-build-${{ env.cache-name }}
           restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}
       - name: buildout
