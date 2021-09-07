@@ -11,7 +11,6 @@ TRANSITION_REQUIRED_ERROR = "Missing workflow transition"
 UID_NOT_FOUND_ERROR = 'No element found with UID "%s"!'
 
 
-
 @implementer(IPublishTraverse)
 class WorkflowTransition(transition.WorkflowTransition):
     """Updates an existing content object."""
