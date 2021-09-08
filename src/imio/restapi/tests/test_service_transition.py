@@ -1,20 +1,19 @@
 # -*- coding: utf-8 -*-
 from base64 import b64encode
-from unittest import TestCase
-
 from DateTime import DateTime
-from Products.CMFCore.utils import getToolByName
-from ZPublisher.pubevents import PubStart
 from imio.restapi.testing import IMIO_RESTAPI_WORKFLOWS_INTEGRATION_TESTING
+from plone.app.testing import login
+from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import TEST_USER_PASSWORD
-from plone.app.testing import login
-from plone.app.testing import setRoles
+from Products.CMFCore.utils import getToolByName
+from unittest import TestCase
 from zExceptions import NotFound
 from zope.event import notify
+from ZPublisher.pubevents import PubStart
 
 
 class TestWorkflowTransition(TestCase):

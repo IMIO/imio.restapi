@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
-import unittest
 from base64 import b64encode
-
-import transaction
-from Products.CMFCore.utils import getToolByName
-from ZPublisher.pubevents import PubStart
 from imio.restapi.testing import IMIO_RESTAPI_DX_FUNCTIONAL_TESTING
+from plone.app.testing import login
+from plone.app.testing import setRoles
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import TEST_USER_ID
-from plone.app.testing import login
-from plone.app.testing import setRoles
+from Products.CMFCore.utils import getToolByName
 from zope.event import notify
+from ZPublisher.pubevents import PubStart
+
+import transaction
+import unittest
 
 
 class TestContentPatch(unittest.TestCase):
-
     layer = IMIO_RESTAPI_DX_FUNCTIONAL_TESTING
 
     def setUp(self):
@@ -57,7 +56,6 @@ class TestContentPatch(unittest.TestCase):
 
     def test_patch_document_will_delete_value_with_null(self):
         self.assertEqual(self.portal.doc1.description, "Some Description")
-
         self.request["BODY"] = '{"description": null}'
         uid = self.portal.doc1.UID()
         service = self.traverse("/plone/@content/{0}".format(uid))

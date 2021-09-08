@@ -6,6 +6,7 @@ from zope.interface import implementer
 from zope.publisher.interfaces import IPublishTraverse
 from zope.publisher.interfaces import NotFound
 
+
 UID_REQUIRED_ERROR = 'Missing UID'
 UID_NOT_FOUND_ERROR = 'No element found with UID "%s"!'
 
