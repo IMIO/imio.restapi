@@ -121,9 +121,13 @@ class TestWorkflowTransition(TestCase):
             endpoint_url,
             headers={"Accept": "application/json"},
             auth=(SITE_OWNER_NAME, SITE_OWNER_PASSWORD),
-            json={"expires": "2019-06-20T18:00:00"},
+            json={"expires": "2019-06-20T18:00:00",
+                  "comment": "A comment"},
         )
         transaction.commit()
+        self.assertEqual(
+            "A comment", self.wftool.getInfoFor(self.portal.doc1, u"comments")
+        )
         self.assertEqual(
             "2019-06-20T18:00:00+00:00", self.portal.doc1.expires().ISO8601()
         )
