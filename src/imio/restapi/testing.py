@@ -7,6 +7,8 @@ from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
 from plone.restapi.testing import PLONE_RESTAPI_AT_FUNCTIONAL_TESTING
+from plone.restapi.testing import PLONE_RESTAPI_DX_FUNCTIONAL_TESTING
+from plone.restapi.testing import PLONE_RESTAPI_WORKFLOWS_INTEGRATION_TESTING
 from plone.testing import z2
 
 import collective.documentgenerator
@@ -64,4 +66,14 @@ IMIO_RESTAPI_DOCGEN_FUNCTIONAL_TESTING = FunctionalTesting(
 IMIO_RESTAPI_ACCEPTANCE_TESTING = FunctionalTesting(
     bases=(IMIO_RESTAPI_FIXTURE, REMOTE_LIBRARY_BUNDLE_FIXTURE, z2.ZSERVER_FIXTURE),
     name="ImioRestapiLayer:AcceptanceTesting",
+)
+
+IMIO_RESTAPI_WORKFLOWS_INTEGRATION_TESTING = IntegrationTesting(
+    bases=(IMIO_RESTAPI_FIXTURE, PLONE_RESTAPI_WORKFLOWS_INTEGRATION_TESTING, z2.ZSERVER_FIXTURE),
+    name="ImioRestapiLayer:IntegrationWorkflowTesting"
+)
+
+IMIO_RESTAPI_DX_FUNCTIONAL_TESTING = FunctionalTesting(
+    bases=(IMIO_RESTAPI_FIXTURE, PLONE_RESTAPI_DX_FUNCTIONAL_TESTING),
+    name="ImioRestapiLayer:FunctionalDXTesting",
 )

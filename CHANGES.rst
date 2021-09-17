@@ -5,7 +5,8 @@ Changelog
 1.0a15 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Override 'update' and 'workflow transition' to use the uid
+  [vpiret]
 
 
 1.0a14 (2021-07-16)

@@ -74,6 +74,24 @@
     />
 
   <plone:service
+    method="PATCH"
+    name="@content"
+    for="Products.CMFCore.interfaces.ISiteRoot"
+    factory=".update.ContentPatch"
+    layer="imio.restapi.interfaces.IImioRestapiLayer"
+    permission="zope2.View"
+    />
+
+  <plone:service
+    method="POST"
+    name="@wf"
+    for="Products.CMFCore.interfaces.ISiteRoot"
+    factory=".transition.WorkflowTransition"
+    layer="imio.restapi.interfaces.IImioRestapiLayer"
+    permission="zope2.View"
+    />
+
+  <plone:service
     method="DELETE"
     for="*"
     accept="application/json,application/schema+json"
