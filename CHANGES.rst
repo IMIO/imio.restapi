@@ -7,7 +7,9 @@ Changelog
 
 - Override 'update' and 'workflow transition' to use the uid
   [vpiret]
-
+- In `FolderPost` if an error occurs in `plone.restapi FolderPost`,
+  stop and return the result immediately.
+  [gbastien]
 
 1.0a14 (2021-07-16)
 -------------------

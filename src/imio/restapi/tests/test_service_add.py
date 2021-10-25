@@ -207,3 +207,23 @@ class TestFolderCreate(unittest.TestCase):
         brains = self.portal.portal_catalog(review_state="published")
         doc = brains[0].getObject()
         self.assertEqual(doc.UID(), json["__children__"][0]["UID"])
+
+    def test_folder_post_unauthorized(self):
+        plone_site = self.portal.portal_types["Plone Site"]
+        plone_site.filter_content_types = True
+        transaction.commit()
+        response = requests.post(
+            self.portal_url,
+            headers={"Accept": "application/json"},
+            auth=(SITE_OWNER_NAME, SITE_OWNER_PASSWORD),
+            json={
+                "@type": "Folder",
+                "id": "myfolder",
+                "title": "My Folder",
+            },
+        )
+        self.assertEqual(403, response.status_code)
+        self.assertEqual(
+            response.json(),
+            {u'error': {u'message': u'Disallowed subobject type: Folder',
+                        u'type': u'Forbidden'}})

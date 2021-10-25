@@ -101,6 +101,8 @@ class FolderPost(add.FolderPost):
             children = self.data.pop("__children__")
             self.request.set("BODY", json.dumps(self.data))
         result = super(FolderPost, self).reply()
+        if "error" in result:
+            return result
         self.wf_transitions(result)
         self._after_reply_hook(result)
         result["@warnings"] = self.warnings
