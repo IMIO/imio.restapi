@@ -17,10 +17,10 @@ Changelog
   stop and return the result immediately.
   [vpireti
 
-- Added `return_fullobject_after_creation_default`, `True` by default, this will
-  do the full serialized object to be returned after an object is created
-  (this is already the current behavior).  When set to False, the summary
-  serialization will be returned.
+- Added `return_fullobject_after_creation_default`, `True` by default,
+  to the `imio.restapi` settings panel. This will do the full serialized object to
+  be returned after an object is created (this is already the current behavior).
+  When set to False, the summary serialization will be returned.
   [gbastien]
 
 
