@@ -2,6 +2,7 @@
 
 from imio.restapi.services.add import FILE_DATA_INCOMPLETE_ERROR
 from imio.restapi.testing import IMIO_RESTAPI_FUNCTIONAL_TESTING
+from plone import api
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 
@@ -33,7 +34,7 @@ class TestFolderCreate(unittest.TestCase):
                 ],
             },
         )
-        self.assertEqual(201, response.status_code)
+        self.assertEqual(201, response.status_code, response.content)
         transaction.begin()
         # first level
         self.assertIsNotNone(self.portal.get("myfolder"))
@@ -80,7 +81,7 @@ class TestFolderCreate(unittest.TestCase):
                 ],
             },
         )
-        self.assertEqual(201, response.status_code)
+        self.assertEqual(201, response.status_code, response.content)
         transaction.begin()
         # first level
         self.assertIsNotNone(self.portal.get("myfolder"))
@@ -127,7 +128,7 @@ class TestFolderCreate(unittest.TestCase):
                 "file": {"data": "123456", "encoding": "ascii", },
             },
         )
-        self.assertEqual(400, response.status_code)
+        self.assertEqual(400, response.status_code, response.content)
         self.assertEqual(response.json()[u"message"], FILE_DATA_INCOMPLETE_ERROR)
 
         # add file correctly
@@ -142,7 +143,7 @@ class TestFolderCreate(unittest.TestCase):
                 "file": {"data": "123456", "encoding": "ascii", "filename": "file.txt"},
             },
         )
-        self.assertEqual(201, response.status_code)
+        self.assertEqual(201, response.status_code, response.content)
         transaction.begin()
         myfile = self.portal.myfile
         self.assertEqual(myfile.Title(), "My File")
@@ -167,7 +168,7 @@ class TestFolderCreate(unittest.TestCase):
                 "file": {"data": base64.b64encode("654321"), "filename": "file.txt"},
             },
         )
-        self.assertEqual(201, response.status_code)
+        self.assertEqual(201, response.status_code, response.content)
         transaction.begin()
         myfile2 = self.portal.myfile2
         self.assertEqual(myfile2.Title(), "My File 2")
@@ -197,7 +198,7 @@ class TestFolderCreate(unittest.TestCase):
                 ],
             },
         )
-        self.assertEqual(201, response.status_code)
+        self.assertEqual(201, response.status_code, response.content)
         transaction.begin()
         # unknown transitions are ignored
         json = response.json()
@@ -227,3 +228,66 @@ class TestFolderCreate(unittest.TestCase):
             response.json(),
             {u'error': {u'message': u'Disallowed subobject type: Folder',
                         u'type': u'Forbidden'}})
+
+    def test_folder_post_return_fullobject(self):
+        self.assertTrue(
+            api.portal.get_registry_record(
+                name="imio.restapi.settings.interfaces.ISettings."
+                "return_fullobject_after_creation_default"))
+        post_json = {
+            "@type": "Folder",
+            "id": "myfolder",
+            "title": "My Folder",
+        }
+        response = requests.post(
+            self.portal_url,
+            headers={"Accept": "application/json"},
+            auth=(SITE_OWNER_NAME, SITE_OWNER_PASSWORD),
+            json=post_json,
+        )
+        self.assertEqual(201, response.status_code, response.content)
+        transaction.begin()
+        json = response.json()
+        # fullobject is returned
+        self.assertTrue("@components" in json)
+        self.assertTrue("id" in json)
+        self.assertTrue("parent" in json)
+        # change configuration to return summary
+        api.portal.set_registry_record(
+            "imio.restapi.settings.interfaces.ISettings."
+            "return_fullobject_after_creation_default",
+            False)
+        transaction.commit()
+        post_json["id"] = "myfolder-1"
+        response = requests.post(
+            self.portal_url,
+            headers={"Accept": "application/json"},
+            auth=(SITE_OWNER_NAME, SITE_OWNER_PASSWORD),
+            json=post_json,
+        )
+        self.assertEqual(201, response.status_code, response.content)
+        transaction.begin()
+        json = response.json()
+        # we get the summary version
+        self.assertEqual(sorted(json.keys()),
+                         [u'@id',
+                          u'@type',
+                          u'@warnings',
+                          u'description',
+                          u'review_state',
+                          u'title'])
+        # can be overrided during creation using "return_fullobject"
+        post_json["return_fullobject"] = True
+        post_json["id"] = "myfolder-2"
+        response = requests.post(
+            self.portal_url,
+            headers={"Accept": "application/json"},
+            auth=(SITE_OWNER_NAME, SITE_OWNER_PASSWORD),
+            json=post_json,
+        )
+        self.assertEqual(201, response.status_code, response.content)
+        transaction.begin()
+        json = response.json()
+        self.assertTrue("@components" in json)
+        self.assertTrue("id" in json)
+        self.assertTrue("parent" in json)

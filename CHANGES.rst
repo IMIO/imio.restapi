@@ -15,6 +15,11 @@ Changelog
   [vpiret]
 - In `FolderPost` if an error occurs in `plone.restapi FolderPost`,
   stop and return the result immediately.
+  [vpireti
+- Added `return_fullobject_after_creation_default`, `True` by default, this will
+  do the full serialized object to be returned after an object is created
+  (this is already the current behavior).  When set to False, the summary
+  serialization will be returned.
   [gbastien]
 
 1.0a14 (2021-07-16)

@@ -57,6 +57,16 @@ class ISettings(Interface):
         required=False,
     )
 
+    return_fullobject_after_creation_default = schema.Bool(
+        title=_(u"Return full object after creation by default?"),
+        description=_(
+            u"When an element is created, check the box if the full object "
+            u"must be returned by default (default is true)"
+        ),
+        default=True,
+        required=False,
+    )
+
 
 class ISettingsForm(Interface):
     """Marker interface for the settings form"""
