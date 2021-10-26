@@ -289,3 +289,5 @@ class TestFolderCreate(unittest.TestCase):
         self.assertTrue("@components" in json)
         self.assertTrue("id" in json)
         self.assertTrue("parent" in json)
+        # tearDown
+        del os.environ["RETURN_FULLOBJECT_AFTER_CREATION_DEFAULT"]
