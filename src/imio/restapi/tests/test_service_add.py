@@ -2,11 +2,13 @@
 
 from imio.restapi.services.add import FILE_DATA_INCOMPLETE_ERROR
 from imio.restapi.testing import IMIO_RESTAPI_FUNCTIONAL_TESTING
+from imio.restapi.utils import get_return_fullobject_after_creation_default
 from plone import api
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 
 import base64
+import os
 import requests
 import transaction
 import unittest
@@ -230,10 +232,7 @@ class TestFolderCreate(unittest.TestCase):
                         u'type': u'Forbidden'}})
 
     def test_folder_post_return_fullobject(self):
-        self.assertTrue(
-            api.portal.get_registry_record(
-                name="imio.restapi.settings.interfaces.ISettings."
-                "return_fullobject_after_creation_default"))
+        self.assertTrue(get_return_fullobject_after_creation_default())
         post_json = {
             "@type": "Folder",
             "id": "myfolder",
@@ -253,11 +252,10 @@ class TestFolderCreate(unittest.TestCase):
         self.assertTrue("id" in json)
         self.assertTrue("parent" in json)
         # change configuration to return summary
-        api.portal.set_registry_record(
-            "imio.restapi.settings.interfaces.ISettings."
-            "return_fullobject_after_creation_default",
-            False)
+        # it is done by defining an env variable
+        os.environ["RETURN_FULLOBJECT_AFTER_CREATION_DEFAULT"] = "False"
         transaction.commit()
+        self.assertFalse(get_return_fullobject_after_creation_default())
         post_json["id"] = "myfolder-1"
         response = requests.post(
             self.portal_url,

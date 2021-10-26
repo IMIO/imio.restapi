@@ -2,6 +2,7 @@
 
 from Acquisition import aq_base
 from Acquisition.interfaces import IAcquirer
+from imio.restapi.utils import get_return_fullobject_after_creation_default
 from plone import api
 from plone.restapi.deserializer import json_body
 from plone.restapi.exceptions import DeserializationError
@@ -191,13 +192,7 @@ class FolderPost(FolderPost):
         self.request.response.setHeader("Location", obj.absolute_url())
 
         # imio.restapi, begin changes, manage returning full object or summary
-        return_full_object = data.get(
-            "return_fullobject",
-            api.portal.get_registry_record(
-                name="imio.restapi.settings.interfaces.ISettings."
-                "return_fullobject_after_creation_default",
-                default=True))
-        if return_full_object:
+        if get_return_fullobject_after_creation_default():
             serializer = queryMultiAdapter((obj, self.request), ISerializeToJson)
         else:
             serializer = queryMultiAdapter((obj, self.request), ISerializeToJsonSummary)

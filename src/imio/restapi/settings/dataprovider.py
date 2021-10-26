@@ -46,6 +46,7 @@ class SettingsDataProvider(object):
 
     @property
     def values(self):
+        import ipdb; ipdb.set_trace()
         if not self._values:
             self._values = {
                 k.lower(): boolean_value(os.getenv(k, default))
