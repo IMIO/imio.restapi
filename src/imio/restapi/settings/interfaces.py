@@ -57,6 +57,7 @@ class ISettings(Interface):
         required=False,
     )
 
+    form.mode(ws_url="return_fullobject_after_creation_default")
     return_fullobject_after_creation_default = schema.Bool(
         title=_(u"Return full object after creation by default?"),
         description=_(

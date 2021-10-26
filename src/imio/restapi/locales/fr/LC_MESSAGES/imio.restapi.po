@@ -77,7 +77,7 @@ msgstr ""
 
 #: ../settings/interfaces.py:62
 msgid "When an element is created, check the box if the full object must be returned by default (default is true)"
-msgstr "Lorqu'un élément est créé via les WS REST, si la case est cochée (défaut), une sérialisation complète de l'objet créé sera renvoyée au créateur.  Si décoché, la version \"sommaire\" est retournée."
+msgstr "Cette information est configurée dans le fichier de configuration de l'instance<br>Lorqu'un élément est créé via les WS REST, si la case est cochée (défaut), une sérialisation complète de l'objet créé sera renvoyée au créateur.  Si décoché, la version \"sommaire\" est retournée."
 
 #: ../configure.zcml:28
 msgid "imio.restapi"
