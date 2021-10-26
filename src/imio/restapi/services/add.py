@@ -192,7 +192,9 @@ class FolderPost(FolderPost):
         self.request.response.setHeader("Location", obj.absolute_url())
 
         # imio.restapi, begin changes, manage returning full object or summary
-        if get_return_fullobject_after_creation_default():
+        return_full_object = data.get(
+            "return_fullobject", get_return_fullobject_after_creation_default())
+        if return_full_object:
             serializer = queryMultiAdapter((obj, self.request), ISerializeToJson)
         else:
             serializer = queryMultiAdapter((obj, self.request), ISerializeToJsonSummary)
