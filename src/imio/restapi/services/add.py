@@ -1,29 +1,29 @@
 # -*- coding: utf-8 -*-
 
-from plone import api
-from plone.restapi.deserializer import json_body
-from plone.restapi.services.content.add import FolderPost
-from zExceptions import BadRequest
-from ZPublisher.HTTPRequest import HTTPRequest
 from Acquisition import aq_base
 from Acquisition.interfaces import IAcquirer
+from plone import api
+from plone.restapi.deserializer import json_body
 from plone.restapi.exceptions import DeserializationError
 from plone.restapi.interfaces import IDeserializeFromJson
 from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.interfaces import ISerializeToJsonSummary
-from plone.restapi.services.content.utils import add
-from plone.restapi.services.content.utils import create
+from plone.restapi.services.content.add import FolderPost
 from plone.restapi.services.content.add import PAM_INSTALLED
 from plone.restapi.services.content.add import PLONE5
+from plone.restapi.services.content.utils import add
+from plone.restapi.services.content.utils import create
 from Products.CMFPlone.utils import safe_hasattr
+from zExceptions import BadRequest
 from zExceptions import Unauthorized
 from zope.component import queryMultiAdapter
 from zope.event import notify
 from zope.interface import alsoProvides
 from zope.lifecycleevent import ObjectCreatedEvent
+from ZPublisher.HTTPRequest import HTTPRequest
 
-import plone.protect.interfaces
 import json
+import plone.protect.interfaces
 
 
 FILE_DATA_INCOMPLETE_ERROR = (
