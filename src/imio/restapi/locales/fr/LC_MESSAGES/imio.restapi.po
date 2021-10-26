@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-06-22 11:23+0000\n"
+"POT-Creation-Date: 2021-10-26 14:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,6 +39,10 @@ msgstr "Elément(s) lié(s)"
 msgid "List of application with who this application will communicate"
 msgstr "Liste des applications avec lesquelles cette application communiquera"
 
+#: ../settings/interfaces.py:61
+msgid "Return full object after creation by default?"
+msgstr "Lors de la création d'un élément, retourner une sérialisation complète de l'élément créé?"
+
 #: ../settings/interfaces.py:23
 msgid "The application identifier"
 msgstr "L'identifiant de l'application"
@@ -70,6 +74,10 @@ msgstr "Cette information est configurée dans le fichier de configuration de l'
 #: ../configure.zcml:37
 msgid "Uninstalls the imio.restapi add-on."
 msgstr ""
+
+#: ../settings/interfaces.py:62
+msgid "When an element is created, check the box if the full object must be returned by default (default is true)"
+msgstr "Lorqu'un élément est créé via les WS REST, si la case est cochée (défaut), une sérialisation complète de l'objet créé sera renvoyée au créateur.  Si décoché, la version \"sommaire\" est retournée."
 
 #: ../configure.zcml:28
 msgid "imio.restapi"
