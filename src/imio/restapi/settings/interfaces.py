@@ -3,6 +3,7 @@
 from collective.z3cform.select2.widget.widget import MultiSelect2FieldWidget
 from imio.restapi import _
 from plone.autoform import directives as form
+from z3c.form.browser.radio import RadioFieldWidget
 from zope import schema
 from zope.interface import Interface
 
@@ -57,7 +58,8 @@ class ISettings(Interface):
         required=False,
     )
 
-    form.mode(ws_url="return_fullobject_after_creation_default")
+    form.mode(return_fullobject_after_creation_default="display")
+    form.widget(return_fullobject_after_creation_default=RadioFieldWidget)
     return_fullobject_after_creation_default = schema.Bool(
         title=_(u"Return full object after creation by default?"),
         description=_(
