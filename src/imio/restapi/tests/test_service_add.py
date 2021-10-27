@@ -3,7 +3,6 @@
 from imio.restapi.services.add import FILE_DATA_INCOMPLETE_ERROR
 from imio.restapi.testing import IMIO_RESTAPI_FUNCTIONAL_TESTING
 from imio.restapi.utils import get_return_fullobject_after_creation_default
-from plone import api
 from plone.app.testing import SITE_OWNER_NAME
 from plone.app.testing import SITE_OWNER_PASSWORD
 
