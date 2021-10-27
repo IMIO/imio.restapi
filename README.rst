@@ -27,7 +27,7 @@ Features
 
   - by default when an object is created, the fullobject serialization is returned which is doing some processing sometimes unnecessary
   - adding an environment variable ``RETURN_FULLOBJECT_AFTER_CREATION_DEFAULT False`` will return the summary serialization when an object is created
-
+  - this will change the default behavior but it is still possible to change this behavior for a particular POST by defining the ``"return_fullobject": true/false`` in the Body
 
 Todo
 ----
