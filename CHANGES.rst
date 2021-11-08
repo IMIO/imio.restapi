@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a15 (unreleased)
+1.0a15 (2021-11-08)
 -------------------
 
 - Override 'update' and 'workflow transition' to use the uid
