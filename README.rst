@@ -18,11 +18,16 @@ plone.restapi endpoints and adaptations
 Features
 --------
 
-- add element :
+- ``add element``:
+
     - with children
     - trigger WF transitions
-- `@pod-templates` endpoint (collective.documentgenerator)
+- ``@pod-templates`` endpoint (collective.documentgenerator)
+- ``disable returning fullobject serialization upon creation``:
 
+  - by default when an object is created, the fullobject serialization is returned which is doing some processing sometimes unnecessary
+  - adding an environment variable ``RETURN_FULLOBJECT_AFTER_CREATION_DEFAULT False`` will return the summary serialization when an object is created
+  - this will change the default behavior but it is still possible to change this behavior for a particular POST by defining the ``"return_fullobject": true/false`` in the Body
 
 Todo
 ----

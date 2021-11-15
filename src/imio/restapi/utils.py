@@ -3,6 +3,7 @@
 from imio.restapi.interfaces import IContentImporter
 from imio.restapi.interfaces import IRestAuthentication
 from imio.restapi.interfaces import IRESTLink
+from plone.restapi.deserializer import boolean_value
 from plone.restapi.services.content import add
 from zope.component import getMultiAdapter
 from zope.component import queryAdapter
@@ -31,6 +32,11 @@ def get_application_id():
 def get_application_url():
     """ Return the application_url defined in instance config """
     return os.getenv("APPLICATION_URL")
+
+
+def get_return_fullobject_after_creation_default():
+    """ Return the return_fullobject_after_creation_default defined in instance config """
+    return boolean_value(os.getenv("RETURN_FULLOBJECT_AFTER_CREATION_DEFAULT", True))
 
 
 def get_authentication(request):

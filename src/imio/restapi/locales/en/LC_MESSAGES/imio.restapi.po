@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-06-22 11:23+0000\n"
+"POT-Creation-Date: 2021-10-26 14:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,6 +39,10 @@ msgstr ""
 msgid "List of application with who this application will communicate"
 msgstr ""
 
+#: ../settings/interfaces.py:61
+msgid "Return full object after creation by default?"
+msgstr ""
+
 #: ../settings/interfaces.py:23
 msgid "The application identifier"
 msgstr ""
@@ -69,6 +73,10 @@ msgstr ""
 
 #: ../configure.zcml:37
 msgid "Uninstalls the imio.restapi add-on."
+msgstr ""
+
+#: ../settings/interfaces.py:62
+msgid "When an element is created, check the box if the full object must be returned by default (default is true)"
 msgstr ""
 
 #: ../configure.zcml:28

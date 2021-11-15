@@ -10,6 +10,7 @@ from plone.restapi.testing import PLONE_RESTAPI_AT_FUNCTIONAL_TESTING
 from plone.restapi.testing import PLONE_RESTAPI_DX_FUNCTIONAL_TESTING
 from plone.restapi.testing import PLONE_RESTAPI_WORKFLOWS_INTEGRATION_TESTING
 from plone.testing import z2
+from zope.globalrequest import setLocal
 
 import collective.documentgenerator
 import imio.restapi
@@ -40,6 +41,10 @@ class ImioRestapiDocGenLayer(PloneSandboxLayer):
         self.loadZCML(package=collective.documentgenerator)
 
     def setUpPloneSite(self, portal):
+        # necessary for collective.fingerpointing used
+        # when installing "collective.documentgenerator:demo"
+        setLocal('request', portal.REQUEST)
+
         applyProfile(portal, "imio.restapi:default")
         applyProfile(portal, "collective.documentgenerator:demo")
 

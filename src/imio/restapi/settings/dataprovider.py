@@ -2,6 +2,7 @@
 
 from imio.restapi.settings.interfaces import ISettings
 from plone import api
+from plone.restapi.deserializer import boolean_value
 from z3c.form.interfaces import IForm
 from z3c.form.interfaces import IFormLayer
 from z3c.form.interfaces import IValue
@@ -19,7 +20,13 @@ import os
 class SettingsDataProvider(object):
     adapts(Interface, IFormLayer, IForm, IField, IWidget)
 
-    _env_keys = ("WS_URL", "CLIENT_ID", "APPLICATION_ID", "APPLICATION_URL")
+    # env vars with name as key and default value as value
+    _env_keys = {
+        "WS_URL": "",
+        "CLIENT_ID": "",
+        "APPLICATION_ID": "",
+        "APPLICATION_URL": "",
+        "RETURN_FULLOBJECT_AFTER_CREATION_DEFAULT": True}
 
     def __init__(self, context, request, form, field, widget):
         self.context = context
@@ -27,6 +34,7 @@ class SettingsDataProvider(object):
         self.form = form
         self.field = field
         self.widget = widget
+        self._values = {}
 
     def get(self):
         key = self.field.__name__
@@ -38,4 +46,9 @@ class SettingsDataProvider(object):
 
     @property
     def values(self):
-        return {k.lower(): os.getenv(k) for k in self._env_keys}
+        if not self._values:
+            self._values = {
+                k.lower(): boolean_value(os.getenv(k, default))
+                if isinstance(default, bool) else os.getenv(k, default)
+                for k, default in self._env_keys.items()}
+        return self._values

@@ -2,15 +2,14 @@
   xmlns="http://namespaces.zope.org/zope"
   xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
 
-  <!-- -*- extra stuff goes here -*- -->
-  <!--<genericsetup:upgradeStep
-    source="*"
+  <genericsetup:upgradeSteps
+    source="1000"
     destination="1001"
-    title="Reload GS profiles"
-    description=""
-    profile="imio.restapi:default"
-    handler=".upgrades.reload_gs_profile"
-    />-->
-
+    profile="imio.restapi:default">
+    <genericsetup:upgradeDepends
+        title="Re-apply registry.xml to add 'return_fullobject_after_creation_default' parameter"
+        description=""
+        import_steps="plone.app.registry" />
+  </genericsetup:upgradeSteps>
 
 </configure>
