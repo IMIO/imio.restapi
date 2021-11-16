@@ -5,8 +5,8 @@ Changelog
 1.0a16 (unreleased)
 -------------------
 
-- In `FolderPost` if an error occurs in `plone.restapi FolderPost`,
-  stop and return the result immediately.
+- In `FolderPost.do_reply` if an error occurs, do not continue,
+  stop and return the result with the error immediately.
   [gbastien]
 
 - Added `return_fullobject_after_creation_default`, `True` by default,
