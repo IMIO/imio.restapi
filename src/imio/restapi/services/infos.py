@@ -6,6 +6,7 @@ from plone import api
 from plone.restapi.deserializer import boolean_value
 from plone.restapi.services import Service
 
+import json
 import os
 
 
@@ -61,8 +62,7 @@ class InfosGet(Service):
 
     def _stats_database(self):
         # soft dependency
-        from imio.pyutils.system import read_dir
-        from imio.pyutils.system import read_file
+        from imio.pyutils.system import error
         from Products.CPUtils.Extensions.utils import tobytes
 
         # zope
@@ -82,20 +82,20 @@ class InfosGet(Service):
             # try with INSTANCE_HOME, it is like
             # /srv/instances/instance_name/parts/instance1
             instdir = os.getenv("INSTANCE_HOME").split("/parts/")[0]
-        vardir = os.path.join(instdir, "var")
-        if os.path.exists(vardir):
-            for blobdirname in read_dir(vardir, only_folders=True):
-                if not blobdirname.startswith("blobstorage"):
-                    continue
-                sizefile = os.path.join(vardir, blobdirname, "size.txt")
-                if os.path.exists(sizefile):
-                    lines = read_file(sizefile)
-                    size = int(lines and lines[0] or 0)
-                    # keep only largest
-                    if size > database["bl_sz"]:
-                        database["bl_sz"] = size
-                        database["bl_sz_readable"] = sizeof_fmt(size)
-                        database["bl_nm"] = blobdirname
+        if os.path.exists(instdir):
+            # .sizes.json
+            sizefile = os.path.join(instdir, '.sizes.json')
+            try:
+                fh = open(sizefile)
+                res = json.load(fh)
+                fh.close()
+                size = int(res.get(u'local_size', 0))
+                if size > database['fs_sz']:
+                    size -= database['fs_sz']
+                    database['bl_sz'] = size
+                    database["bl_sz_readable"] = sizeof_fmt(size)
+            except Exception, msg:
+                error(u".sizes.json not valid in '{}': '{}'".format(instdir, msg))
         return database
 
     def _stats(self):

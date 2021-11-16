@@ -5,23 +5,24 @@ Changelog
 1.0a16 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
-
-1.0a15 (2021-11-08)
--------------------
-
-- Override 'update' and 'workflow transition' to use the uid
-  [vpiret]
 - In `FolderPost` if an error occurs in `plone.restapi FolderPost`,
   stop and return the result immediately.
-  [vpireti
+  [gbastien]
 
 - Added `return_fullobject_after_creation_default`, `True` by default,
   to the `imio.restapi` settings panel. This will do the full serialized object to
   be returned after an object is created (this is already the current behavior).
   When set to False, the summary serialization will be returned.
   [gbastien]
+
+- Fixed `@infos?include_stats=1` blobstorage size computation to use `.size.json`.
+  [gbastien]
+
+1.0a15 (2021-11-08)
+-------------------
+
+- Override 'update' and 'workflow transition' to use the uid
+  [vpiret]
 
 
 1.0a14 (2021-07-16)
