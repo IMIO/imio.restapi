@@ -214,12 +214,9 @@ class FolderPost(FolderPost):
         if "__children__" in self.data:
             children = self.data.pop("__children__")
             self.request.set("BODY", json.dumps(self.data))
-
-        result = super(FolderPost, self).reply()
+        result = self.do_reply()
         if "error" in result:
             return result
-
-        result = self.do_reply()
         self.wf_transitions(result)
         self._after_reply_hook(result)
         result["@warnings"] = self.warnings
