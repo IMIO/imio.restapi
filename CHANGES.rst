@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0b1 (unreleased)
+1.0b1 (2022-01-03)
 ------------------
 
 - In `FolderPost.do_reply` if an error occurs, do not continue,
