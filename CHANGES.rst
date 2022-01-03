@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-1.0a16 (unreleased)
--------------------
+1.0b1 (unreleased)
+------------------
 
 - In `FolderPost.do_reply` if an error occurs, do not continue,
   stop and return the result with the error immediately.

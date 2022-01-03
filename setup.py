@@ -16,11 +16,12 @@ long_description = "\n\n".join(
 
 setup(
     name="imio.restapi",
-    version="1.0a16.dev0",
+    version="1.0b1.dev0",
     description="Extended rest api service for IMIO usecases",
     long_description=long_description,
     # Get more from https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
+        "Development Status :: 6 - Mature",
         "Environment :: Web Environment",
         "Framework :: Plone",
         "Framework :: Plone :: 4.3",
