@@ -25,14 +25,12 @@ jobs:
           mkdir -p -m 777 /tmp/appy/
           sudo apt update -qq -y
           sudo apt-get install -qq -y libfreetype6-dev liblcms2-dev libreoffice libreoffice-script-provider-python
-      - name: Checkout
-        uses: actions/checkout@v2
       - name: Cache eggs
         uses: actions/cache@v2
         env:
           cache-name: cache-eggs
         with:
-          path: ~/buildout-cache/eggs
+          path: ~/.buildout/eggs
           key: ${{ runner.os }}-build-${{ env.cache-name }}
       - name: buildout
         run: |
@@ -64,14 +62,12 @@ jobs:
           mkdir -p -m 777 /tmp/appy/
           sudo apt update -qq -y
           sudo apt-get install -qq -y libfreetype6-dev liblcms2-dev libreoffice libreoffice-script-provider-python
-      - name: Checkout
-        uses: actions/checkout@v2
       - name: Cache eggs
         uses: actions/cache@v2
         env:
           cache-name: cache-eggs
         with:
-          path: ~/buildout-cache/eggs
+          path: ~/.buildout/eggs
           key: ${{ runner.os }}-build-coverage-${{ env.cache-name }}
       - name: buildout
         run: |
