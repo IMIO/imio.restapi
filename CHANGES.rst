@@ -5,8 +5,9 @@ Changelog
 1.0b2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Added helper `utils.serialize_term` that will serialize a vocabulary term
+  the same way it is done by the `FieldSerializer`.
+  [gbastien]
 
 1.0b1 (2022-01-03)
 ------------------

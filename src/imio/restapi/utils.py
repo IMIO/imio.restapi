@@ -132,3 +132,21 @@ def listify(value):
     if not hasattr(value, "__iter__"):
         value = [value]
     return value
+
+
+def serialize_term(tokens, vocab):
+    """Given a term p_values and a p_vocab, generate a serialized version
+       with {'token': p_token[0], 'value': term_value}.
+       This is useful when it is not a real field and we can not use a FieldSerializer."""
+    res = []
+    only_one = False
+    if isinstance(tokens, basestring):
+        only_one = True
+        tokens = [tokens]
+    for token in tokens:
+        res.append({'token': token, 'title': vocab.getTerm(token).title})
+    # if we receive one token, we return a dict, if we receive a list of tokens
+    # even if only one token in the list, we return a list of dicts
+    if res and only_one:
+        res = res[0]
+    return res
