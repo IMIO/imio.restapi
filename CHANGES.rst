@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0b2 (unreleased)
+1.0b2 (2023-05-31)
 ------------------
 
 - Added helper `utils.serialize_term` that will serialize a vocabulary term
