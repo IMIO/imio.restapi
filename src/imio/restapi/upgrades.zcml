@@ -12,4 +12,14 @@
         import_steps="plone.app.registry" />
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+    source="1001"
+    destination="1002"
+    profile="imio.restapi:default">
+    <genericsetup:upgradeDepends
+        title="Re-apply registry.xml to add 'debug_mode' parameter"
+        description=""
+        import_steps="plone.app.registry" />
+  </genericsetup:upgradeSteps>
+
 </configure>

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-10-26 14:53+0000\n"
+"POT-Creation-Date: 2023-07-24 13:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,9 +14,13 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: ../settings/interfaces.py:50
+#: ../settings/interfaces.py:51
 msgid "Application links"
-msgstr ""
+msgstr "Application links"
+
+#: ../settings/interfaces.py:75
+msgid "Enable debug mode?"
+msgstr "Enable debug mode?"
 
 #: ../profiles/default/controlpanel.xml
 #: ../settings/view.py:15
@@ -35,21 +39,25 @@ msgstr ""
 msgid "Linked element(s)"
 msgstr ""
 
-#: ../settings/interfaces.py:51
+#: ../settings/interfaces.py:52
 msgid "List of application with who this application will communicate"
 msgstr ""
 
-#: ../settings/interfaces.py:61
+#: ../settings/interfaces.py:76
+msgid "Manually enable debug mode when RESTAPI_DEBUG environment variable is not set to True."
+msgstr "Manually enable debug mode when RESTAPI_DEBUG environment variable is not set to True."
+
+#: ../settings/interfaces.py:64
 msgid "Return full object after creation by default?"
-msgstr ""
+msgstr "Return full object after creation by default?"
 
-#: ../settings/interfaces.py:23
+#: ../settings/interfaces.py:24
 msgid "The application identifier"
-msgstr ""
+msgstr "The application identifier"
 
-#: ../settings/interfaces.py:14
+#: ../settings/interfaces.py:15
 msgid "The client unique identifier"
-msgstr ""
+msgstr "The client unique identifier"
 
 #: ../form/form.py:115
 msgid "The content {title} was created"
@@ -59,15 +67,15 @@ msgstr ""
 msgid "The content(s) was imported"
 msgstr ""
 
-#: ../settings/interfaces.py:32
+#: ../settings/interfaces.py:33
 msgid "The public url of this application"
 msgstr ""
 
-#: ../settings/interfaces.py:41
+#: ../settings/interfaces.py:42
 msgid "The url of the Webservice instance"
 msgstr ""
 
-#: ../settings/interfaces.py:15
+#: ../settings/interfaces.py:16
 msgid "This information is configured in the instance configuration file"
 msgstr ""
 
@@ -75,7 +83,7 @@ msgstr ""
 msgid "Uninstalls the imio.restapi add-on."
 msgstr ""
 
-#: ../settings/interfaces.py:62
+#: ../settings/interfaces.py:65
 msgid "When an element is created, check the box if the full object must be returned by default (default is true)"
 msgstr ""
 

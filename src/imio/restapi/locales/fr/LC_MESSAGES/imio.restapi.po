@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-10-26 14:53+0000\n"
+"POT-Creation-Date: 2023-07-24 13:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,9 +14,13 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: ../settings/interfaces.py:50
+#: ../settings/interfaces.py:51
 msgid "Application links"
 msgstr "Liens avec les autres applications"
+
+#: ../settings/interfaces.py:75
+msgid "Enable debug mode?"
+msgstr "Activer le mode debug?"
 
 #: ../profiles/default/controlpanel.xml
 #: ../settings/view.py:15
@@ -35,19 +39,23 @@ msgstr ""
 msgid "Linked element(s)"
 msgstr "Elément(s) lié(s)"
 
-#: ../settings/interfaces.py:51
+#: ../settings/interfaces.py:52
 msgid "List of application with who this application will communicate"
 msgstr "Liste des applications avec lesquelles cette application communiquera"
 
-#: ../settings/interfaces.py:61
+#: ../settings/interfaces.py:76
+msgid "Manually enable debug mode when RESTAPI_DEBUG environment variable is not set to True."
+msgstr "Lorsque la variable d'environnement RESTAPI_DEBUG n'est pas activée, ceci permet d'activer le mode debug, les entrées/sorties des requêtes REST sont affichées dans le log de Zope"
+
+#: ../settings/interfaces.py:64
 msgid "Return full object after creation by default?"
 msgstr "Lors de la création d'un élément, retourner une sérialisation complète de l'élément créé?"
 
-#: ../settings/interfaces.py:23
+#: ../settings/interfaces.py:24
 msgid "The application identifier"
 msgstr "L'identifiant de l'application"
 
-#: ../settings/interfaces.py:14
+#: ../settings/interfaces.py:15
 msgid "The client unique identifier"
 msgstr "L'identifiant unique du client"
 
@@ -59,15 +67,15 @@ msgstr "Le contenu {title} a été créé"
 msgid "The content(s) was imported"
 msgstr "Le(s) contenu(s) ont été importé(s)"
 
-#: ../settings/interfaces.py:32
+#: ../settings/interfaces.py:33
 msgid "The public url of this application"
 msgstr "L'URL publique de l'application"
 
-#: ../settings/interfaces.py:41
+#: ../settings/interfaces.py:42
 msgid "The url of the Webservice instance"
 msgstr "L'URL de l'instance des webservices"
 
-#: ../settings/interfaces.py:15
+#: ../settings/interfaces.py:16
 msgid "This information is configured in the instance configuration file"
 msgstr "Cette information est configurée dans le fichier de configuration de l'instance"
 
@@ -75,9 +83,9 @@ msgstr "Cette information est configurée dans le fichier de configuration de l'
 msgid "Uninstalls the imio.restapi add-on."
 msgstr ""
 
-#: ../settings/interfaces.py:62
+#: ../settings/interfaces.py:65
 msgid "When an element is created, check the box if the full object must be returned by default (default is true)"
-msgstr "Cette information est configurée dans le fichier de configuration de l'instance<br>Lorqu'un élément est créé via les WS REST, si la case est cochée (défaut), une sérialisation complète de l'objet créé sera renvoyée au créateur.  Si décoché, la version \"sommaire\" est retournée."
+msgstr "Cette information est configurée dans le fichier de configuration de l'instance<br>Lorqu'un élément est créé via les WS REST, si la case est cochée (défaut), une sérialisation complète de l'objet créé sera renvoyée au créateur  Si décoché, la version \"sommaire\" est retournée"
 
 #: ../configure.zcml:28
 msgid "imio.restapi"

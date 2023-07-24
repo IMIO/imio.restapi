@@ -3,6 +3,7 @@
 from imio.restapi.interfaces import IContentImporter
 from imio.restapi.interfaces import IRestAuthentication
 from imio.restapi.interfaces import IRESTLink
+from plone import api
 from plone.restapi.deserializer import boolean_value
 from plone.restapi.services.content import add
 from zope.component import getMultiAdapter
@@ -37,6 +38,15 @@ def get_application_url():
 def get_return_fullobject_after_creation_default():
     """ Return the return_fullobject_after_creation_default defined in instance config """
     return boolean_value(os.getenv("RETURN_FULLOBJECT_AFTER_CREATION_DEFAULT", True))
+
+
+def is_debug_mode_enabled():
+    """ Return the debug_mode defined in instance config """
+    return boolean_value(os.getenv("RESTAPI_DEBUG", False)) or \
+        api.portal.get_registry_record(
+        'imio.restapi.settings.interfaces.ISettings.debug_mode'
+    )
+
 
 
 def get_authentication(request):

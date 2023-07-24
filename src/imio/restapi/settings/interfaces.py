@@ -70,6 +70,17 @@ class ISettings(Interface):
         required=False,
     )
 
+    form.widget(debug_mode=RadioFieldWidget)
+    debug_mode = schema.Bool(
+        title=_(u"Enable debug mode?"),
+        description=_(
+            u"Manually enable debug mode when RESTAPI_DEBUG "
+            u"environment variable is not set to True."
+        ),
+        default=False,
+        required=False,
+    )
+
 
 class ISettingsForm(Interface):
     """Marker interface for the settings form"""

@@ -5,8 +5,9 @@ Changelog
 1.0b3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Added parameter `debug_mode` to the settings, when enabled, input and output
+  requests are displayed into the Zope log.
+  [gbastien]
 
 1.0b2 (2023-05-31)
 ------------------
