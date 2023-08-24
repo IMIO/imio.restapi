@@ -46,6 +46,7 @@ setup(
         "z3c.jbot",
         # fix plone.app.controlpanel permissions.zcml include
         "plone.restapi<8",
+        "plone.rest<2",
         "collective.z3cform.select2",
         "requests",
         "imio.helpers",
