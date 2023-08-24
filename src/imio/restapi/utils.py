@@ -48,7 +48,6 @@ def is_debug_mode_enabled():
     )
 
 
-
 def get_authentication(request):
     auth = queryAdapter(request, IRestAuthentication)
     if auth:
