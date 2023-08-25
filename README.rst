@@ -8,6 +8,10 @@
 .. image:: https://coveralls.io/repos/github/IMIO/imio.restapi/badge.svg?branch=master
     :target: https://coveralls.io/github/IMIO/imio.restapi?branch=master
 
+.. image:: http://img.shields.io/pypi/v/imio.restapi.svg
+   :alt: PyPI badge
+   :target: https://pypi.org/project/imio.restapi
+
 
 ============
 imio.restapi
