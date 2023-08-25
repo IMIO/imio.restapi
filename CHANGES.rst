@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0b3 (unreleased)
+1.0b3 (2023-08-25)
 ------------------
 
 - Added parameter `debug_mode` to the settings, when enabled, input and output
