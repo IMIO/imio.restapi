@@ -136,13 +136,6 @@ def sizeof_fmt(num, suffix="o"):
     return "%.1f%s%s" % (num, "Yi", suffix)
 
 
-def listify(value):
-    """Make sure value is a list."""
-    if not hasattr(value, "__iter__"):
-        value = [value]
-    return value
-
-
 def serialize_term(tokens, vocab):
     """Given a term p_values and a p_vocab, generate a serialized version
        with {'token': p_token[0], 'value': term_value}.

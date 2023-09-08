@@ -5,8 +5,8 @@ Changelog
 1.0b4 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Moved unused `utils.listify` to `imio.pyutils.utils.listify`.
+  [gbastien]
 
 1.0b3 (2023-08-25)
 ------------------
