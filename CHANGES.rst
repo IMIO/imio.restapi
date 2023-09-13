@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-1.0 (unreleased)
-----------------
+1.0rc1 (unreleased)
+-------------------
 
 - Moved unused `utils.listify` to `imio.pyutils.utils.listify`.
   [gbastien]
