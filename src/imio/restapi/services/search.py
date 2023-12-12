@@ -33,6 +33,10 @@ class SearchGet(BaseSearchGet):
             if element and ICollection.providedBy(element[0]):
                 collection = element[0]
                 query = parseFormquery(collection, collection.query)
+                if collection.sort_on:
+                    query['sort_on'] = collection.sort_on
+                if collection.sort_reversed:
+                    query['sort_order'] = 'reverse'
             elif element:
                 self.context = element[0]
         return query

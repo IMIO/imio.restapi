@@ -7,6 +7,9 @@ Changelog
 
 - Moved unused `utils.listify` to `imio.pyutils.utils.listify`.
   [gbastien]
+- When using a `base_search_uid` take also `sort_on/sort_order`
+  defined on the Collection.
+  [gbastien]
 
 1.0b3 (2023-08-25)
 ------------------
