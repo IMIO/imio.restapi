@@ -46,7 +46,8 @@ def render(self):
             data = json_body(self.request)
             fplog("restapi_call_debug",
                   extras="INPUT: \n" + json.dumps(data, indent=4, sort_keys=True))
-    res = self.__old_pm_render()
+    # res can be None when using DELETE for example
+    res = self.__old_pm_render() or ""
     # log the output when debug is enabled
     if debug:
         fplog("restapi_call_debug", extras="OUTPUT: \n" + res)

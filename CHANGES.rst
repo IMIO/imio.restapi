@@ -5,8 +5,8 @@ Changelog
 1.0rc2 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Do not fail to log restapi call when using DELETE.
+  [gbastien]
 
 1.0rc1 (2024-03-14)
 -------------------
