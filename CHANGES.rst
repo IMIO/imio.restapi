@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0rc2 (unreleased)
+1.0rc2 (2024-05-27)
 -------------------
 
 - Do not fail to log restapi call when using DELETE.
