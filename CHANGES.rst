@@ -5,8 +5,8 @@ Changelog
 1.0rc3 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Python 3 compatibility.
+  [gbastien]
 
 1.0rc2 (2024-05-27)
 -------------------

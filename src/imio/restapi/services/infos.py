@@ -94,7 +94,7 @@ class InfosGet(Service):
                     size -= database['fs_sz']
                     database['bl_sz'] = size
                     database["bl_sz_readable"] = sizeof_fmt(size)
-            except Exception, msg:
+            except Exception as msg:
                 error(u".sizes.json not valid in '{}': '{}'".format(instdir, msg))
         return database
 
