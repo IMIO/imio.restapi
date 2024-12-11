@@ -28,7 +28,7 @@ jobs:
           sudo apt update -qq -y
           sudo apt-get install -qq -y libfreetype6-dev liblcms2-dev libreoffice libreoffice-script-provider-python
       - name: Cache eggs
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         env:
           cache-name: cache-eggs
         with:
