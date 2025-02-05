@@ -9,8 +9,8 @@ from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.serializer import dxcontent
 from plone.restapi.serializer import summary
-from plone.restapi.serializer.summary import DEFAULT_METADATA_FIELDS
-from plone.restapi.serializer.summary import NON_METADATA_ATTRIBUTES
+# from plone.restapi.serializer.summary import DEFAULT_METADATA_FIELDS  # MIGRATION-PLONE6
+# from plone.restapi.serializer.summary import NON_METADATA_ATTRIBUTES  # MIGRATION-PLONE6
 from Products.CMFCore.utils import getToolByName
 from Products.ZCatalog.interfaces import ICatalogBrain
 from zope.component import adapter

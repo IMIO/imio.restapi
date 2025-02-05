@@ -10,8 +10,8 @@ from plone.restapi.interfaces import IDeserializeFromJson
 from plone.restapi.interfaces import ISerializeToJson
 from plone.restapi.interfaces import ISerializeToJsonSummary
 from plone.restapi.services.content.add import FolderPost
-from plone.restapi.services.content.add import PAM_INSTALLED
-from plone.restapi.services.content.add import PLONE5
+# from plone.restapi.services.content.add import PAM_INSTALLED  # MIGRATION-PLONE6
+# from plone.restapi.services.content.add import PLONE5  # MIGRATION-PLONE6
 from plone.restapi.services.content.utils import add
 from plone.restapi.services.content.utils import create
 from Products.CMFPlone.utils import safe_hasattr
